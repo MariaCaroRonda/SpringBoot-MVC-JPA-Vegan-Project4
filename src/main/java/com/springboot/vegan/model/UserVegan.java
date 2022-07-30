@@ -12,8 +12,8 @@ public class UserVegan {
     private Integer userId;
     private String firstName; // user's first name
     private String lastName;
-    private String username; // used to log in to the website, it doesn't have to match the user's firstName
     private String email;
+    private String username; // used to log in to the website, it doesn't have to match the user's firstName
     private String password;
     private Integer status; // {Administrator = 1, UserVegan = 2} default value = 2
     private Date registrationDate;
