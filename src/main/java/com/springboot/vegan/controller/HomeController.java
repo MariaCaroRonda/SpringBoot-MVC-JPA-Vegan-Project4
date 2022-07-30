@@ -23,7 +23,6 @@ public class HomeController {
 
     }
 
-
     @GetMapping("/detail")
     public String showDetail(Model model) {
         Recipe recipe1 = new Recipe();

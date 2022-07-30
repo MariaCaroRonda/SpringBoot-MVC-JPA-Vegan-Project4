@@ -6,5 +6,14 @@
 </head>
 <body>
   <h1>Create Categories</h1>
+
+  <form th:action="@{/categories/save}" method="post">
+    Name: <br>
+    <input type="text" name="name" value=""><br>
+    Description: <br>
+    <input type="text" name="description" value=""><br><br>
+    <input type="submit" value="Save">
+  </form>
+
 </body>
 </html>

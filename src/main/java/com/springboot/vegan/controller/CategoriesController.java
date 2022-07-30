@@ -2,10 +2,7 @@ package com.springboot.vegan.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/categories")
@@ -26,7 +23,12 @@ public class CategoriesController {
 
     // @PostMapping
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save() {
+    public String save(@RequestParam("name") String name,
+                       @RequestParam("description") String description) {
+
+        System.out.println("Category: " + name);
+        System.out.println("Description: " + description);
+
         return "categories/listCategories";
     }
 }
