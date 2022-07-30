@@ -2,8 +2,6 @@ package com.springboot.vegan.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 @Entity
 @Table(name = "UsersVegan")
@@ -12,9 +10,9 @@ public class UserVegan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
-    private String FirstName;
-    private String userLastName;
-    private String username; // used to log in
+    private String firstName; // user's first name
+    private String lastName;
+    private String username; // used to log in to the website, it doesn't have to match the user's firstName
     private String email;
     private String password;
     private Integer status; // {Administrator = 1, UserVegan = 2} default value = 2
@@ -33,6 +31,15 @@ public class UserVegan {
         profileList.add(tempProfile);
     }*/
 
+
+/*    public List<Profile> getProfileList() {
+        return profileList;
+    }
+
+    public void setProfileList(List<Profile> profileList) {
+        this.profileList = profileList;
+    }*/
+
     public Integer getUserId() {
         return userId;
     }
@@ -42,19 +49,27 @@ public class UserVegan {
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
-    public void setFirstName(String userName) {
-        this.FirstName = userName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUserLastName() {
-        return userLastName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUserLastName(String userLastName) {
-        this.userLastName = userLastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -73,22 +88,6 @@ public class UserVegan {
         this.password = password;
     }
 
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-/*    public List<Profile> getProfileList() {
-        return profileList;
-    }
-
-    public void setProfileList(List<Profile> profileList) {
-        this.profileList = profileList;
-    }*/
-
     public Integer getStatus() {
         return status;
     }
@@ -97,26 +96,25 @@ public class UserVegan {
         this.status = status;
     }
 
-    public String getUsername() {
-        return username;
+    public Date getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     @Override
     public String toString() {
         return "UserVegan{" +
                 "userId=" + userId +
-                ", FirstName='" + FirstName + '\'' +
-                ", userLastName='" + userLastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 ", registrationDate=" + registrationDate +
-        //        ", profileList=" + profileList +
                 '}';
     }
 }
