@@ -23,6 +23,8 @@
         <th>Cooking time</th>
         <th>Publication Date</th>
         <th>Featured</th>
+        <th>Details</th>
+        <th>Delete</th>
       </tr>
     </thead>
 
@@ -42,6 +44,17 @@
       <td>
         <span th:if="${tmpRecipe.featured == 1}" class="badge badge-success"> Yes </span>
         <span th:unless="${tmpRecipe.featured == 1}" class="badge badge-danger"> No</span>
+      </td>
+
+      <td>
+        <a th:href="@{/recipes/view/{idTemp} (idTemp = ${tmpRecipe.recipeId})}"
+           class="btn btn-success">Detail</a>
+      </td>
+
+      <td>
+        <a th:href="@{/recipes/delete(id=${tmpRecipe.recipeId})}" class="btn btn-danger">
+          Delete
+        </a>
       </td>
 
 
