@@ -20,6 +20,7 @@
         <th>Ingredients</th>
         <th>Cooking time</th>
         <th>Publication Date</th>
+        <th>Featured</th>
       </tr>
     </thead>
 
@@ -29,6 +30,14 @@
       <td th:text="${tmpRecipe.ingredients}"></td>
       <td th:text="${tmpRecipe.cookingTime}"></td>
       <td th:text="${tmpRecipe.publicationDate}"></td>
+     <!-- <td th:text="${tmpRecipe.featured}"></td>-->
+     <!--<td th:text="${tmpRecipe.featured == 1 ? 'Yes' : 'No'}"></td>-->
+      <td>
+        <span th:if="${tmpRecipe.featured == 1}" class="badge badge-success"> Yes </span>
+        <span th:unless="${tmpRecipe.featured == 1}" class="badge badge-danger"> No</span>
+      </td>
+
+
     </tr>
   </table>
 

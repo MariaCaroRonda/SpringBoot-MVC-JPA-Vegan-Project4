@@ -78,13 +78,11 @@ public class HomeController {
             // Create Recipe 1
             Recipe recipe1 = new Recipe();
             recipe1.setRecipeId(1);
-
             recipe1.setRecipeName("Breakfast - Blueberry banana pancakes");
             recipe1.setIngredients("Flour, baking powder, sugar, plant-milk");
-
             recipe1.setCookingTime(20);
-
             recipe1.setPublicationDate(sdf.parse("08-02-2020"));
+            recipe1.setFeatured(1);
 
             // Create Recipe 2
             Recipe recipe2 = new Recipe();
@@ -93,6 +91,7 @@ public class HomeController {
             recipe2.setIngredients("Pasta, basil, garlic, olive oil");
             recipe2.setCookingTime(20);
             recipe2.setPublicationDate(sdf.parse("18-03-2021"));
+            recipe2.setFeatured(0);
 
             // Create Recipe 3
             Recipe recipe3 = new Recipe();
@@ -101,6 +100,7 @@ public class HomeController {
             recipe3.setIngredients("Wild mushrooms, spring onions, potatoes, red pepper,olive oil, water");
             recipe3.setCookingTime(30);
             recipe3.setPublicationDate(sdf.parse("23-01-2022"));
+            recipe3.setFeatured(0);
 
             // Create Recipe 4
             Recipe recipe4 = new Recipe();
@@ -109,6 +109,7 @@ public class HomeController {
             recipe4.setIngredients("Carrots, Apple, Ginger, Pineapple and a cup of Almond milk");
             recipe4.setCookingTime(15);
             recipe4.setPublicationDate(sdf.parse("08-07-2019"));
+            recipe4.setFeatured(1);
 
             recipesList.add(recipe1);
             recipesList.add(recipe2);

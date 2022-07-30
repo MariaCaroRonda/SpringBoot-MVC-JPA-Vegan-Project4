@@ -56,6 +56,14 @@ public class Recipe {
         this.cookingTime = cookingTime;
     }
 
+    public Integer getFeatured() {
+        return featured;
+    }
+
+    public void setFeatured(Integer featured) {
+        this.featured = featured;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +
@@ -64,6 +72,7 @@ public class Recipe {
                 ", ingredients='" + ingredients + '\'' +
                 ", publicationDate=" + publicationDate +
                 ", cookingTime=" + cookingTime +
+                ", featured=" + featured +
                 '}';
     }
 }
