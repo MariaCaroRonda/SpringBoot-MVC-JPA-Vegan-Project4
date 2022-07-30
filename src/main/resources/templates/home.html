@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Home Page</title>
+</head>
+<body>
+<!--  <h1 th:text="${message}"></h1>
+  <h2>Today is [[${date}]]</h2>-->
+
+  <h1>Welcome</h1>
+  <h2>Recipe</h2>
+  <h3 th:text="'Name:' + ${recipeName}"></h3>
+  <h3 th:text="'Publication date: ' + ${publicationDate}"></h3>
+  <h3 th:text="'Cooking time (mins)' + ${cookingTime}"></h3>
+  <h3 th:text="'Premium recipe' + ${premiumRecipe}"></h3>
+</body>
+</html>
