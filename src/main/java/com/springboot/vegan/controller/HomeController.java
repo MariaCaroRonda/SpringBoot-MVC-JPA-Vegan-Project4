@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,19 +54,9 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String howHome(Model model) {
-/*        model.addAttribute("message", "Welcome to Vegan App");
-        model.addAttribute("date", new Date());*/
-
-        String recipeName = "Brownies";
-        Date publicationDate = new Date();
-        int cookingTime = 60;
-        boolean premiumRecipe = true;
-
-        model.addAttribute("recipeName", recipeName);
-        model.addAttribute("publicationDate", publicationDate);
-        model.addAttribute("cookingTime", cookingTime);
-        model.addAttribute("premiumRecipe", premiumRecipe);
+    public String showHome(Model model) {
+        List<Recipe> list = recipesService.findAll();
+        model.addAttribute("recipes", list);
 
         return "home";
     }

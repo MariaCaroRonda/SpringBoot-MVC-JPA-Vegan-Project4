@@ -1,18 +1,117 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Home Page</title>
-</head>
-<body>
-<!--  <h1 th:text="${message}"></h1>
-  <h2>Today is [[${date}]]</h2>-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
 
-  <h1>Welcome</h1>
-  <h2>Recipe</h2>
-  <h3 th:text="'Name:' + ${recipeName}"></h3>
-  <h3 th:text="'Publication date: ' + ${publicationDate}"></h3>
-  <h3 th:text="'Cooking time (mins)' + ${cookingTime}"></h3>
-  <h3 th:text="'Premium recipe' + ${premiumRecipe}"></h3>
+  <title>VeganApp | Plant-based Recipes</title>
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link th:href="@{bootstrap/css/jumbotron.css}" rel="stylesheet">
+  <link th:href="@{bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">EmpleosApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Menu 2</a>
+        </li>
+      </ul>
+      <a class="btn btn-primary" href="#">Login</a>&nbsp;
+      <a class="btn btn-primary" href="#">Register</a>
+    </div>
+  </nav>
+</header>
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h3>Find a vegan recipe.</h3>
+      You can search by ingredient and category.
+      <form class="form-inline">
+        <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
+        <select class="custom-select custom-select mb-3">
+          <option selected>Seleccione una categoría</option>
+          <option value="1">Breakfast</option>
+          <option value="2">Lunch</option>
+          <option value="3">Dinner</option>
+          <option value="4">Snacks</option>
+          <option value="5">Smoothies</option>
+        </select>&nbsp;
+        <button type="submit" class="btn btn-primary mb-3">Search</button>
+      </form>
+    </div>
+  </div>
+  <hr>
+
+  <div class="container">
+    <h2 class="font-weight-bold text-center text-capitalize">FEATURED</h2>
+    <hr>
+
+    <div class="row" th:each="tmpRecipe : ${recipes}">
+      <hr>
+
+      <div class="col-md-3">
+        <img class="rounded mx-auto d-block" th:src="@{/images/{img} (img=${tmpRecipe.imageMeal}) }"
+             alt="Generic placeholder image" width="220" height="200">
+      </div>
+      <div class="col-md-9">
+        <h2 th:text="${tmpRecipe.recipeName}"></h2>
+        <h6 class="card-title"><strong>Category: </strong> <span></span></h6>
+
+        <h6 class="card-title"><strong>Publication date: </strong>
+            <span th:text="${tmpRecipe.publicationDate}"></span></h6>
+
+        <p th:text="${tmpRecipe.ingredients}"></p>
+        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        <hr>
+        <br>
+      </div>
+
+    </div>
+    <br>
+    <hr>
+  </div> <!-- /container -->
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>
+      &copy; 2019 EmpleosApp, Inc. | WebApp Desarrollada con Spring Boot 2.1.2 | Autor: Iv&aacute;n E. Tinajero D&iacute;az | &middot; <a href="#">Privacy</a>
+      &middot; <a href="#">Terms</a>
+    </p>
+  </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
