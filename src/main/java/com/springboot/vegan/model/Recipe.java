@@ -10,8 +10,9 @@ public class Recipe {
     private Date publicationDate;
     private Integer cookingTime;
     private Integer featured;
+    private String imageMeal="no-image.png";
 
-/*    private String imageMeal="no-image.png";
+/*
     private String instructions;
     private Integer recipePremium;
 */
@@ -58,6 +59,14 @@ public class Recipe {
 
     public Integer getFeatured() {
         return featured;
+    }
+
+    public String getImageMeal() {
+        return imageMeal;
+    }
+
+    public void setImageMeal(String imageMeal) {
+        this.imageMeal = imageMeal;
     }
 
     public void setFeatured(Integer featured) {

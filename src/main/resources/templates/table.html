@@ -10,11 +10,13 @@
 
 </head>
 <body>
+  <img th:src="@{/images/leaf2.png}" alt="">
   <h1 class="text-primary">List of Recipes</h1>
 
   <table class="table table-bordered table-hover">
     <thead class="thead-dark">
       <tr>
+        <th>Image</th>
         <th>Id</th>
         <th>Name</th>
         <th>Ingredients</th>
@@ -25,6 +27,11 @@
     </thead>
 
     <tr th:each="tmpRecipe : ${recipes}">
+      <td>
+        <img th:src="@{/images/{imgTmp} (imgTmp=${tmpRecipe.imageMeal}) }"
+             width="130" height="120"
+             alt="photo">
+      </td>
       <td th:text="${tmpRecipe.recipeId}"></td>
       <td th:text="${tmpRecipe.recipeName}"></td>
       <td th:text="${tmpRecipe.ingredients}"></td>

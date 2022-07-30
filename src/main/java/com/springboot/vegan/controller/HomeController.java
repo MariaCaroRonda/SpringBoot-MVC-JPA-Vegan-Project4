@@ -83,6 +83,8 @@ public class HomeController {
             recipe1.setCookingTime(20);
             recipe1.setPublicationDate(sdf.parse("08-02-2020"));
             recipe1.setFeatured(1);
+            recipe1.setImageMeal("blueberry-banana-pancakes.png");
+
 
             // Create Recipe 2
             Recipe recipe2 = new Recipe();
@@ -92,6 +94,7 @@ public class HomeController {
             recipe2.setCookingTime(20);
             recipe2.setPublicationDate(sdf.parse("18-03-2021"));
             recipe2.setFeatured(0);
+            recipe2.setImageMeal("Lunch-Vegan Pasta2.png");
 
             // Create Recipe 3
             Recipe recipe3 = new Recipe();
@@ -110,6 +113,8 @@ public class HomeController {
             recipe4.setCookingTime(15);
             recipe4.setPublicationDate(sdf.parse("08-07-2019"));
             recipe4.setFeatured(1);
+            recipe4.setImageMeal("Smoothies-mixed fruits smoothie2.png");
+
 
             recipesList.add(recipe1);
             recipesList.add(recipe2);
