@@ -20,8 +20,8 @@ public class UserVegan {
     private Integer status; // {Administrator = 1, UserVegan = 2} default value = 2
     private Date registrationDate;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "UserProfile",
+/*      @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "UserProfile",
             joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "profileId"))
     private List<Profile> profileList;
@@ -31,7 +31,7 @@ public class UserVegan {
             profileList = new LinkedList<Profile>();
         }
         profileList.add(tempProfile);
-    }
+    }*/
 
     public Integer getUserId() {
         return userId;
@@ -81,13 +81,13 @@ public class UserVegan {
         this.registrationDate = registrationDate;
     }
 
-    public List<Profile> getProfileList() {
+/*    public List<Profile> getProfileList() {
         return profileList;
     }
 
     public void setProfileList(List<Profile> profileList) {
         this.profileList = profileList;
-    }
+    }*/
 
     public Integer getStatus() {
         return status;
@@ -116,7 +116,7 @@ public class UserVegan {
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 ", registrationDate=" + registrationDate +
-                ", profileList=" + profileList +
+        //        ", profileList=" + profileList +
                 '}';
     }
 }
