@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,13 +36,12 @@ public class RecipesController {
     }
 
     @GetMapping("/create")
-    public String create(){
+    public String create(Recipe recipe){
         return "recipes/formRecipe";
     }
 
     @PostMapping("/save")
-    public String save(Recipe recipe, BindingResult result) {
-
+    public String save(Recipe recipe, BindingResult result, RedirectAttributes attributes) {
         if (result.hasErrors()) {
             for (ObjectError error: result.getAllErrors()){
                 System.out.println("An error has happened: "+ error.getDefaultMessage());
@@ -50,6 +50,8 @@ public class RecipesController {
 
         }
         recipesService.save(recipe);
+        attributes.addFlashAttribute("msg", "Recipe Saved Successfully");
+
         return "redirect:/recipes/index";
     }
 

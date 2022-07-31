@@ -29,8 +29,10 @@
       <h4 class="card-header"><strong>List of Recipes</strong></h4>
       <div class="card-body">
         <a class="btn btn-primary" th:href="@{/recipes/create}"
-           title="Create a new Recipe" role="button"><i class="fas fa-file" aria-hidden="true"></i> New</a>
+           title="Create a new Recipe" role="button">
+            <i class="fas fa-file" aria-hidden="true"></i> New</a>
         <hr>
+        <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
         <table class="table table-hover">
           <thead class="thead-light">
           <tr>
