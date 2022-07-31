@@ -1,19 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Category Form</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
+
+  <title>VeganApp | Plant-based Recipes<</title>
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+  <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
 </head>
+
 <body>
-  <h1>Create Categories</h1>
 
-  <form th:action="@{/categories/save}" method="post">
-    Name: <br>
-    <input type="text" name="name" value=""><br>
-    Description: <br>
-    <input type="text" name="description" value=""><br><br>
-    <input type="submit" value="Save">
-  </form>
+<header th:insert="fragments/menu :: menu-main">
+</header>
 
+<main role="main">
+  <hr>
+  <div class="container">
+
+    <div class="card">
+      <h4 class="card-header"><strong>Category details</strong></h4>
+      <div class="card-body">
+        <form th:action="@{/categories/save}" method="post">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       placeholder="Enter the category name" required="required">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" name="description" id="description" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <button type="submit" title="Save the category" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </div>
+  </div> <!-- /container -->
+
+</main>
+
+<footer th:insert="fragments/footer :: page-footer" class="footer">
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
