@@ -1,7 +1,15 @@
 package com.springboot.vegan.model;
 
+import org.springframework.data.repository.cdi.Eager;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Categories")
 public class Category {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
     private String name;
     private String description;
