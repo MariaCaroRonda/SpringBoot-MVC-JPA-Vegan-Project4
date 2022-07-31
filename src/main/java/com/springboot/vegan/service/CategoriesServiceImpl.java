@@ -51,7 +51,6 @@ public class CategoriesServiceImpl implements ICategoriesService{
         category7.setName("Smoothies");
         category7.setDescription("A thick, smooth cold drink of fresh fruit / vegetables pureed with a plant-based drink/yogurt/water..");
 
-
         list.add(category1);
         list.add(category2);
         list.add(category3);

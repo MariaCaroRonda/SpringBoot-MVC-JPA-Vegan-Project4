@@ -31,9 +31,30 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             delete();
             save();
             countCategories();
-            deleteAll(); */
+            deleteAll();
+            findByIds();
+            findAll();
+            existById(); */
 
-        findByIds();
+        saveAll();
+
+    }
+
+    private void saveAll() {
+        List<Category> categories = getListCategories();
+        categoriesRepository.saveAll(categories);
+    }
+
+    private void existById() {
+        boolean exist = categoriesRepository.existsById(15);
+        System.out.println("Does the category exist? " + exist);
+    }
+
+    private void findAll() {
+        Iterable<Category> categories = categoriesRepository.findAll();
+        for (Category tmpCat: categories) {
+            System.out.println(tmpCat);
+        }
     }
 
     private void findByIds() {
@@ -57,7 +78,7 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     }
 
     public void delete() {
-        int categoryId = 1;
+        int categoryId = 2;
         if (!categoriesRepository.findById(categoryId).isPresent()) {
             System.out.println("Category with id " + categoryId + " not found");
         }
@@ -101,6 +122,58 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
         category.setDescription("A light midday meal between breakfast and dinner.");
         categoriesRepository.save(category);
         System.out.println(category);
+    }
+
+
+    private List<Category> getListCategories () {
+
+        List<Category> list = new LinkedList<Category>();
+        Category category1, category2, category3, category4, category5;
+
+        category1 = new Category();
+        category1.setCategoryId((1));
+        category1.setName("Breakfast");
+        category1.setDescription("A meal eaten in the morning, the first meal of the day.");
+
+        category2 = new Category();
+        category2.setCategoryId((2));
+        category2.setName("Lunch");
+        category2.setDescription("A light midday meal between breakfast and dinner.");
+
+        category3 = new Category();
+        category3.setCategoryId((3));
+        category3.setName("Dinner");
+        category3.setDescription("The main meal of the day, usually eaten in the evening.");
+
+        category4 = new Category();
+        category4.setCategoryId((4));
+        category4.setName("Snacks");
+        category4.setDescription("A small amount of food eaten between meals.");
+
+        category5 = new Category();
+        category5.setCategoryId((5));
+        category5.setName("Dessert");
+        category5.setDescription("Usually a sweet course or dish served at the end of a meal.");
+
+        Category category6 = new Category();
+        category6.setCategoryId(6);
+        category6.setName("Christmas Dinner");
+        category6.setDescription("The main meal on Christmas day, eaten any time in the afternoon or evening.");
+
+        Category category7 = new Category();
+        category7.setCategoryId(7);
+        category7.setName("Smoothies");
+        category7.setDescription("A thick, smooth cold drink of fresh fruit / vegetables pureed with a plant-based drink/yogurt/water..");
+
+        list.add(category1);
+        list.add(category2);
+        list.add(category3);
+        list.add(category4);
+        list.add(category5);
+        list.add(category6);
+        list.add(category7);
+
+        return list;
     }
 
 
