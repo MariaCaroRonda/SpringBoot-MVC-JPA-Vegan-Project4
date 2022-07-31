@@ -5,6 +5,7 @@ import com.springboot.vegan.service.ICategoriesService;
 import com.springboot.vegan.service.IRecipesService;
 import com.springboot.vegan.util.MyUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/recipes")
 public class RecipesController {
+
+    @Value("${veganapp.path.images}")
+    private String path;
 
     @Autowired
     private IRecipesService recipesService;
@@ -59,7 +63,8 @@ public class RecipesController {
         }
 
         if (!multiPart.isEmpty()) {
-            String path = "c:/vegan/img-vegan04/"; // Windows
+            /*String path = "c:/vegan/img-vegan04/"; // Windows*/
+
             String nameImage = MyUtilities.saveFile(multiPart, path);
             if (nameImage != null){ // The image was uploaded
                 // Process file nameImage
@@ -88,7 +93,7 @@ public class RecipesController {
         Recipe recipe = recipesService.findById(recipeId);
 
         model.addAttribute("recipe", recipe);
-        System.out.println("Recipe: " + recipe);
+       //System.out.println("Recipe: " + recipe);
 
         // Find the recipe details on the DB
         return "detail";
