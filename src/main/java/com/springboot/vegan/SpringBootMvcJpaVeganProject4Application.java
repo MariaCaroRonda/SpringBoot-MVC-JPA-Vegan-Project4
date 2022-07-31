@@ -1,5 +1,6 @@
 package com.springboot.vegan;
 
+import com.springboot.vegan.model.Category;
 import com.springboot.vegan.repository.CategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,8 +25,11 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
        // save();
     }
 
+
     private void save() {
-        System.out.println("Saving a registry in the DB");
+        Category category = new Category();
+        category.setName("Breakfast");
+        category.setDescription("A light midday meal between breakfast and dinner.");
     }
 
 
