@@ -29,6 +29,7 @@
     <div class="card">
       <h4 class="card-header"><strong>Recipe Details</strong></h4>
       <div class="card-body">
+
         <form th:action="@{/recipes/save}" method="post"
           th:object="${recipe}">
 
@@ -43,18 +44,22 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name"
+                <input type="text" class="form-control" th:field="*{name}"
+                       id="name" name="name"
                        placeholder="Recipe name" required="required">
               </div>
             </div>
+
             <div class="col-md-9">
               <div class="form-group">
                 <label for="ingredients">Ingredients</label>
-                <input type="text" class="form-control" id="ingredients" name="ingredients"
+                <input type="text" class="form-control" th:field="*{ingredients}"
+                       id="ingredients" name="ingredients"
                        placeholder="Recipe ingredients" required="required">
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
@@ -72,46 +77,55 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="status">Status</label>
-                <select class="form-control" name="status" id="status">
+                <select class="form-control" name="status" th:field="*{status}"
+                        id="status">
                   <option value=1>Premium</option>
                   <option value=0>Not Premium</option>
                  </select>
               </div>
             </div>
+
             <div class="col-md-3">
               <div class="form-group">
                 <label for="date">Publication Date</label>
-                <input type="text" class="form-control" name="date" id="date"
+                <input type="text" class="form-control" name="date" th:field="*{date}"
+                       id="date"
                        placeholder="Publication date" required="required">
               </div>
             </div>
+
+
+
             <div class="col-md-3">
               <div class="form-check">
                 <label class="form-check-label" for="featured0"></label><br>
-                <input class="form-check-input" type="radio" name="featured"
-                       id="featured0" value="1" checked="checked">
+                <input class="form-check-input" type="radio" th:field="*{featured}" name="featured"
+                       id="featured" value="1" >
                 <label class="form-check-label" for="featured1">Featured</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="featured"
-                       id="featured1" value="0">
+                <input class="form-check-input" type="radio" th:field="*{featured}" name="featured"
+                       id="featured" value="0">
                 <label class="form-check-label" for="featured2">Not Featured</label>
               </div>
             </div>
+
           </div>
 
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
                 <label for="prepTime">Preparation time (Approx)</label>
-                <input type="text" class="form-control" name="prepTime" id="prepTime"
+                <input type="text" class="form-control" name="prepTime" th:field="*{prepTime}"
+                       id="prepTime"
                        placeholder="Preparation time (Approx)" required="required">
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label for="cookingTime">Cooking time (Approx)</label>
-                <input type="text" class="form-control" name="cookingTime" id="cookingTime"
+                <input type="text" class="form-control" name="cookingTime" th:field="*{cookingTime}"
+                       id="cookingTime"
                        placeholder="Cooking time (Approx)" required="required">
               </div>
             </div>
@@ -128,7 +142,8 @@
             <div class="col-md-9">
               <div class="form-group">
                 <label for="instructions"><strong>Instructions</strong></label>
-                <textarea class="form-control" name="instructions" id="instructions"
+                <textarea class="form-control" name="instructions"  th:field="*{instructions}"
+                          id="instructions"
                           rows="7"></textarea>
               </div>
             </div>

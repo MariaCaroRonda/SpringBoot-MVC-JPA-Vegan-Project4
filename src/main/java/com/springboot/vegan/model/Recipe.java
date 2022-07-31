@@ -10,7 +10,7 @@ public class Recipe {
     private Date date;
     private Integer prepTime;
     private Integer cookingTime;
-    private Integer featured;
+    private Integer featured=0;
     private String imageMeal="no-image.png";
     private Integer status;
     private String instructions;
