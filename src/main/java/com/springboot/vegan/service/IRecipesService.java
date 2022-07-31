@@ -9,4 +9,6 @@ public interface IRecipesService {
     List<Recipe> findAll();
 
     Recipe findById(Integer recipeId);
+
+    void save(Recipe recipe);
 }

@@ -56,11 +56,11 @@
              alt="Generic placeholder image" width="220" height="200">
       </div>
       <div class="col-md-9">
-        <h2 th:text="${tmpRecipe.recipeName}"></h2>
+        <h2 th:text="${tmpRecipe.name}"></h2>
         <h6 class="card-title"><strong>Category: </strong> <span></span></h6>
 
         <h6 class="card-title"><strong>Publication date: </strong>
-            <span th:text="${tmpRecipe.publicationDate}"></span></h6>
+            <span th:text="${tmpRecipe.date}"></span></h6>
 
         <p th:text="${tmpRecipe.ingredients}"></p>
         <p>

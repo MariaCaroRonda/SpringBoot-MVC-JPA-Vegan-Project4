@@ -5,18 +5,15 @@ import java.util.Date;
 public class Recipe {
 
     private Integer recipeId;
-    private String recipeName;
+    private String name;
     private String ingredients;
-    private Date publicationDate;
+    private Date date;
     private Integer prepTime;
     private Integer cookingTime;
     private Integer featured;
     private String imageMeal="no-image.png";
-
-/*
+    private Integer status;
     private String instructions;
-    private Integer recipePremium;
-*/
 
     public Integer getRecipeId() {
         return recipeId;
@@ -26,12 +23,12 @@ public class Recipe {
         this.recipeId = recipeId;
     }
 
-    public String getRecipeName() {
-        return recipeName;
+    public String getName() {
+        return name;
     }
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getIngredients() {
@@ -42,12 +39,12 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public Date getPublicationDate() {
-        return publicationDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setPublicationDate(Date publicationDate) {
-        this.publicationDate = publicationDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Integer getCookingTime() {
@@ -70,6 +67,22 @@ public class Recipe {
         this.imageMeal = imageMeal;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
     public Integer getPrepTime() {
         return prepTime;
     }
@@ -86,13 +99,15 @@ public class Recipe {
     public String toString() {
         return "Recipe{" +
                 "recipeId=" + recipeId +
-                ", recipeName='" + recipeName + '\'' +
+                ", name ='" + name + '\'' +
                 ", ingredients='" + ingredients + '\'' +
-                ", publicationDate=" + publicationDate +
+                ", publicationDate=" + date +
                 ", prepTime=" + prepTime +
                 ", cookingTime=" + cookingTime +
                 ", featured=" + featured +
                 ", imageMeal='" + imageMeal + '\'' +
+                ", status=" + status +
+                ", instructions='" + instructions + '\'' +
                 '}';
     }
 }

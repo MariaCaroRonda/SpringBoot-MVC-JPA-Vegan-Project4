@@ -30,10 +30,10 @@ public class HomeController {
     public String showDetail(Model model) {
         Recipe recipe1 = new Recipe();
         recipe1.setRecipeId(1);
-        recipe1.setRecipeName("Breakfast - Blueberry banana pancakes");
+        recipe1.setName("Breakfast - Blueberry banana pancakes");
         recipe1.setIngredients("Flour, baking powder, sugar, plant-milk");
         recipe1.setCookingTime(20);
-        recipe1.setPublicationDate(new Date());
+        recipe1.setDate(new Date());
 
         model.addAttribute("recipe", recipe1);
         return "detail";
