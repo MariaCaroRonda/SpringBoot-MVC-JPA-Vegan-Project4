@@ -24,10 +24,27 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     @Override
     public void run(String... args) throws Exception {
         /* save();
-           findById();  */
+           findById();
+           update();
+           delete();*/
+        save();
+        countCategories();
+    }
 
-        update();
+    private void countCategories() {
+        long countCat = categoriesRepository.count();
+        System.out.println("Total categories: " + countCat);
+    }
 
+    public void delete() {
+        int categoryId = 1;
+        if (!categoriesRepository.findById(categoryId).isPresent()) {
+            System.out.println("Category with id " + categoryId + " not found");
+        }
+        else
+        {
+            categoriesRepository.deleteById(categoryId);
+        }
     }
 
     /* If the category exists, it updates the category
