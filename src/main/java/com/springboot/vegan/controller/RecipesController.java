@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/recipes")
@@ -21,9 +24,12 @@ public class RecipesController {
 
 
     @GetMapping("/index")
-    public String showIndex() {
-
-
+    public String showIndex(Model model) {
+        List<Recipe> list = recipesService.findAll();
+        for (Recipe tmpRecipe : list) {
+            System.out.println(tmpRecipe);
+        }
+        model.addAttribute("recipes", list);
 
         return "recipes/listRecipes";
     }
@@ -34,33 +40,19 @@ public class RecipesController {
     }
 
     @PostMapping("/save")
-    public String save(Recipe recipe) {
+    public String save(Recipe recipe, BindingResult result) {
+
+        if (result.hasErrors()) {
+            for (ObjectError error: result.getAllErrors()){
+                System.out.println("An error has happened: "+ error.getDefaultMessage());
+            }
+            return "recipes/formRecipe";
+
+        }
         recipesService.save(recipe);
-        System.out.println("Recipe: " + recipe);
-        return "recipes/listRecipes";
+        return "redirect:/recipes/index";
     }
 
-/*    @PostMapping("/save")
-    public String save(@RequestParam("name") String name,
-                       @RequestParam("ingredients") String ingredients,
-                       @RequestParam("status") String status,
-                       @RequestParam("date") String date,
-                       @RequestParam("featured") int featured,
-                       @RequestParam("prepTime") int prepTime,
-                       @RequestParam("cookingTime") int cookingTime,
-                       @RequestParam("instructions") String instructions) {
-
-        System.out.println("Name: " + name);
-        System.out.println("Ingredients: " + ingredients);
-        System.out.println("Status: " + status);
-        System.out.println("Published: " + date);
-        System.out.println("Featured: " + featured);
-        System.out.println("Prep. time: " + prepTime);
-        System.out.println("Cooking time: " + cookingTime);
-        System.out.println("Instructions: " + instructions);
-
-        return "recipes/listRecipes";
-    }*/
 
     @GetMapping("/delete")
     public String delete(@RequestParam("id") int recipeId, Model model) {

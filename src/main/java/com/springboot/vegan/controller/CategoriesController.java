@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/categories")
 public class CategoriesController {
 
-
-
     // @GetMapping
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String showIndex(Model model) {
