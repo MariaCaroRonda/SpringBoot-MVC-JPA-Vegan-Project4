@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -23,12 +25,30 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
     @Override
     public void run(String... args) throws Exception {
-        /* save();
-           findById();
-           update();
-           delete();*/
-        save();
-        countCategories();
+        /*  save();
+            findById();
+            update();
+            delete();
+            save();
+            countCategories();
+            deleteAll(); */
+
+        findByIds();
+    }
+
+    private void findByIds() {
+        List<Integer> ids = new LinkedList<Integer>();
+        ids.add(1);
+        ids.add(4);
+        ids.add(8);
+        Iterable<Category> categories = categoriesRepository.findAllById(ids);
+        for (Category tmpCat : categories) {
+            System.out.println(tmpCat);
+        }
+    }
+
+    private void deleteAll() {
+        categoriesRepository.deleteAll();
     }
 
     private void countCategories() {
