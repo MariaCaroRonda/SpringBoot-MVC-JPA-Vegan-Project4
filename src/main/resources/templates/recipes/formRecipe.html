@@ -1,10 +1,170 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.ico">
+
+  <title>VeganApp | Plant-based Recipes</title>
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+  <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+  <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
 </head>
+
 <body>
 
+<header th:insert="fragments/menu :: menu-main">
+
+</header>
+
+<main role="main">
+  <hr>
+  <div class="container">
+
+    <div class="card">
+      <h4 class="card-header"><strong>Recipe Details</strong></h4>
+      <div class="card-body">
+        <form th:action="@{/recipes/save}" method="post">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       placeholder="Recipe name" required="required">
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="form-group">
+                <label for="ingredients">Ingredients</label>
+                <input type="text" class="form-control" id="ingredients" name="ingredients"
+                       placeholder="Recipe ingredients" required="required">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" name="category" id="category">
+                  <option value="1">Breakfast</option>
+                  <option value="2">Lunch</option>
+                  <option value="3">Dinner</option>
+                  <option value="4">Snacks</option>
+                  <option value="5">Smoothies</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="premium">Premium</label>
+                <select class="form-control" name="premium" id="premium">
+                  <option value="premium">Premium</option>
+                  <option value="not-premium">Not Premium</option>
+                 </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="date">Publication Date</label>
+                <input type="text" class="form-control" name="date" id="date"
+                       placeholder="Publication date" required="required">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-check">
+                <label class="form-check-label" for="destacado0"></label><br>
+                <input class="form-check-input" type="radio" name="featured"
+                       id="featured" value="1" checked="checked">
+                <label class="form-check-label" for="destacado1">Featured</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="featured"
+                       id="featured" value="0">
+                <label class="form-check-label" for="destacado2">Not Featured</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="prepTime">Preparation time (Approx)</label>
+                <input type="text" class="form-control" name="prepTime" id="prepTime"
+                       placeholder="Preparation time (Approx)" required="required">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="cookingTime">Cooking time (Approx)</label>
+                <input type="text" class="form-control" name="cookingTime" id="cookingTime"
+                       placeholder="Cooking time (Approx)" required="required">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="archivoImagen">Imagen</label>
+                <input type="file" class="form-control-file" name="archivoImagen" id="archivoImagen">
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-9">
+              <div class="form-group">
+                <label for="instructions"><strong>Instructions</strong></label>
+                <textarea class="form-control" name="instructions" id="instructions"
+                          rows="7"></textarea>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label for="imagen">Imagen/Logo</label>
+              <img class="rounded mx-auto d-block" src="images/construccion-logo.png"
+                   alt="Generic placeholder image" width="200" height="200">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+    </div>
+  </div> <!-- /container -->
+
+</main>
+
+<footer th:insert="fragments/footer :: page-footer" class="footer">
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{tinymce/tinymce.min.js}"></script>
+<script>
+
+    $(function () {
+            $("#date").datepicker({dateFormat: 'dd-mm-yy'});
+        }
+    );
+
+    /*
+    tinymce.init({
+        selector: '#detalles',
+        plugins: "textcolor, table lists code",
+        toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify \n\
+                  | bullist numlist outdent indent | forecolor backcolor table code"
+    });
+
+    */
+
+</script>
 </body>
 </html>

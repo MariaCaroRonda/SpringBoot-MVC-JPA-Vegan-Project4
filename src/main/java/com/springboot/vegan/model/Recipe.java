@@ -8,6 +8,7 @@ public class Recipe {
     private String recipeName;
     private String ingredients;
     private Date publicationDate;
+    private Integer prepTime;
     private Integer cookingTime;
     private Integer featured;
     private String imageMeal="no-image.png";
@@ -69,6 +70,14 @@ public class Recipe {
         this.imageMeal = imageMeal;
     }
 
+    public Integer getPrepTime() {
+        return prepTime;
+    }
+
+    public void setPrepTime(Integer prepTime) {
+        this.prepTime = prepTime;
+    }
+
     public void setFeatured(Integer featured) {
         this.featured = featured;
     }
@@ -80,8 +89,10 @@ public class Recipe {
                 ", recipeName='" + recipeName + '\'' +
                 ", ingredients='" + ingredients + '\'' +
                 ", publicationDate=" + publicationDate +
+                ", prepTime=" + prepTime +
                 ", cookingTime=" + cookingTime +
                 ", featured=" + featured +
+                ", imageMeal='" + imageMeal + '\'' +
                 '}';
     }
 }
