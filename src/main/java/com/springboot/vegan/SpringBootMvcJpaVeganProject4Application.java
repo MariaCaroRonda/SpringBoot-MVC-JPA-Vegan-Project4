@@ -7,8 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Optional;
+
 @SpringBootApplication
 public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunner {
+
+    /** Test the Category Repository */
 
     @Autowired
     private CategoriesRepository categoriesRepository;
@@ -19,17 +23,28 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
     @Override
     public void run(String... args) throws Exception {
-        /*System.out.println("Examples of Spring Data JPA");*/
-        System.out.println(categoriesRepository);
+        /*save();*/
 
-       // save();
+        findById();
     }
 
+    private void findById() {
+         Optional<Category> optional = categoriesRepository.findById(5);
+         if (optional.isPresent()) {
+             System.out.println(optional.get());
+         }
+         else
+         {
+             System.out.println("Category not found");
+         }
+    }
 
     private void save() {
         Category category = new Category();
         category.setName("Breakfast");
         category.setDescription("A light midday meal between breakfast and dinner.");
+        categoriesRepository.save(category);
+        System.out.println(category);
     }
 
 
