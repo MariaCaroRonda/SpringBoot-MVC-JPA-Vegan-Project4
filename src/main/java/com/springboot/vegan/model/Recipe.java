@@ -15,6 +15,8 @@ public class Recipe {
     private Integer status;
     private String instructions;
 
+    private Category category;
+
     public Integer getRecipeId() {
         return recipeId;
     }
@@ -95,19 +97,28 @@ public class Recipe {
         this.featured = featured;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +
                 "recipeId=" + recipeId +
-                ", name ='" + name + '\'' +
+                ", name='" + name + '\'' +
                 ", ingredients='" + ingredients + '\'' +
-                ", publicationDate=" + date +
+                ", date=" + date +
                 ", prepTime=" + prepTime +
                 ", cookingTime=" + cookingTime +
                 ", featured=" + featured +
                 ", imageMeal='" + imageMeal + '\'' +
                 ", status=" + status +
                 ", instructions='" + instructions + '\'' +
+                ", category=" + category +
                 '}';
     }
 }

@@ -31,7 +31,7 @@
       <div class="card-body">
 
         <form th:action="@{/recipes/save}" method="post"
-          th:object="${recipe}">
+          th:object="${recipe}" enctype="multipart/form-data">
 
           <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
             <p>Please correct the following errors: </p>
@@ -64,13 +64,12 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="category">Category</label>
-                <select class="form-control" name="category" id="category">
-                  <option value=1>Breakfast</option>
-                  <option value=2>Lunch</option>
-                  <option value=3>Dinner</option>
-                  <option value=4>Snacks</option>
-                  <option value=5>Smoothies</option>
+                <select class="form-control" name="category" th:field="*{category.categoryId}"
+                        id="category">
+                  <option th:each="catTmp: ${categories}" th:value="${catTmp.categoryId}"
+                    th:text="${catTmp.name}">
                 </select>
+
               </div>
             </div>
 

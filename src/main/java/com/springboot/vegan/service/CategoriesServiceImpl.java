@@ -46,12 +46,19 @@ public class CategoriesServiceImpl implements ICategoriesService{
         category6.setName("Christmas Dinner");
         category6.setDescription("The main meal on Christmas day, eaten any time in the afternoon or evening.");
 
+        Category category7 = new Category();
+        category7.setCategoryId(7);
+        category7.setName("Smoothies");
+        category7.setDescription("A thick, smooth cold drink of fresh fruit / vegetables pureed with a plant-based drink/yogurt/water..");
+
+
         list.add(category1);
         list.add(category2);
         list.add(category3);
         list.add(category4);
         list.add(category5);
         list.add(category6);
+        list.add(category7);
     }
 
 

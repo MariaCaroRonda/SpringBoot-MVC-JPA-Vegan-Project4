@@ -1,3 +1,4 @@
+/*
 package com.springboot.vegan.model;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class UserVegan {
     private Integer status; // {Administrator = 1, UserVegan = 2} default value = 2
     private Date registrationDate;
 
+*/
 /*      @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "UserProfile",
             joinColumns = @JoinColumn(name = "userId"),
@@ -29,16 +31,19 @@ public class UserVegan {
             profileList = new LinkedList<Profile>();
         }
         profileList.add(tempProfile);
-    }*/
+    }*//*
 
 
+
+*/
 /*    public List<Profile> getProfileList() {
         return profileList;
     }
 
     public void setProfileList(List<Profile> profileList) {
         this.profileList = profileList;
-    }*/
+    }*//*
+
 
     public Integer getUserId() {
         return userId;
@@ -118,3 +123,4 @@ public class UserVegan {
                 '}';
     }
 }
+*/
