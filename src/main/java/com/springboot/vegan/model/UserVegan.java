@@ -2,6 +2,8 @@ package com.springboot.vegan.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name="UsersVegan")
@@ -15,8 +17,23 @@ public class UserVegan {
     private String email;
     private String username; // used to log in to the website, it doesn't have to match the user's firstName
     private String password;
-    private Integer status; // {Administrator = 1, UserVegan = 2} default value = 2
+    private Integer status = 1; // {status: {not-locked = 1, locked = 0} (default value = 1)
     private Date registrationDate;
+
+    // Configure ManyToMany relationship
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="UserVgProfile",
+        joinColumns = @JoinColumn(name = "userId"),
+        inverseJoinColumns = @JoinColumn(name = "profileId"))
+    private List<Profile> profiles;
+
+    // profiles: {Supervisor = 1, Administrator = 2,  UserVegan = 3} (default value = 3)
+    public void add(Profile tmpProfile) {
+        if (profiles == null) {
+            profiles = new LinkedList<Profile>();
+        }
+        profiles.add(tmpProfile);
+    }
 
     public Integer getUserId() {
         return userId;
@@ -81,6 +98,16 @@ public class UserVegan {
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
+
+    public List<Profile> getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(List<Profile> profiles) {
+        this.profiles = profiles;
+    }
+
+
 
     @Override
     public String toString() {

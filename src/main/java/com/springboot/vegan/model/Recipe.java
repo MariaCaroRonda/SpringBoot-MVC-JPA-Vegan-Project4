@@ -17,7 +17,7 @@ public class Recipe {
     private Integer cookingTime;
     private Integer featured=0;
     private String imageMeal="no-image.png";
-    private Integer status;
+    private String status; // status: {Premium (for registered users only), Normal}
     private String instructions;
 
     //@Transient // ignore the field category
@@ -77,11 +77,11 @@ public class Recipe {
         this.imageMeal = imageMeal;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

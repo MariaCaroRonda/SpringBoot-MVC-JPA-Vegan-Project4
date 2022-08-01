@@ -1,7 +1,9 @@
 package com.springboot.vegan;
 
 import com.springboot.vegan.model.Category;
+import com.springboot.vegan.model.Profile;
 import com.springboot.vegan.model.Recipe;
+import com.springboot.vegan.model.UserVegan;
 import com.springboot.vegan.repository.CategoriesRepository;
 import com.springboot.vegan.repository.ProfilesRepository;
 import com.springboot.vegan.repository.RecipesRepository;
@@ -58,8 +60,66 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             findAllPaginating();
             findAllPaginatingSorting()
             findRecipes();
-            saveRecipe(); */
+            saveRecipe();
+            createProfileApplication();
+            createUserWithTwoProfiles();
+            findUser();
+            */
 
+        findRecipesByStatus();
+    }
+
+    private void findRecipesByStatus () {
+        List<Recipe> list = recipesRepository.findByStatus("Premium");
+        System.out.println("Recipes found: " + list.size());
+        for (Recipe r : list) {
+            System.out.println(r.getRecipeId() + ": " + r.getName() +
+                            ", status: " + r.getStatus());
+        }
+    }
+
+    public void findUser() {
+        Optional<UserVegan> optional = usersVeganRepository.findById(1);
+        if (optional.isPresent()) {
+            UserVegan uv = optional.get();
+            System.out.println("User first name: " + uv.getFirstName());
+            System.out.println("User last name: " + uv.getLastName());
+            System.out.println("Assigned profiles: " );
+            for (Profile p : uv.getProfiles()) {
+                System.out.println(p.getProfile());
+            }
+        }
+        else
+        {
+            System.out.println("User not found");
+        }
+    }
+
+    // Create user with profiles Administrator and UserVegan
+    private void createUserWithTwoProfiles() {
+        UserVegan user = new UserVegan();
+        user.setFirstName("Ivan");
+        user.setLastName("Tinajero");
+        user.setEmail("ivan.tinajero@gmail.com");
+        user.setRegistrationDate(new Date());
+        user.setUsername("itinajero");
+        user.setPassword("12345");
+        user.setStatus(1);
+
+        Profile profile1 = new Profile();
+        profile1.setProfileId(2);
+
+        Profile profile2 = new Profile();
+        profile2.setProfileId(3);
+
+        user.add(profile1);
+        user.add(profile2);
+
+        usersVeganRepository.save(user);
+    }
+
+    private void createProfileApplication() {
+        profilesRepository.saveAll(getProfilesApplication());
     }
 
     private void saveRecipe() {
@@ -69,7 +129,7 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
         recipe.setIngredients("Plant-based margarine, vegan toast");
         recipe.setDate(new Date());
         recipe.setImageMeal("no-image.png");
-        recipe.setStatus(2);
+        recipe.setStatus("Normal");
         recipe.setPrepTime(3);
         recipe.setCookingTime(1);
         recipe.setFeatured(0);
@@ -237,7 +297,6 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
         }
     }
 
-
     private List<Category> getListCategories () {
 
         List<Category> list = new LinkedList<Category>();
@@ -289,5 +348,23 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
         return list;
     }
 
+    private List<Profile> getProfilesApplication() {
+        List<Profile> list = new LinkedList<Profile>();
+
+        Profile profile1 = new Profile();
+        profile1.setProfile("SUPERVISOR");
+
+        Profile profile2 = new Profile();
+        profile2.setProfile("ADMINISTRATOR");
+
+        Profile profile3 = new Profile();
+        profile3.setProfile("USERVEGAN");
+
+        list.add(profile1);
+        list.add(profile2);
+        list.add(profile3);
+
+        return list;
+    }
 
 }
