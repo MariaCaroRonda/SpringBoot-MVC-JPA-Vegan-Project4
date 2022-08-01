@@ -40,15 +40,35 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             existById();
             saveAll();
             findAllJpa();
-            findAllSorting(); */
+            findAllSorting();
+            findAllPaginating(); */
 
-        findAllPaginating();
+        findAllPaginatingSorting();
 
+    }
+
+    private void findAllPaginatingSorting() {
+        // Start pagination of page 0 and size 3 (3 registries per page) and sorted by 'name'
+        Page<Category> page = categoriesRepository.findAll(PageRequest.of(0, 4, Sort.by("name")));
+        System.out.println("Total registries: " + page.getTotalElements());
+        System.out.println("Total pages: " + page.getTotalPages());
+        for (Category tmpCat : page.getContent()) {
+            System.out.println(tmpCat.getCategoryId() + " " + tmpCat.getName());
+        }
+
+        page = categoriesRepository.findAll(PageRequest.of(0, 4, Sort.by("name").descending()));
+        System.out.println("Total registries: " + page.getTotalElements());
+        System.out.println("Total pages: " + page.getTotalPages());
+        for (Category tmpCat : page.getContent()) {
+            System.out.println(tmpCat.getCategoryId() + " " + tmpCat.getName());
+        }
     }
 
     private void findAllPaginating() {
         // Start pagination of page 0 and size 3 (3 registries per page)
         Page<Category> page = categoriesRepository.findAll(PageRequest.of(0, 3));
+        System.out.println("Total registries: " + page.getTotalElements());
+        System.out.println("Total pages: " + page.getTotalPages());
         for (Category tmpCat : page.getContent()) {
             System.out.println(tmpCat.getCategoryId() + " " + tmpCat.getName());
         }
