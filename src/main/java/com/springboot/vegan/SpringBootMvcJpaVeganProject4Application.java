@@ -1,7 +1,9 @@
 package com.springboot.vegan;
 
 import com.springboot.vegan.model.Category;
+import com.springboot.vegan.model.Recipe;
 import com.springboot.vegan.repository.CategoriesRepository;
+import com.springboot.vegan.repository.RecipesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +24,9 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     @Autowired
     private CategoriesRepository categoriesRepository;
 
+    @Autowired
+    private RecipesRepository recipesRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(SpringBootMvcJpaVeganProject4Application.class, args);
     }
@@ -41,10 +46,20 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             saveAll();
             findAllJpa();
             findAllSorting();
-            findAllPaginating(); */
+            findAllPaginating();
+            findAllPaginatingSorting(); */
 
-        findAllPaginatingSorting();
+        findRecipes();
 
+    }
+
+    private void findRecipes() {
+        List<Recipe> list = recipesRepository.findAll();
+        //displayListRecipe(list);
+        for (Recipe tmpRecipe : list) {
+            System.out.println(tmpRecipe.getRecipeId() + " " + tmpRecipe.getName() +
+                    ", with category:  " + tmpRecipe.getCategory().getName());
+        }
     }
 
     private void findAllPaginatingSorting() {
@@ -77,11 +92,11 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     private void findAllSorting() {
         // Ascending order
         List<Category> categories = categoriesRepository.findAll(Sort.by("name"));
-        displayList(categories);
+        displayListCategory(categories);
 
         // Descending order
         categories = categoriesRepository.findAll(Sort.by("name").descending());
-        displayList(categories);
+        displayListCategory(categories);
     }
 
     private void saveAll() {
@@ -180,9 +195,15 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     }
 
 
-    private void displayList(List<Category> categories) {
+    private void displayListCategory(List<Category> categories) {
         for (Category tmpCat : categories) {
             System.out.println(tmpCat.getCategoryId() + " " + tmpCat.getName());
+        }
+    }
+
+    private void displayListRecipe(List<Recipe> recipes) {
+        for (Recipe tmpRecipe : recipes) {
+            System.out.println(tmpRecipe.getRecipeId() + " " + tmpRecipe.getName());
         }
     }
 

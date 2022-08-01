@@ -1,9 +1,14 @@
 package com.springboot.vegan.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "Recipes")
 public class Recipe {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer recipeId;
     private String name;
     private String ingredients;
@@ -15,6 +20,9 @@ public class Recipe {
     private Integer status;
     private String instructions;
 
+    //@Transient // ignore the field category
+    @OneToOne // between 'Recipes' and 'Categories' using the column 'categoryId'
+    @JoinColumn(name = "categoryId")
     private Category category;
 
     public Integer getRecipeId() {
