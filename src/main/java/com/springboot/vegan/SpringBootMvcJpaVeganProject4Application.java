@@ -34,9 +34,10 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             deleteAll();
             findByIds();
             findAll();
-            existById(); */
+            existById();
+            saveAll(); */
 
-        saveAll();
+           findAll();
 
     }
 
@@ -51,10 +52,16 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     }
 
     private void findAll() {
-        Iterable<Category> categories = categoriesRepository.findAll();
+/*        Iterable<Category> categories = categoriesRepository.findAll();
         for (Category tmpCat: categories) {
             System.out.println(tmpCat);
-        }
+        }*/
+
+        // findAll() using JpaRepository
+         List<Category> categories  = categoriesRepository.findAll();
+         for (Category tmpCat : categories) {
+             System.out.println(tmpCat.getCategoryId() + " " + tmpCat.getName());
+         }
     }
 
     private void findByIds() {
