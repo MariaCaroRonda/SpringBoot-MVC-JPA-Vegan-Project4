@@ -1,14 +1,15 @@
+/*
 package com.springboot.vegan.model;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="UsersVegan")
+@Table(name = "UsersVegan")
 public class UserVegan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //auto-increment MySQL
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
     private String firstName; // user's first name
     private String lastName;
@@ -17,6 +18,32 @@ public class UserVegan {
     private String password;
     private Integer status; // {Administrator = 1, UserVegan = 2} default value = 2
     private Date registrationDate;
+
+*/
+/*      @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "UserProfile",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "profileId"))
+    private List<Profile> profileList;
+
+    public void addProfile(Profile tempProfile) {
+        if (profileList == null) {
+            profileList = new LinkedList<Profile>();
+        }
+        profileList.add(tempProfile);
+    }*//*
+
+
+
+*/
+/*    public List<Profile> getProfileList() {
+        return profileList;
+    }
+
+    public void setProfileList(List<Profile> profileList) {
+        this.profileList = profileList;
+    }*//*
+
 
     public Integer getUserId() {
         return userId;
@@ -42,20 +69,20 @@ public class UserVegan {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -88,11 +115,12 @@ public class UserVegan {
                 "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 ", registrationDate=" + registrationDate +
                 '}';
     }
 }
+*/

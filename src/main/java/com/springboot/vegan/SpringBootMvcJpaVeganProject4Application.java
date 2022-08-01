@@ -3,7 +3,9 @@ package com.springboot.vegan;
 import com.springboot.vegan.model.Category;
 import com.springboot.vegan.model.Recipe;
 import com.springboot.vegan.repository.CategoriesRepository;
+import com.springboot.vegan.repository.ProfilesRepository;
 import com.springboot.vegan.repository.RecipesRepository;
+import com.springboot.vegan.repository.UsersVeganRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,6 +30,12 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     @Autowired
     private RecipesRepository recipesRepository;
 
+    @Autowired
+    private UsersVeganRepository usersVeganRepository;
+
+    @Autowired
+    private ProfilesRepository profilesRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(SpringBootMvcJpaVeganProject4Application.class, args);
     }
@@ -49,9 +57,8 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             findAllSorting();
             findAllPaginating();
             findAllPaginatingSorting()
-            findRecipes(); */
-
-        saveRecipe();
+            findRecipes();
+            saveRecipe(); */
 
     }
 
