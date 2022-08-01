@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,10 +38,30 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             findByIds();
             findAll();
             existById();
-            saveAll(); */
+            saveAll();
+            findAllJpa();
+            findAllSorting(); */
 
-           findAll();
+        findAllPaginating();
 
+    }
+
+    private void findAllPaginating() {
+        // Start pagination of page 0 and size 3 (3 registries per page)
+        Page<Category> page = categoriesRepository.findAll(PageRequest.of(0, 3));
+        for (Category tmpCat : page.getContent()) {
+            System.out.println(tmpCat.getCategoryId() + " " + tmpCat.getName());
+        }
+    }
+
+    private void findAllSorting() {
+        // Ascending order
+        List<Category> categories = categoriesRepository.findAll(Sort.by("name"));
+        displayList(categories);
+
+        // Descending order
+        categories = categoriesRepository.findAll(Sort.by("name").descending());
+        displayList(categories);
     }
 
     private void saveAll() {
@@ -52,16 +75,18 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     }
 
     private void findAll() {
-/*        Iterable<Category> categories = categoriesRepository.findAll();
+        Iterable<Category> categories = categoriesRepository.findAll();
         for (Category tmpCat: categories) {
             System.out.println(tmpCat);
-        }*/
+        }
+    }
 
+    private void findAllJpa() {
         // findAll() using JpaRepository
-         List<Category> categories  = categoriesRepository.findAll();
-         for (Category tmpCat : categories) {
-             System.out.println(tmpCat.getCategoryId() + " " + tmpCat.getName());
-         }
+        List<Category> categories  = categoriesRepository.findAll();
+        for (Category tmpCat : categories) {
+            System.out.println(tmpCat.getCategoryId() + " " + tmpCat.getName());
+        }
     }
 
     private void findByIds() {
@@ -76,7 +101,10 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     }
 
     private void deleteAll() {
-        categoriesRepository.deleteAll();
+        /*categoriesRepository.deleteAll();*/
+        // delete all using JpaRepository
+        categoriesRepository.deleteAllInBatch();
+
     }
 
     private void countCategories() {
@@ -129,6 +157,13 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
         category.setDescription("A light midday meal between breakfast and dinner.");
         categoriesRepository.save(category);
         System.out.println(category);
+    }
+
+
+    private void displayList(List<Category> categories) {
+        for (Category tmpCat : categories) {
+            System.out.println(tmpCat.getCategoryId() + " " + tmpCat.getName());
+        }
     }
 
 
