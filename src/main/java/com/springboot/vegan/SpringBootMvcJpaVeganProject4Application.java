@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -47,9 +48,31 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             findAllJpa();
             findAllSorting();
             findAllPaginating();
-            findAllPaginatingSorting(); */
+            findAllPaginatingSorting()
+            findRecipes(); */
 
-        findRecipes();
+        saveRecipe();
+
+    }
+
+    private void saveRecipe() {
+        Recipe recipe = new Recipe();
+
+        recipe.setName("Vegan Toast");
+        recipe.setIngredients("Plant-based margarine, vegan toast");
+        recipe.setDate(new Date());
+        recipe.setImageMeal("no-image.png");
+        recipe.setStatus(2);
+        recipe.setPrepTime(3);
+        recipe.setCookingTime(1);
+        recipe.setFeatured(0);
+        recipe.setInstructions("<h3>Put a slice of bread on a toaster for 3 minutes. Spread the margarine " +
+                "on the toast</h3>");
+
+        Category cat = new Category();
+        cat.setCategoryId(1);
+        recipe.setCategory(cat);
+        recipesRepository.save(recipe);
 
     }
 
