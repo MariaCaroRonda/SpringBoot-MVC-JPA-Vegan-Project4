@@ -64,9 +64,57 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             createProfileApplication();
             createUserWithTwoProfiles();
             findUser();
+            findRecipesByStatus();
+            findRecipesByFeaturedStatus();
+            findByCookingTime();
+            findByCookingTimeBetweenOrdered();
+             findRecipeSeveralStatus();
             */
 
-        findRecipesByStatus();
+
+
+    }
+
+    private void findRecipeSeveralStatus() {
+        String[] status = new String[] {"Premium", "Normal"};
+        List<Recipe> list = recipesRepository.findByStatusIn(status);
+        System.out.println("Recipes found: " + list.size());
+        for (Recipe r : list) {
+            System.out.println(r.getRecipeId() + ": " + r.getName() +
+                    ", status: " + r.getStatus());
+        }
+
+    }
+
+    private void findByCookingTimeBetweenOrdered() {
+        List<Recipe> list = recipesRepository.findByCookingTimeBetweenOrderByCookingTimeDesc(10, 30);
+        System.out.println("Recipes found: " + list.size());
+        for (Recipe r : list) {
+            System.out.println(r.getRecipeId() + ": " + r.getName() +
+                    ", Cooking time in minutes: " + r.getCookingTime());
+        }
+    }
+
+    private void findByCookingTime() {
+        List<Recipe> list = recipesRepository.findByCookingTimeBetween(10, 30);
+        System.out.println("Recipes found: " + list.size());
+        for (Recipe r : list) {
+            System.out.println(r.getRecipeId() + ": " + r.getName() +
+                    ", Cooking time in minutes: " + r.getCookingTime());
+        }
+    }
+
+    private void findRecipesByFeaturedStatus() {
+        List<Recipe> list = recipesRepository
+                .findByFeaturedAndStatusOrderByRecipeIdDesc (1, "Premium");
+
+        System.out.println("Recipes found: " + list.size());
+
+        for (Recipe r : list) {
+            System.out.println(r.getRecipeId() + ": " + r.getName() +
+                    ", status: " + r.getStatus() +
+                    ", featured: " + r.getFeatured());
+        }
     }
 
     private void findRecipesByStatus () {
