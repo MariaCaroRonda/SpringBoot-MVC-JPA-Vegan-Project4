@@ -46,7 +46,7 @@
           </thead>
           <tbody>
           <tr th:each="tmpRecipe : ${recipes}">
-            <td>-</td>
+            <td th:text="${tmpRecipe.category.name}"></td>
             <td th:text="${tmpRecipe.name}"></td>
             <td th:text="${tmpRecipe.date}"></td>
             <td th:text="${tmpRecipe.status}"></td>
@@ -54,7 +54,7 @@
             <td>
               <a href="#" class="btn btn-success btn-sm" role="button"
                  title="Edit recipe"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-              <a href="#" onclick="return confirm('¿Estas seguro?')"
+              <a href="#" onclick="return confirm('Are you sure?')"
                  class="btn btn-success btn-sm" role="button" title="Delete recipe">
                 <i class="fas fa-trash" aria-hidden="true"></i></a>
             </td>

@@ -34,6 +34,11 @@ public class RecipesServiceImpl implements IRecipesService{
         recipesList.add(recipe);
     }
 
+    @Override
+    public List<Recipe> findFeatured() {
+        return null;
+    }
+
 
     public RecipesServiceImpl() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

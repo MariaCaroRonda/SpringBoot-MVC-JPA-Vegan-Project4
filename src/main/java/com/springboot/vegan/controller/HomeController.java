@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -55,10 +56,18 @@ public class HomeController {
 
     @GetMapping("/")
     public String showHome(Model model) {
-        List<Recipe> list = recipesService.findAll();
-        model.addAttribute("recipes", list);
+        // we don't need the below lines when we use setGenerics()
+/*        List<Recipe> list = recipesService.findAll();
+        model.addAttribute("recipes", list);*/
 
         return "home";
+    }
+
+    @ModelAttribute
+    // We can add to the model all attributes we want, and these
+    //attributes will be available for all methods within Home Controller
+    public void setGenerics(Model model) {
+        model.addAttribute("recipes", recipesService.findFeatured());
     }
 
 }

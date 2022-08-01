@@ -45,7 +45,7 @@
   <hr>
 
   <div class="container">
-    <h2 class="font-weight-bold text-center text-capitalize">FEATURED</h2>
+    <h3 class="font-weight-bold text-center text-capitalize">FEATURED</h3>
     <hr>
 
     <div class="row" th:each="tmpRecipe : ${recipes}">
@@ -56,13 +56,16 @@
              alt="Generic placeholder image" width="220" height="200">
       </div>
       <div class="col-md-9">
-        <h2 th:text="${tmpRecipe.name}"></h2>
-        <h6 class="card-title"><strong>Category: </strong> <span></span></h6>
+        <h3 th:text="${tmpRecipe.name}"></h3>
+        <h5 class="card-title"><strong>Category: </strong> <span th:text="${tmpRecipe.category.name}"></span></h5>
 
-        <h6 class="card-title"><strong>Publication date: </strong>
-            <span th:text="${tmpRecipe.date}"></span></h6>
+        <h5 class="card-title"><strong>Publication date: </strong>
+            <span th:text="${tmpRecipe.date}"></span></h5>
 
-        <p th:text="${tmpRecipe.ingredients}"></p>
+       <!-- <h6 class="card-title"><strong>Ingredients: </strong>
+          <span th:text="${tmpRecipe.ingredients}"></span></h6>-->
+
+<!--        <h5 class="text-success" th:text="${tmpRecipe.ingredients}"></h5>-->
         <p>
           <a class="btn btn-secondary"
               th:href="@{/recipes/view/{idTemp} (idTemp = ${tmpRecipe.recipeId}) }"

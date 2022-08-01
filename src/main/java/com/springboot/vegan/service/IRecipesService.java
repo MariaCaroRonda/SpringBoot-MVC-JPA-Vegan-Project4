@@ -11,4 +11,6 @@ public interface IRecipesService {
     Recipe findById(Integer recipeId);
 
     void save(Recipe recipe);
+
+    List<Recipe> findFeatured();
 }

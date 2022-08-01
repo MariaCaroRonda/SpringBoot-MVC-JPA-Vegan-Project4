@@ -31,7 +31,7 @@ public class CategoriesServiceImpl implements ICategoriesService{
         category3.setName("Dinner");
         category3.setDescription("The main meal of the day, usually eaten in the evening.");
 
-        category4 = new Category();
+/*        category4 = new Category();
         category4.setCategoryId((4));
         category4.setName("Snacks");
         category4.setDescription("A small amount of food eaten between meals.");
@@ -49,15 +49,15 @@ public class CategoriesServiceImpl implements ICategoriesService{
         Category category7 = new Category();
         category7.setCategoryId(7);
         category7.setName("Smoothies");
-        category7.setDescription("A thick, smooth cold drink of fresh fruit / vegetables pureed with a plant-based drink/yogurt/water..");
+        category7.setDescription("A thick, smooth cold drink of fresh fruit / vegetables pureed with a plant-based drink/yogurt/water..");*/
 
         list.add(category1);
         list.add(category2);
         list.add(category3);
-        list.add(category4);
+/*        list.add(category4);
         list.add(category5);
         list.add(category6);
-        list.add(category7);
+        list.add(category7);*/
     }
 
 
@@ -69,6 +69,11 @@ public class CategoriesServiceImpl implements ICategoriesService{
     @Override
     public List<Category> findAll() {
         return list;
+    }
+
+    @Override
+    public Category findById(Integer categoryId) {
+        return null;
     }
 
 
