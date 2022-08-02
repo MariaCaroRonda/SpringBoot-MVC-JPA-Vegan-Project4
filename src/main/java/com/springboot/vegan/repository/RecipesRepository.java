@@ -22,4 +22,5 @@ public interface RecipesRepository extends JpaRepository<Recipe, Integer> {
     List<Recipe> findByCookingTimeBetweenOrderByCookingTimeDesc(int time1, int time2);
 
     List<Recipe> findByStatusIn(String[] status);
+
 }

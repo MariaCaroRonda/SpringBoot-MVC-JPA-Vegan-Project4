@@ -39,6 +39,11 @@ public class RecipesServiceImpl implements IRecipesService{
         return null;
     }
 
+    @Override
+    public void delete(Integer recipeId) {
+
+    }
+
 
     public RecipesServiceImpl() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

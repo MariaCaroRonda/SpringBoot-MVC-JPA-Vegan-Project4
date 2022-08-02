@@ -79,12 +79,23 @@ public class RecipesController {
     }
 
 
+/*
     @GetMapping("/delete")
     public String delete(@RequestParam("id") int recipeId, Model model) {
         System.out.println("Deleting recipe with Id: " + recipeId);
 
         model.addAttribute("id", recipeId);
         return "message";
+    }
+*/
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int recipeId, RedirectAttributes attributes) {
+        System.out.println("Deleting recipe with id: " + recipeId);
+        recipesService.delete(recipeId);
+        attributes.addFlashAttribute("msg", "Recipe deleted successfully");
+
+        return "redirect:/recipes/index";
     }
 
     @GetMapping("/view/{id}")
@@ -98,6 +109,9 @@ public class RecipesController {
         // Find the recipe details on the DB
         return "detail";
     }
+
+
+/*    public String edit() {}*/
 
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {

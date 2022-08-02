@@ -54,7 +54,7 @@
             <td>
               <a href="#" class="btn btn-success btn-sm" role="button"
                  title="Edit recipe"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-              <a href="#" onclick="return confirm('Are you sure?')"
+              <a th:href="@{/recipes/delete/{id} (id=${tmpRecipe.recipeId})}" onclick="return confirm('Are you sure?')"
                  class="btn btn-success btn-sm" role="button" title="Delete recipe">
                 <i class="fas fa-trash" aria-hidden="true"></i></a>
             </td>

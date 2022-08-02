@@ -13,4 +13,6 @@ public interface IRecipesService {
     void save(Recipe recipe);
 
     List<Recipe> findFeatured();
+
+    void delete (Integer recipeId);
 }

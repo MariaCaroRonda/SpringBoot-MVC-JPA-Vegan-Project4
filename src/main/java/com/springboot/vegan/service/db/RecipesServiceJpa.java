@@ -40,4 +40,9 @@ public class RecipesServiceJpa implements IRecipesService {
     public List<Recipe> findFeatured() { // find featured and premium recipes
         return recipesRepository.findByFeaturedAndStatusOrderByRecipeIdDesc(1, "Premium");
     }
+
+    @Override
+    public void delete(Integer recipeId) {
+        recipesRepository.deleteById(recipeId);
+    }
 }
