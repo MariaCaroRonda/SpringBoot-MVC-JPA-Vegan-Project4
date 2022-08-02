@@ -36,7 +36,11 @@
           <h4 class="card-header">Recipe <strong th:text="${recipe.name}"></strong></h4>
           <div class="card-body">
             <h5 class="card-title"><strong>Category: </strong> <span th:text="${recipe.category.name}"></span></h5>
-            <h6 class="card-title"><strong>Published: </strong> <span th:text="${recipe.date}"></span></h6>
+            <h6 class="card-title"><strong>Published: </strong>
+<!--              <span th:text="${recipe.date}"></span>-->
+              <span th:text="${#dates.format(recipe.date, 'dd-MM-yyyy')}"></span>
+
+            </h6>
             <h6 class="card-title"><strong>Preparation time: </strong><span th:text="${recipe.prepTime}"></span></h6>
             <h6 class="card-title"><strong>Cooking time: </strong><span th:text="${recipe.cookingTime}"></span></h6>
             <h5 class="card-title"><strong>Ingredients: </strong><span th:text="${recipe.ingredients}"></span></h5>

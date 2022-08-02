@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
@@ -18,62 +18,50 @@
 
 <body>
 
-<header th:insert="fragments/menu :: menu-main">
-</header>
+<header th:insert="fragments/menu :: menu-main"></header>
 
 <main role="main">
   <hr>
   <div class="container">
 
     <div class="card">
-      <h4 class="card-header"><strong>List of Recipes</strong></h4>
+      <h4 class="card-header"><strong>List of Categories</strong></h4>
       <div class="card-body">
-        <a class="btn btn-primary" th:href="@{/recipes/create}"
-           title="Create a new Recipe" role="button">
-            <i class="fas fa-file" aria-hidden="true"></i> New</a>
+        <a class="btn btn-primary" th:href="@{/categories/create}" role="button">
+          <i class="fas fa-file" aria-hidden="true"></i> New</a>
         <hr>
         <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+
         <table class="table table-hover">
           <thead class="thead-light">
           <tr>
-            <th scope="col">Category</th>
+            <th scope="col">Id</th>
             <th scope="col">Name</th>
-            <th scope="col">Published</th>
-            <th scope="col">Status</th>
-            <th scope="col">Featured</th>
+            <th scope="col">Description</th>
             <th scope="col">Operations</th>
           </tr>
           </thead>
           <tbody>
-          <tr th:each="tmpRecipe : ${recipes}">
-            <td th:text="${tmpRecipe.category.name}"></td>
-            <td th:text="${tmpRecipe.name}"></td>
-            <td th:text="${tmpRecipe.date}"></td>
-            <td th:text="${tmpRecipe.status}"></td>
-            <td th:text="${tmpRecipe.featured==1 ? 'YES' : 'NO' }"></td>
-            <td>
-              <a th:href="@{/recipes/edit/{id} (id=${tmpRecipe.recipeId})}"
-                 class="btn btn-success btn-sm" role="button"
-                 title="Edit recipe"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
 
-              <a th:href="@{/recipes/delete/{id} (id=${tmpRecipe.recipeId})}" onclick="return confirm('Are you sure?')"
-                 class="btn btn-success btn-sm" role="button" title="Delete recipe">
+          <tr th:each="tmpCat : ${categories}">
+            <!--<th scope="row" th:text="${tmpCat.categoryId}"></th>-->
+            <td th:text="${tmpCat.categoryId}"></td>
+            <td th:text="${tmpCat.name}"></td>
+            <td th:text="${tmpCat.description}"></td>
+            <td>
+              <a th:href="@{/categories/edit/{id} (id=${tmpCat.categoryId}) }"
+                 class="btn btn-success btn-sm" role="button"
+                 title="Edit"><i class="fas fa-pencil-alt"
+                                   aria-hidden="true"></i></a>
+
+              <a th:href="@{/categories/delete/{id} (id=${tmpCat.categoryId}) }"
+                 onclick="return confirm('Are you sure?')"
+                 class="btn btn-success btn-sm" role="button" title="Delete">
                 <i class="fas fa-trash" aria-hidden="true"></i></a>
             </td>
           </tr>
           </tbody>
         </table>
-
-        <nav th:if="${recipesPage.totalPages  > 0}" aria-label="Page navigation example" >
-          <ul class="pagination">
-            <li class="page-item">
-              <a th:href="@{/recipes/indexPaginate(page=${recipes.number -1})}"
-                 class="page-link">Anterior</a></li>
-            <li class="page-item">
-              <a th:href="@{/recipes/indexPaginate(page=${recipes.number + 1})}"
-                 class="page-link">Siguiente</a></li>
-          </ul>
-        </nav>
 
       </div>
     </div>

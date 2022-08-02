@@ -3,14 +3,20 @@ package com.springboot.vegan.controller;
 import com.springboot.vegan.model.Profile;
 import com.springboot.vegan.model.Recipe;
 import com.springboot.vegan.model.UserVegan;
+import com.springboot.vegan.service.ICategoriesService;
 import com.springboot.vegan.service.IRecipesService;
 import com.springboot.vegan.service.IUsersVgService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,6 +27,9 @@ import java.util.List;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private ICategoriesService categoriesService;
 
     @Autowired
     private IRecipesService recipesService;
@@ -87,27 +96,39 @@ public class HomeController {
         return "detail";
     }
 
-    @GetMapping("/listRecipes")
-    public String showList(Model model){
-        List<String> list = new LinkedList<String>();
+    @GetMapping("/search")
+    public String search(@ModelAttribute("search") Recipe recipe, Model model) {
+        System.out.println("Searching by: " + recipe);
 
-        list.add("Breakfast - Blueberry banana pancakes");
-        list.add("Lunch - Spinach Basil Pasta");
-        list.add("Dinner - Mushroom Potato Soup");
-        list.add("Smoothies - Fruits Smoothie");
+        // It uses a search type 'like'
+        //where ingredients like '%?%'
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("ingredients",
+                        ExampleMatcher.GenericPropertyMatchers.contains());
 
+        Example<Recipe> example = Example.of(recipe, matcher);
+        List<Recipe> list = recipesService.findByExample(example);
         model.addAttribute("recipes", list);
 
-        return "listRecipes";
+        return "home";
     }
 
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        // It set an empty string to null
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    }
 
     @ModelAttribute
     // We can add to the model all attributes we want, and these
     //attributes will be available for all methods within Home Controller
     public void setGenerics(Model model) {
+        Recipe recipeSearch = new Recipe();
+        recipeSearch.reset();
         model.addAttribute("recipes", recipesService.findFeatured());
+        model.addAttribute("categories", categoriesService.findAll());
+        model.addAttribute("search", recipeSearch);
     }
 
 }

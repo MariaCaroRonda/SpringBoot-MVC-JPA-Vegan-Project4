@@ -1,6 +1,8 @@
 package com.springboot.vegan.service;
 
 import com.springboot.vegan.model.Category;
+import com.springboot.vegan.model.Recipe;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;

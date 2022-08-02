@@ -113,6 +113,11 @@ public class Recipe {
         this.category = category;
     }
 
+    public void reset() {
+        this.imageMeal = null;
+        this.featured = null;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +

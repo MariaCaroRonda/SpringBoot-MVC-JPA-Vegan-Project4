@@ -1,6 +1,9 @@
 package com.springboot.vegan.service;
 
 import com.springboot.vegan.model.Recipe;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -47,6 +50,16 @@ public class RecipesServiceImpl implements IRecipesService{
     @Override
     public void delete(Integer recipeId) {
 
+    }
+
+    @Override
+    public List<Recipe> findByExample(Example<Recipe> example) {
+        return null;
+    }
+
+    @Override
+    public Page<Recipe> findAll(Pageable page) {
+        return null;
     }
 
 

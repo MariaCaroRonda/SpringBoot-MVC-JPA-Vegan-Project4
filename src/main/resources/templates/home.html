@@ -27,16 +27,22 @@
   <div class="jumbotron">
     <div class="container">
       <h3>Find a vegan recipe.</h3>
-      You can search by ingredient and category.
-      <form class="form-inline">
-        <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
-        <select class="custom-select custom-select mb-3">
-          <option selected>Seleccione una categoría</option>
-          <option value="1">Breakfast</option>
-          <option value="2">Lunch</option>
-          <option value="3">Dinner</option>
-          <option value="4">Snacks</option>
-          <option value="5">Smoothies</option>
+      <p>You can search by ingredient and category</p>
+
+      <form class="form-inline"
+            th:action="@{/search}" method="get"
+            th:object="${search}">
+        <input type="text" class="form-control mb-3"
+               th:field="*{ingredients}"
+               id="exampleFormControlInput1"
+               placeholder="Enter a Search">&nbsp;
+        <select th:field="*{category.categoryId}" class="custom-select custom-select mb-3">
+          <option th:value="*{null}" selected>Select a Category</option>
+          <option th:each="catTmp : ${categories}"
+                  th:value="${catTmp.categoryId}"
+                  th:text="${catTmp.name}">
+          </option>
+
         </select>&nbsp;
         <button type="submit" class="btn btn-primary mb-3">Search</button>
       </form>
@@ -58,9 +64,14 @@
       <div class="col-md-9">
         <h3 th:text="${tmpRecipe.name}"></h3>
         <h5 class="card-title"><strong>Category: </strong> <span th:text="${tmpRecipe.category.name}"></span></h5>
+        <h6>
+          <strong>Ingredients: </strong> <span th:text="${tmpRecipe.ingredients}"></span>
+        </h6>
 
         <h5 class="card-title"><strong>Publication date: </strong>
-            <span th:text="${tmpRecipe.date}"></span></h5>
+            <!--<span th:text="${tmpRecipe.date}"></span>-->
+          <span th:text="${#dates.format(tmpRecipe.date, 'dd-MM-yyyy')}"></span>
+        </h5>
 
        <!-- <h6 class="card-title"><strong>Ingredients: </strong>
           <span th:text="${tmpRecipe.ingredients}"></span></h6>-->

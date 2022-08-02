@@ -5,6 +5,9 @@ import com.springboot.vegan.repository.RecipesRepository;
 import com.springboot.vegan.service.IRecipesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,5 +55,15 @@ public class RecipesServiceJpa implements IRecipesService {
     @Override
     public void delete(Integer recipeId) {
         recipesRepository.deleteById(recipeId);
+    }
+
+    @Override
+    public List<Recipe> findByExample(Example<Recipe> example) {
+        return recipesRepository.findAll(example);
+    }
+
+    @Override
+    public Page<Recipe> findAll(Pageable page) {
+        return recipesRepository.findAll(page);
     }
 }
