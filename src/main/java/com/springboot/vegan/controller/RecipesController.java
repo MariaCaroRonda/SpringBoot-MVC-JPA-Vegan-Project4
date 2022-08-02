@@ -47,7 +47,6 @@ public class RecipesController {
 
     @GetMapping("/create")
     public String create(Recipe recipe, Model model){
-        model.addAttribute("categories", categoriesService.findAll());
 
         return "recipes/formRecipe";
     }
@@ -111,7 +110,19 @@ public class RecipesController {
     }
 
 
-/*    public String edit() {}*/
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int recipeId, Model model) {
+        Recipe recipe = recipesService.findById(recipeId);
+        model.addAttribute("recipe", recipe);
+
+        return "recipes/formRecipe";
+    }
+
+
+    @ModelAttribute
+    public void setGenerics(Model model) {
+        model.addAttribute("categories", categoriesService.findAll());
+    }
 
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {

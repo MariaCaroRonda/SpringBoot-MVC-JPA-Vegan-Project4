@@ -44,6 +44,8 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Name</label>
+                <input type="hidden" th:field="*{recipeId}">
+                <input type="hidden" th:field="*{imageMeal}">
                 <input type="text" class="form-control" th:field="*{name}"
                        id="name" name="name"
                        placeholder="Recipe name" required="required">
@@ -78,8 +80,8 @@
                 <label for="status">Status</label>
                 <select class="form-control" name="status" th:field="*{status}"
                         id="status">
-                  <option value=1>Premium</option>
-                  <option value=0>Not Premium</option>
+                  <option value='Premium'>Premium</option>
+                  <option value='Normal'>Not Premium</option>
                  </select>
               </div>
             </div>
@@ -148,7 +150,8 @@
             </div>
             <div class="col-md-3">
               <label for="image">Image meal</label>
-              <img class="rounded mx-auto d-block" src="images/construccion-logo.png"
+              <img class="rounded mx-auto d-block"
+                   th:src="@{/logos/{img} (img=${recipe.imageMeal}) }"
                    alt="Generic placeholder image" width="200" height="200">
             </div>
           </div>
