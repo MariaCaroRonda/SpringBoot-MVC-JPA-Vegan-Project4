@@ -12,6 +12,8 @@ public interface IRecipesService {
 
     void save(Recipe recipe);
 
+    List<Recipe> findFeaturedPremium();
+
     List<Recipe> findFeatured();
 
     void delete (Integer recipeId);

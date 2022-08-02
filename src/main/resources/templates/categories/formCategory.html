@@ -43,7 +43,9 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name"
+                <input type="hidden" th:field="*{categoryId}"></input>
+                <input type="text" class="form-control" th:field="*{name}"
+                       id="name" name="name"
                        placeholder="Enter the category name" required="required">
               </div>
             </div>
@@ -52,7 +54,8 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" name="description" id="description" rows="2"></textarea>
+                <textarea class="form-control" th:field="*{description}"
+                          name="description" id="description" rows="2"></textarea>
               </div>
             </div>
           </div>

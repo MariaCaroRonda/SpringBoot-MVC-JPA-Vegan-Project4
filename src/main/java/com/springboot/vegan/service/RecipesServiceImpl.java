@@ -35,6 +35,11 @@ public class RecipesServiceImpl implements IRecipesService{
     }
 
     @Override
+    public List<Recipe> findFeaturedPremium() {
+        return null;
+    }
+
+    @Override
     public List<Recipe> findFeatured() {
         return null;
     }
