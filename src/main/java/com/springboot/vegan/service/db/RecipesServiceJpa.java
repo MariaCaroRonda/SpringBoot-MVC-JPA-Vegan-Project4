@@ -36,9 +36,17 @@ public class RecipesServiceJpa implements IRecipesService {
         recipesRepository.save(recipe);
     }
 
+
     @Override
-    public List<Recipe> findFeatured() { // find featured and premium recipes
+    public List<Recipe> findFeaturedPremium() { // find featured and premium recipes
         return recipesRepository.findByFeaturedAndStatusOrderByRecipeIdDesc(1, "Premium");
+    }
+
+    @Override
+    public List<Recipe> findFeatured() {
+        int featured = 1;
+        int notFeatured = 0;
+        return recipesRepository.findByFeaturedOrderByName(featured);
     }
 
     @Override

@@ -69,10 +69,22 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             findByCookingTime();
             findByCookingTimeBetweenOrdered();
              findRecipeSeveralStatus();
-            */
+
+            findFeatured();  */
+
+    }
 
 
+    private void findFeatured() {
+        int featured = 1;
+        int notFeatured = 0;
 
+        List<Recipe> list = recipesRepository.findByFeaturedOrderByName(notFeatured);
+        System.out.println("Recipes found: " + list.size());
+        for (Recipe r : list) {
+            System.out.println(r.getRecipeId() + " " + r.getName() +
+                    ", featured: " + r.getFeatured());
+        }
     }
 
     private void findRecipeSeveralStatus() {
@@ -105,8 +117,10 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     }
 
     private void findRecipesByFeaturedStatus() {
+        int featured = 1;
+        int notFeatured = 0;
         List<Recipe> list = recipesRepository
-                .findByFeaturedAndStatusOrderByRecipeIdDesc (1, "Premium");
+                .findByFeaturedAndStatusOrderByRecipeIdDesc (notFeatured, "Premium");
 
         System.out.println("Recipes found: " + list.size());
 

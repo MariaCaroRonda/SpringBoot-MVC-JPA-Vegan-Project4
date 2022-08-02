@@ -13,7 +13,7 @@ public interface RecipesRepository extends JpaRepository<Recipe, Integer> {
     //correct query must include ByRecipeId instead ('recipeId' does exist in 'Recipe' class)
     //List<Recipe> findByFeaturedAndStatusOrderByIdDesc(int featured, String status);
 
-    List<Recipe> findByFeaturedAndStatusOrderByRecipeIdDesc(int featured, String status);
+    List<Recipe> findByFeaturedAndStatusOrderByRecipeIdDesc (int featured, String status);
 
     List<Recipe> findByCookingTimeBetween(int time1, int time2);
 
@@ -22,5 +22,7 @@ public interface RecipesRepository extends JpaRepository<Recipe, Integer> {
     List<Recipe> findByCookingTimeBetweenOrderByCookingTimeDesc(int time1, int time2);
 
     List<Recipe> findByStatusIn(String[] status);
+
+    List<Recipe> findByFeaturedOrderByName(int featured);
 
 }

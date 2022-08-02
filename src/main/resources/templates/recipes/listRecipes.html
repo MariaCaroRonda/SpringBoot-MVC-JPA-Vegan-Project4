@@ -52,8 +52,10 @@
             <td th:text="${tmpRecipe.status}"></td>
             <td th:text="${tmpRecipe.featured==1 ? 'YES' : 'NO' }"></td>
             <td>
-              <a th:href="@{/recipes/edit/{id} (id=${tmpRecipe.recipeId})}" class="btn btn-success btn-sm" role="button"
+              <a th:href="@{/recipes/edit/{id} (id=${tmpRecipe.recipeId})}"
+                 class="btn btn-success btn-sm" role="button"
                  title="Edit recipe"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+
               <a th:href="@{/recipes/delete/{id} (id=${tmpRecipe.recipeId})}" onclick="return confirm('Are you sure?')"
                  class="btn btn-success btn-sm" role="button" title="Delete recipe">
                 <i class="fas fa-trash" aria-hidden="true"></i></a>

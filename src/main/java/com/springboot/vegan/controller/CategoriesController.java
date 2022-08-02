@@ -32,6 +32,24 @@ public class CategoriesController {
         return "categories/listCategories";
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable ("id") int categoryId, RedirectAttributes attributes) {
+        System.out.println("Deleting category with id: " + categoryId);
+        categoriesService.delete(categoryId);
+        attributes.addFlashAttribute("msg", "Category deleted successfully");
+
+        return "redirect:/categories/index";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") int categoryId, Model model) {
+        Category category = categoriesService.findById(categoryId);
+        model.addAttribute("category", category);
+
+        return "categories/formCategory";
+    }
+
+
     // @GetMapping
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Category category) {

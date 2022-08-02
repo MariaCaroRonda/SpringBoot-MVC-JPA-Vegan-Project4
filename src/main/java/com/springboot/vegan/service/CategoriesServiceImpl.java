@@ -76,5 +76,10 @@ public class CategoriesServiceImpl implements ICategoriesService{
         return null;
     }
 
+    @Override
+    public void delete(Integer categoryId) {
+
+    }
+
 
 }
