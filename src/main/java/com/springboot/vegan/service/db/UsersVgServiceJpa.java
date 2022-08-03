@@ -33,5 +33,11 @@ public class UsersVgServiceJpa implements IUsersVgService {
         return usersVeganRepository.findAll();
     }
 
+    @Override
+    public UserVegan findByUsername(String username) {
+
+        return usersVeganRepository.findUserVeganByUsername(username);
+    }
+
 
 }

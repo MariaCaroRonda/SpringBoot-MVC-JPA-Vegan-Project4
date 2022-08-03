@@ -85,7 +85,7 @@ public class RecipesController {
         recipesService.save(recipe);
         attributes.addFlashAttribute("msg", "Recipe Saved Successfully");
 
-        return "redirect:/recipes/index";
+        return "redirect:/recipes/indexPaginate";
     }
 
 
@@ -103,7 +103,8 @@ public class RecipesController {
     public String delete(@PathVariable("id") int recipeId, RedirectAttributes attributes) {
         System.out.println("Deleting recipe with id: " + recipeId);
         recipesService.delete(recipeId);
-        attributes.addFlashAttribute("msg", "Recipe deleted successfully");
+        attributes.addFlashAttribute("msg",
+                "Recipe deleted successfully");
 
         return "redirect:/recipes/index";
     }

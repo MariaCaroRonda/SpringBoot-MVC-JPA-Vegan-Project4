@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,7 +51,10 @@
                 <p class="card-text" th:utext="${recipe.instructions}"></p>
               </div>
             </div>
-            <a class="btn btn-primary" href="#" role="button" title="Add to Favorites"><i class="fas fa-file" aria-hidden="true"></i>Favorites</a>
+            <a sec:authorize="isAuthenticated()"
+               class="btn btn-primary" th:href="@{/profile/userFavorites/{id} (id=${recipe.recipeId}) }"
+                role="button" title="Add to Favorites">
+              <i class="fas fa-file" aria-hidden="true"></i>Add to Favorites</a>
           </div>
         </div>
 

@@ -1,13 +1,7 @@
 package com.springboot.vegan;
 
-import com.springboot.vegan.model.Category;
-import com.springboot.vegan.model.Profile;
-import com.springboot.vegan.model.Recipe;
-import com.springboot.vegan.model.UserVegan;
-import com.springboot.vegan.repository.CategoriesRepository;
-import com.springboot.vegan.repository.ProfilesRepository;
-import com.springboot.vegan.repository.RecipesRepository;
-import com.springboot.vegan.repository.UsersVeganRepository;
+import com.springboot.vegan.model.*;
+import com.springboot.vegan.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -37,6 +31,9 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
     @Autowired
     private ProfilesRepository profilesRepository;
+
+    @Autowired
+    private FavoritesRepository favoritesRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootMvcJpaVeganProject4Application.class, args);
@@ -68,10 +65,82 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
             findRecipesByFeaturedStatus();
             findByCookingTime();
             findByCookingTimeBetweenOrdered();
-             findRecipeSeveralStatus();
+            findRecipeSeveralStatus();
+            findFeatured();
 
-            findFeatured();  */
+        findUserUsername();  */
 
+        //findUserUsername();
+
+        saveFavorite();
+    }
+
+
+    private void saveFavorite() {
+        Favorite favorite = new Favorite();
+        favorite.setFavoriteId(3);
+        UserVegan userVegan = usersVeganRepository.findUserVeganByUsername("marisol");
+        Recipe recipe = recipesRepository.findById(2).get();
+
+        System.out.println(userVegan.getFirstName());
+        System.out.println(recipe.getName());
+
+        favorite.setFavoriteId(3);
+        favorite.setUserVegan(userVegan);
+        favorite.setRecipe(recipe);
+        favorite.setComments("New favorite");
+
+        System.out.println(favorite);
+
+        //favoritesRepository.save(favorite);
+
+       /* favorite.setRecipe(recipesRepository.findById(5).get());
+        favorite.setComments("Test");
+
+        favoritesRepository.save(favorite);*/
+
+        //System.out.println(favorite.getUserVegan().getFirstName());
+
+    }
+
+    private void findUserUsername() {
+        String userName = "marisol";
+        Integer recipeId = 2;
+
+        UserVegan user = usersVeganRepository.findById(5).get();
+        Optional<Recipe> optional = recipesRepository.findById(2);
+        Recipe recipe = optional.get();
+
+        Favorite favorite = new Favorite();
+        favorite.setFavoriteId(3);
+        favorite.setRecipe(recipe);
+        favorite.setUserVegan(user);
+        favorite.setComments(recipe.getName());
+
+
+
+        System.out.println(favorite);
+
+        favoritesRepository.save(favorite);
+
+        System.out.println(userName);
+    }
+
+    public void findUser() {
+        Optional<UserVegan> optional = usersVeganRepository.findById(1);
+        if (optional.isPresent()) {
+            UserVegan uv = optional.get();
+            System.out.println("User first name: " + uv.getFirstName());
+            System.out.println("User last name: " + uv.getLastName());
+            System.out.println("Assigned profiles: " );
+            for (Profile p : uv.getProfiles()) {
+                System.out.println(p.getProfile());
+            }
+        }
+        else
+        {
+            System.out.println("User not found");
+        }
     }
 
 
@@ -140,22 +209,7 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
         }
     }
 
-    public void findUser() {
-        Optional<UserVegan> optional = usersVeganRepository.findById(1);
-        if (optional.isPresent()) {
-            UserVegan uv = optional.get();
-            System.out.println("User first name: " + uv.getFirstName());
-            System.out.println("User last name: " + uv.getLastName());
-            System.out.println("Assigned profiles: " );
-            for (Profile p : uv.getProfiles()) {
-                System.out.println(p.getProfile());
-            }
-        }
-        else
-        {
-            System.out.println("User not found");
-        }
-    }
+
 
     // Create user with profiles Administrator and UserVegan
     private void createUserWithTwoProfiles() {

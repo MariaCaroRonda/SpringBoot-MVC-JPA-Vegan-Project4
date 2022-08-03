@@ -1,6 +1,7 @@
 <nav th:fragment="menu-main"
 
-   class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+     class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
   <a class="navbar-brand" th:href="@{/}">VeganApp</a>
 
@@ -13,19 +14,52 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
+
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item" sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
         <a class="nav-link" th:href="@{/recipes/indexPaginate}">Recipes</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item"  sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
         <a class="nav-link"th:href="@{/categories/index}">Categories</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRATOR')">
         <a class="nav-link" th:href="@{/usersvegan/index}">Users</a>
       </li>
     </ul>
-    <a class="btn btn-primary" href="#">Login</a>&nbsp;
-    <a class="btn btn-primary" th:href="@{/signup}">Register</a>
+
+<!--    <a class="btn btn-primary" th:href="@{/index}">Login</a>&nbsp;
+    <a class="btn btn-primary" th:href="@{/signup}">Register</a>&nbsp;-->
+    <div sec:authorize="isAnonymous()">
+      <a class="btn btn-primary" th:href="@{/index}">Login</a>&nbsp;
+      <a class="btn btn-primary" th:href="@{/signup}">Register</a>&nbsp;
+    </div>
+
+<!--    <span th:if="${session.userVegan != null}" class="text-light"
+          th:text="'Welcome ' + ${session.userVegan.email}"></span>&nbsp;-->
+    &nbsp;
+<!--    <span class="text-light">Welcome</span>&nbsp;
+      <span class="text-light" sec:authentication="name"></span>&nbsp;
+    <a class="btn btn-primary" th:href="@{/logout}">Logout</a>&nbsp;-->
+
+    <div sec:authorize="isAuthenticated()">
+      <span class="text-light">Welcome</span>&nbsp;
+      <span class="text-light" sec:authentication="name"></span>&nbsp;
+      <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
+    </div>
+
+    <!--Add Favorites to menu-->
+    <div sec:authorize="isAuthenticated()">
+      <span class="text-light"></span>&nbsp;
+      <!--<span class="text-light" sec:authentication="name"></span>&nbsp;-->
+      <a class="btn btn-primary" th:href="@{/favorites/index}">My Favorites</a>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+      <span class="text-light"></span>&nbsp;
+      <!--<span class="text-light" sec:authentication="name"></span>&nbsp;-->
+      <a class="btn btn-primary" href="#">My Profile</a>
+    </div>
+
   </div>
 </nav>

@@ -11,4 +11,8 @@ public interface IUsersVgService {
     void delete(Integer userId);
 
     List<UserVegan> findAll();
+
+    UserVegan findByUsername(String username);
+
+
 }

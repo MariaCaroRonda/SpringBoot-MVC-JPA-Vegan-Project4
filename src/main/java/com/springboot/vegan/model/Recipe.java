@@ -118,20 +118,5 @@ public class Recipe {
         this.featured = null;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "recipeId=" + recipeId +
-                ", name='" + name + '\'' +
-                ", ingredients='" + ingredients + '\'' +
-                ", date=" + date +
-                ", prepTime=" + prepTime +
-                ", cookingTime=" + cookingTime +
-                ", featured=" + featured +
-                ", imageMeal='" + imageMeal + '\'' +
-                ", status=" + status +
-                ", instructions='" + instructions + '\'' +
-                ", category=" + category +
-                '}';
-    }
+
 }
