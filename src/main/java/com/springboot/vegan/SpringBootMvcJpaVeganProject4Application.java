@@ -72,7 +72,7 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
         //findUserUsername();
 
-        saveFavorite();
+        //saveFavorite();
     }
 
 
