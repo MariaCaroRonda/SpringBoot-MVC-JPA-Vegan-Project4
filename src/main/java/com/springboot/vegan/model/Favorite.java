@@ -12,11 +12,11 @@ public class Favorite {
     private String comments = "comments";
 
     @OneToOne
-    @JoinColumn(name = "recipeId")
+    @JoinColumn(name = "recipeId") // foreign key in Recipes table
     private Recipe recipe;
 
     @OneToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId")  // foreign key in UsersVegan table
     private UserVegan userVegan;
 
     public Favorite() {}
@@ -62,4 +62,5 @@ public class Favorite {
                 ", userVegan=" + userVegan +
                 '}';
     }
+
 }

@@ -50,10 +50,10 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                         "/recipes/view/**").permitAll()
 
                 // set up authorizations as per Roles
-/*                .antMatchers("/favorites/create/**",
-                        "/favorites/save/**").hasAnyAuthority("USERVEGAN")*/
+                .antMatchers("/favorites/create/**",
+                        "/favorites/save/**").hasAuthority("USERVEGAN")
 
-/*                .antMatchers("/favorites/**").hasAnyAuthority("SUPERVISOR, ADMINISTRATOR")*/
+             //   .antMatchers("/favorites/**").hasAnyAuthority("SUPERVISOR, ADMINISTRATOR")
                 .antMatchers("/recipes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
                 .antMatchers("/categories/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
                 .antMatchers("/usersvegan/**").hasAnyAuthority("ADMINISTRATOR")
@@ -64,7 +64,8 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                 // Form login don't require authentication
 /*                .and().formLogin().permitAll();*/
                 // Configure a personalized 'login' page
-                .and().formLogin().loginPage("/login").permitAll();
+                .and().formLogin().loginPage("/login")
+                .and().logout().permitAll();
     }
 
     // Password encryption

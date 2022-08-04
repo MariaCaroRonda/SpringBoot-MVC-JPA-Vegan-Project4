@@ -35,6 +35,12 @@
         <div class="card">
           <h4 class="card-header">Recipe <strong th:text="${recipe.name}"></strong></h4>
           <div class="card-body">
+
+            <div class="alert alert-danger" role="alert" sec:authorize="isAnonymous()">
+              <p>Do you like this Recipe? <strong>Register</strong> and add it to your Favorites!
+              </p>
+            </div>
+
             <h5 class="card-title"><strong>Category: </strong> <span th:text="${recipe.category.name}"></span></h5>
             <h6 class="card-title"><strong>Published: </strong>
 <!--              <span th:text="${recipe.date}"></span>-->
@@ -51,10 +57,18 @@
                 <p class="card-text" th:utext="${recipe.instructions}"></p>
               </div>
             </div>
-            <a sec:authorize="isAuthenticated()"
-               class="btn btn-primary" th:href="@{/profile/userFavorites/{id} (id=${recipe.recipeId}) }"
+<!--            <a sec:authorize="isAuthenticated() and hasAnyAuthority('USERVEGAN')"
+               class="btn btn-primary"
+               th:href="@{/favorites/create/{id} (id=${recipe.recipeId}) }"
                 role="button" title="Add to Favorites">
-              <i class="fas fa-file" aria-hidden="true"></i>Add to Favorites</a>
+              <i class="fas fa-file" aria-hidden="true"></i>Add to Favorites</a>-->
+
+            <a sec:authorize="isAuthenticated() and hasAnyAuthority('USERVEGAN')"
+                class="btn btn-primary"
+                th:href="@{/favorites/create/{id} (id=${recipe.recipeId}) }"
+                role="button" title="Add to my Favorites">
+                  <i class="fas fa-file" aria-hidden="true"></i> Add to Favorites</a>
+
           </div>
         </div>
 

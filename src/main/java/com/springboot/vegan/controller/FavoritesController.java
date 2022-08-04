@@ -8,11 +8,10 @@ import com.springboot.vegan.service.IRecipesService;
 import com.springboot.vegan.service.IUsersVgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -109,20 +108,60 @@ public class FavoritesController {
         return "favorites/listFavoritesPaginate";
     }
 
-    @GetMapping("create/{idFavorite}")
-    public String create() {
+    @GetMapping("/create/{recipeId}")
+    public String create(Favorite favorite,
+            @PathVariable Integer recipeId,
+                         Model model
+                         //HttpSession session,
+                         //Authentication authentication
+                         ) {
+
+       // String username = authentication.getName();
+
+        //UserVegan user = usersVgService.findByUsername(username);
+        Recipe recipe = recipesService.findById(recipeId);
+       // model.addAttribute("recipeId", recipeId);
+       // model.addAttribute("userId", user.getUserId());
+       // model.addAttribute("name", "name");
+        //model.addAttribute("user", user);
+        model.addAttribute("recipe", recipe);
+
         return "favorites/formFavorite";
+    }
+
+    @PostMapping("/save")
+    public String save(
+            Favorite favorite, Model model,
+                       HttpSession session,
+                       RedirectAttributes attributes,
+                       Authentication authentication) {
+
+        // User who started a session
+        //String username = authentication.getName();
+
+        // Find the user on the DB
+        //UserVegan userVegan = usersVgService.findByUsername(username);
+        //favorite.setUserVegan(userVegan);
+
+        attributes.addFlashAttribute("msg", "Saved");
+
+        System.out.println(favorite);
+
+        favoritesService.save(favorite);
+
+        return "favorites/listFavorites";
 
     }
 
 
-    public String save() {
+
+/*    public String save() {
         return "redirect:/";
     }
 
     public String delete () {
         return "redirect/favorites/indexPaginate";
-    }
+    }*/
 
 /*    @PostMapping("/save/{id}")
     public String save(Favorite favorite, Model model,
