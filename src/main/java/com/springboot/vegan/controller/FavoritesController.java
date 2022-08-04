@@ -77,6 +77,33 @@ public class FavoritesController {
         return "favorites/listFavorites";
     }
 
+
+    @GetMapping("/userProfile")
+    public String showProfile (Model model,
+                               HttpSession session,
+                               Authentication authentication) {
+
+        String username = authentication.getName();
+        UserVegan user = usersVgService.findByUsername(username);
+        user.setPassword(null);
+
+        System.out.println(user);
+        model.addAttribute("user", user);
+
+        return "favorites/userProfile";
+    }
+
+    @GetMapping("/view/{id}")
+    public String seeDetail(@PathVariable("id") int recipeId,
+                            Model model) {
+
+        Recipe recipe = recipesService.findById(recipeId);
+        model.addAttribute("recipe", recipe);
+
+        return "favorites/detailFavorite";
+
+    }
+
     @GetMapping("/indexPaginate")
     public String showIndexPaginate() {
         return "favorites/listFavoritesPaginate";
@@ -87,6 +114,7 @@ public class FavoritesController {
         return "favorites/formFavorite";
 
     }
+
 
     public String save() {
         return "redirect:/";

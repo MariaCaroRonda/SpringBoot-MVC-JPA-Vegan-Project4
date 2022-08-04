@@ -46,6 +46,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                         "/search",
                         "/bcrypt/**",
                         "/favorites/**",
+                        "/profile/**",
                         "/recipes/view/**").permitAll()
 
                 // set up authorizations as per Roles

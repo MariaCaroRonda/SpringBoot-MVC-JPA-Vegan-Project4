@@ -21,11 +21,12 @@
 <header th:insert="fragments/menu :: menu-main"></header>
 
 <main role="main">
+
   <hr>
   <div class="container">
 
     <div class="card">
-      <h4 class="card-header"><strong>List of Favorites</strong></h4>
+      <h4 class="card-header"><strong>User Details</strong></h4>
       <div class="card-body">
 
         <hr>
@@ -34,45 +35,27 @@
         <table class="table table-hover">
           <thead class="thead-light">
           <tr>
-            <th scope="col">Favorite Id</th>
-            <th scope="col">Recipe Name</th>
-            <th scope="col">User</th>
-            <th scope="col">Details</th>
-            <th scope="col">Operations</th>
+            <th scope="col">User Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Username</th>
+            <th scope="col">Registered On</th>
           </tr>
           </thead>
           <tbody>
 
-          <tr th:each="tmpFavorite : ${favorites}">
-            <!--<th scope="row" th:text="${tmpCat.categoryId}"></th>-->
-            <td th:text="${tmpFavorite.favoriteId}"></td>
-            <td th:text="${tmpFavorite.recipe.name}"></td>
-            <td th:text="${tmpFavorite.userVegan.firstName}"></td>
-            <td>
-              <p>
-                <a class="btn btn-secondary"
-                   th:href="@{/favorites/view/{idTemp} (idTemp = ${tmpFavorite.recipe.recipeId}) }"
-                   role="button">Details &raquo;</a>
-              </p>
-            </td>
-            <td>
-
-
-                          <a href="#">Delete</a>
-
-<!--                           <a th:href="@{/categories/edit/{id} (id=${tmpCat.categoryId}) }"
-                               class="btn btn-success btn-sm" role="button"
-                               title="Edit"><i class="fas fa-pencil-alt"
-                                               aria-hidden="true"></i></a>
-
-                            <a th:href="@{/categories/delete/{id} (id=${tmpCat.categoryId}) }"
-                               onclick="return confirm('Are you sure?')"
-                               class="btn btn-success btn-sm" role="button" title="Delete">
-                              <i class="fas fa-trash" aria-hidden="true"></i></a>-->
-            </td>
-
-            </td>
+          <tr th:object="${user}">
+            <td th:text="${user.userId}"></td>
+            <th th:text="${user.firstName}"></th>
+            <th th:text="${user.lastName}"></th>
+            <th th:text="${user.email}"></th>
+            <th th:text="${user.username}"></th>
+            <th >
+              <span th:text="${#dates.format(user.registrationDate, 'dd-MM-yyyy')}"></span>
+            </th>
           </tr>
+
           </tbody>
         </table>
 

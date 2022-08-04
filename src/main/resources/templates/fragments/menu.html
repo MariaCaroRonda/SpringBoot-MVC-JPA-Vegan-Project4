@@ -58,7 +58,7 @@
     <div sec:authorize="isAuthenticated()">
       <span class="text-light"></span>&nbsp;
       <!--<span class="text-light" sec:authentication="name"></span>&nbsp;-->
-      <a class="btn btn-primary" href="#">My Profile</a>
+      <a class="btn btn-primary" th:href="@{/favorites/userProfile}">My Profile</a>
     </div>
 
   </div>
