@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/favorites")
@@ -50,7 +51,29 @@ public class FavoritesController {
 
 
     @GetMapping("/index")
-    public String showIndex() {
+    public String showIndex(Model model,
+                            HttpSession session,
+                            Authentication authentication) {
+
+        String username = authentication.getName();
+        System.out.println("Username: " + username);
+
+        // Find user's favorite on DB
+        UserVegan user = usersVgService.findByUsername(username);
+        int userId = user.getUserId();
+        user.setPassword(null);
+
+        List<Favorite> list = favoritesService.findAll();
+       // model.addAttribute("favorites", list);
+
+        List<Favorite> list2 = favoritesService.findByUser(user);
+        model.addAttribute("favorites", list2);
+
+        System.out.println(user.getFirstName() + " List of favorites ");
+        for (Favorite fav : list2) {
+            System.out.println("Recipe name: " + fav.getRecipe().getName());
+        }
+
         return "favorites/listFavorites";
     }
 

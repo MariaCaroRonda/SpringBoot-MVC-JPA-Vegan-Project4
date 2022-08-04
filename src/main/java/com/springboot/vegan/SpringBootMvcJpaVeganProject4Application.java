@@ -73,6 +73,21 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
         //findUserUsername();
 
         //saveFavorite();
+
+        //findFavorites();
+    }
+
+    private void findFavorites() {
+
+        Optional<UserVegan> optional = usersVeganRepository.findById(5);
+        UserVegan userVegan = optional.get();
+        userVegan.setPassword(null);
+
+        List<Favorite> list = favoritesRepository.findFavoritesByUserVeganEquals(userVegan );
+        System.out.println(userVegan.getFirstName() + " List of favorites ");
+        for (Favorite fav : list) {
+            System.out.println("Recipe name: " + fav.getRecipe().getName());
+        }
     }
 
 

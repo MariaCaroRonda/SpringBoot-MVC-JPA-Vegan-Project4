@@ -25,7 +25,7 @@
   <div class="container">
 
     <div class="card">
-      <h4 class="card-header"><strong>List of Favorites</strong></h4>
+      <h4 class="card-header"><strong>List of Categories</strong></h4>
       <div class="card-body">
 
         <hr>
@@ -37,7 +37,6 @@
             <th scope="col">Favorite Id</th>
             <th scope="col">Recipe Name</th>
             <th scope="col">User</th>
-            <th scope="col">Details</th>
             <th scope="col">Operations</th>
           </tr>
           </thead>
@@ -49,24 +48,19 @@
             <td th:text="${tmpFavorite.recipe.name}"></td>
             <td th:text="${tmpFavorite.userVegan.firstName}"></td>
             <td>
-              <a href="#">Details</a>
+<!--              <a th:href="@{/categories/edit/{id} (id=${tmpCat.categoryId}) }"
+                 class="btn btn-success btn-sm" role="button"
+                 title="Edit"><i class="fas fa-pencil-alt"
+                                 aria-hidden="true"></i></a>
+
+              <a th:href="@{/categories/delete/{id} (id=${tmpCat.categoryId}) }"
+                 onclick="return confirm('Are you sure?')"
+                 class="btn btn-success btn-sm" role="button" title="Delete">
+                <i class="fas fa-trash" aria-hidden="true"></i></a>-->
             </td>
             <td>
-
-                          <a href="#">Edit</a>
-                          <a href="#">Delete</a>
-
-<!--                           <a th:href="@{/categories/edit/{id} (id=${tmpCat.categoryId}) }"
-                               class="btn btn-success btn-sm" role="button"
-                               title="Edit"><i class="fas fa-pencil-alt"
-                                               aria-hidden="true"></i></a>
-
-                            <a th:href="@{/categories/delete/{id} (id=${tmpCat.categoryId}) }"
-                               onclick="return confirm('Are you sure?')"
-                               class="btn btn-success btn-sm" role="button" title="Delete">
-                              <i class="fas fa-trash" aria-hidden="true"></i></a>-->
-            </td>
-
+              <a href="#">Edit</a>
+              <a href="#">Delete</a>
             </td>
           </tr>
           </tbody>

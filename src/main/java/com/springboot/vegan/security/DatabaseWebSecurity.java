@@ -45,13 +45,14 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                         "/signup",
                         "/search",
                         "/bcrypt/**",
+                        "/favorites/**",
                         "/recipes/view/**").permitAll()
 
                 // set up authorizations as per Roles
-                .antMatchers("/favorites/create/**",
-                        "/favorites/save/**").hasAnyAuthority("USERVEGAN")
+/*                .antMatchers("/favorites/create/**",
+                        "/favorites/save/**").hasAnyAuthority("USERVEGAN")*/
 
-                .antMatchers("/favorites/**").hasAnyAuthority("SUPERVISOR, ADMINISTRATOR")
+/*                .antMatchers("/favorites/**").hasAnyAuthority("SUPERVISOR, ADMINISTRATOR")*/
                 .antMatchers("/recipes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
                 .antMatchers("/categories/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
                 .antMatchers("/usersvegan/**").hasAnyAuthority("ADMINISTRATOR")

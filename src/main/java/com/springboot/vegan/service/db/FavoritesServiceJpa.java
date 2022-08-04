@@ -1,6 +1,7 @@
 package com.springboot.vegan.service.db;
 
 import com.springboot.vegan.model.Favorite;
+import com.springboot.vegan.model.UserVegan;
 import com.springboot.vegan.repository.FavoritesRepository;
 import com.springboot.vegan.service.IFavoritesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,12 @@ public class FavoritesServiceJpa implements IFavoritesService {
     @Override
     public Page<Favorite> findAll(Pageable page) {
         return favoritesRepository.findAll(page);
+    }
+
+
+    @Override
+    public List<Favorite> findByUser(UserVegan user) {
+        return favoritesRepository.findFavoritesByUserVeganEquals(user);
     }
 
 

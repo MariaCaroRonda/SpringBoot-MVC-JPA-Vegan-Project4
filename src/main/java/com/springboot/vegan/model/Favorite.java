@@ -9,7 +9,7 @@ public class Favorite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer favoriteId;
-    private String comments;
+    private String comments = "comments";
 
     @OneToOne
     @JoinColumn(name = "recipeId")
