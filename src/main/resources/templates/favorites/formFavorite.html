@@ -25,7 +25,10 @@
   <div class="container">
 
     <div class="card">
-      <h5 class="card-header"><strong>Add to Favorites</strong></h5>
+      <h6 class="card-header"><strong>Add to Favorites:
+        <span class="text-success"  th:text="${recipe.name}"></span>
+      </strong>
+      </h6>
       <div class="card-body">
 
         <div class="col-md-3">
@@ -36,12 +39,12 @@
         <div class="col-md-9">
 
           <div class="card">
-            <h4 class="card-header"><strong>Aplicar para la vacante <span th:text="${recipe.name}"></span></strong></h4>
+
             <div class="card-body">
-              <h5 class="card-title"><strong>Categoría: </strong><span th:text="${recipe.category.name}"></span></h5>
-              <h6 class="card-title"><strong>Publicado: </strong><span th:text="${#dates.format(recipe.date, 'dd-MM-yyyy')}"></span></h6>
-              <h6 class="card-title"><strong>Cooking time: </strong><span th:text="${recipe.cookingTime}"></span></h6>
-              <p class="card-text" th:text="${recipe.ingredients}"></p>
+              <h6 class="card-title"><strong>Category: </strong><span th:text="${recipe.category.name}"></span></h6>
+              <h6 class="card-title"><strong>Preparation (mins): </strong><span th:text="${recipe.cookingTime}"></span></h6>
+              <h6 class="card-title"><strong>Cooking (mins): </strong><span th:text="${recipe.cookingTime}"></span></h6>
+
               <hr>
 
 
@@ -67,6 +70,25 @@
                 <button type="submit" class="btn btn-primary">Enviar</button>
               </form>-->
 
+              <form th:action="@{/favorites/save}" th:object="${favorite}"
+                    method="post">
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="hidden"
+                              th:name="recipe.recipeId"
+                              th:value="${recipe.recipeId}">
+                      <label for="comments">Comments</label>
+                      <textarea class="form-control" name="comments"
+                                id="comments" rows="2"></textarea>
+                    </div>
+                  </div>
+
+                </div>
+                <hr>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </form>
 
             </div>
           </div>

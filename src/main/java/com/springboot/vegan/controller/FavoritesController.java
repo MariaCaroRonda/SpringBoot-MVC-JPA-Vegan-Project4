@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -117,19 +120,31 @@ public class FavoritesController {
                          ) {
 
        // String username = authentication.getName();
-
         //UserVegan user = usersVgService.findByUsername(username);
-        Recipe recipe = recipesService.findById(recipeId);
        // model.addAttribute("recipeId", recipeId);
        // model.addAttribute("userId", user.getUserId());
        // model.addAttribute("name", "name");
         //model.addAttribute("user", user);
+
+        Recipe recipe = recipesService.findById(recipeId);
         model.addAttribute("recipe", recipe);
 
         return "favorites/formFavorite";
     }
 
-    @PostMapping("/save")
+/*    @GetMapping("/create/{recipeId}")
+    public String create(Favorite favorite,
+                         @PathVariable Integer recipeId,
+                         Model model) {
+
+        Recipe recipe = recipesService.findById(recipeId);
+        model.addAttribute("recipe", recipe);
+
+        return "favorites/formFavorite";
+
+    }*/
+
+/**    @PostMapping("/save")
     public String save(
             Favorite favorite, Model model,
                        HttpSession session,
@@ -144,13 +159,47 @@ public class FavoritesController {
         //favorite.setUserVegan(userVegan);
 
         attributes.addFlashAttribute("msg", "Saved");
-
         System.out.println(favorite);
-
         favoritesService.save(favorite);
 
         return "favorites/listFavorites";
 
+    }*/
+
+    @PostMapping("/save")
+    public String guardar(Favorite favorite, Model model,
+                          HttpSession session,
+                          RedirectAttributes attributes,
+                          Authentication authentication) {
+
+        // Recuperamos el username que inicio sesión
+        String username = authentication.getName();
+
+/*        if (result.hasErrors()){
+
+            System.out.println("Existieron errores");
+            return "solicitudes/formSolicitud";
+        }*/
+
+
+        // Buscamos el objeto Usuario en BD
+        //Usuario usuario = serviceUsuarios.buscarPorUsername(username);
+        UserVegan userVegan = usersVgService.findByUsername(username);
+        System.out.println(userVegan.getFirstName());
+
+        //solicitud.setUsuario(usuario); // Referenciamos la solicitud con el usuario
+        favorite.setUserVegan(userVegan);
+        //solicitud.setFecha(new Date());
+
+        System.out.println("Favorite: " + favorite);
+
+        // Guadamos el objeto solicitud en la bd
+        //serviceSolicitudes.guardar(solicitud);
+        favoritesService.save(favorite);
+        attributes.addFlashAttribute("msg", "Gracias por enviar tu CV!");
+
+        //return "redirect:/solicitudes/index";
+        return "redirect:/";
     }
 
 
