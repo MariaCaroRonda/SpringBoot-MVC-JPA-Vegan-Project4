@@ -29,7 +29,7 @@ public class FavoritesController {
     @Autowired
     private IUsersVgService usersVgService;
 
-    @GetMapping("/index")
+/*    @GetMapping("/index")
     public String showIndex(Authentication auth, HttpSession session) {
         String username = auth.getName();
         System.out.println("User Name: " + username) ;
@@ -46,11 +46,34 @@ public class FavoritesController {
         }
 
         return "favorites/listFavorites";
+    }*/
+
+
+    @GetMapping("/index")
+    public String showIndex() {
+        return "favorites/listFavorites";
     }
 
+    @GetMapping("/indexPaginate")
+    public String showIndexPaginate() {
+        return "favorites/listFavoritesPaginate";
+    }
 
+    @GetMapping("create/{idFavorite}")
+    public String create() {
+        return "favorites/formFavorite";
 
-    @PostMapping("/save/{id}")
+    }
+
+    public String save() {
+        return "redirect:/";
+    }
+
+    public String delete () {
+        return "redirect/favorites/indexPaginate";
+    }
+
+/*    @PostMapping("/save/{id}")
     public String save(Favorite favorite, Model model,
                        HttpSession session,
                        @PathVariable("id") Integer recipeId,
@@ -72,5 +95,5 @@ public class FavoritesController {
 
         return "favorites/listFavorites";
 
-    }
+    }*/
 }
