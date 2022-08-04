@@ -64,7 +64,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                 // Form login don't require authentication
 /*                .and().formLogin().permitAll();*/
                 // Configure a personalized 'login' page
-                .and().formLogin().loginPage("/login")
+                .and().formLogin().loginPage("/login").permitAll()
                 .and().logout().permitAll();
     }
 
