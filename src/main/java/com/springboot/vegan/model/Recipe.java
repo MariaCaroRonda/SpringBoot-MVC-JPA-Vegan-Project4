@@ -8,22 +8,24 @@ import java.util.Date;
 public class Recipe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment mySQL
     private Integer recipeId;
-    private String name;
-    private String ingredients;
-    private Date date;
-    private Integer prepTime;
-    private Integer cookingTime;
-    private Integer featured=0;
-    private String imageMeal="no-image.png";
+    private String name;            // Recipe name
+    private String ingredients;     // Recipe ingredients
+    private Date date;              // Publication date
+    private Integer prepTime;       // Preparation time in minutes
+    private Integer cookingTime;    // Cooking time in minutes
+    private Integer featured=0;     // Feature recipe, default value = 0
+    private String imageMeal="no-image.png"; // Picture of the meal already cooked
+                                             // no image by default
     private String status; // status: {Premium (for registered users only), Normal}
-    private String instructions;
+    private String instructions;    // Instructions to prepare and cook a recipe
 
-    //@Transient // ignore the field category
     @OneToOne // between 'Recipes' and 'Categories' using the column 'categoryId'
     @JoinColumn(name = "categoryId")
     private Category category;
+
+    // Getters and Setters
 
     public Integer getRecipeId() {
         return recipeId;
@@ -113,6 +115,8 @@ public class Recipe {
         this.category = category;
     }
 
+
+   // Remove the default values to avoid run time errors in HomeController
     public void reset() {
         this.imageMeal = null;
         this.featured = null;

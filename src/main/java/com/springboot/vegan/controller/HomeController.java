@@ -227,7 +227,7 @@ public class HomeController {
     //attributes will be available for all methods within Home Controller
     public void setGenerics(Model model) {
         Recipe recipeSearch = new Recipe();
-        recipeSearch.reset();
+        recipeSearch.reset(); // Remove the default values to avoid run time errors
         model.addAttribute("recipes", recipesService.findFeatured());
         model.addAttribute("categories", categoriesService.findAll());
         model.addAttribute("search", recipeSearch);

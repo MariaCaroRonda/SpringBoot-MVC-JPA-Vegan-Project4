@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Primary
+@Primary // To allow the use of another Service Class use for testing
 public class RecipesServiceJpa implements IRecipesService {
 
     @Autowired

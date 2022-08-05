@@ -26,7 +26,7 @@ import java.util.List;
 @RequestMapping("/recipes")
 public class RecipesController {
 
-    @Value("${veganapp.path.images}")
+    @Value("${veganapp.path.images}")  // path where the uploaded images are saved
     private String path;
 
     @Autowired
@@ -36,17 +36,18 @@ public class RecipesController {
     private ICategoriesService categoriesService;
 
 
+/*  // Home Page without Pagination
     @GetMapping("/index")
     public String showIndex(Model model) {
         List<Recipe> list = recipesService.findAll();
-        for (Recipe tmpRecipe : list) {
-            System.out.println(tmpRecipe);
-        }
         model.addAttribute("recipes", list);
 
         return "recipes/listRecipes";
-    }
+    }*/
 
+
+    /** Home Page with Pagination.
+     * It displays a list of Recipes sorted in Ascending Order by Recipe Name*/
     @GetMapping("/indexPaginate")
     public String showIndexPaginate(Model model, Pageable page) {
         Page<Recipe> list = recipesService.findAll(page);
@@ -56,16 +57,20 @@ public class RecipesController {
     }
 
 
+    /** Method that displays a form to create a new Recipe */
     @GetMapping("/create")
     public String create(Recipe recipe, Model model){
 
         return "recipes/formRecipe";
     }
 
+    /** Method to save a Recipe in the Database */
     @PostMapping("/save")
     public String save(Recipe recipe, BindingResult result, RedirectAttributes attributes,
                        @RequestParam("fileImage") MultipartFile multiPart) {
+
         if (result.hasErrors()) {
+            // Print in the console error messages if they have occurred
             for (ObjectError error: result.getAllErrors()){
                 System.out.println("An error has happened: "+ error.getDefaultMessage());
             }
@@ -82,6 +87,7 @@ public class RecipesController {
             }
         }
 
+        // Save object Recipe on the Database and display a confirmation message
         recipesService.save(recipe);
         attributes.addFlashAttribute("msg", "Recipe Saved Successfully");
 
@@ -89,16 +95,7 @@ public class RecipesController {
     }
 
 
-/*
-    @GetMapping("/delete")
-    public String delete(@RequestParam("id") int recipeId, Model model) {
-        System.out.println("Deleting recipe with Id: " + recipeId);
-
-        model.addAttribute("id", recipeId);
-        return "message";
-    }
-*/
-
+    // Delete a Recipe from the Database and display a confirmation message
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") int recipeId, RedirectAttributes attributes) {
         System.out.println("Deleting recipe with id: " + recipeId);
@@ -106,22 +103,20 @@ public class RecipesController {
         attributes.addFlashAttribute("msg",
                 "Recipe deleted successfully");
 
-        return "redirect:/recipes/index";
+        return "redirect:/recipes/indexPaginate";
     }
 
+    // Find the recipe details on the DB
     @GetMapping("/view/{id}")
     public String seeDetail(@PathVariable("id") int recipeId, Model model) {
 
         Recipe recipe = recipesService.findById(recipeId);
-
         model.addAttribute("recipe", recipe);
-       //System.out.println("Recipe: " + recipe);
 
-        // Find the recipe details on the DB
         return "detail";
     }
 
-
+    // Method that renders an HTML form to edit an existing Recipe on the DB
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") int recipeId, Model model) {
         Recipe recipe = recipesService.findById(recipeId);
@@ -131,11 +126,15 @@ public class RecipesController {
     }
 
 
+    // Generic method to add a Model to the Category List. It is used in create()
+    //and in edit() methods
     @ModelAttribute
     public void setGenerics(Model model) {
         model.addAttribute("categories", categoriesService.findAll());
     }
 
+
+    // We customize the Data Binding for all Date type properties
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 
+
+/** This class is used only for testing the front end
+ * without accessing the Database */
 @Service
 public class CategoriesServiceImpl implements ICategoriesService{
 
@@ -51,7 +54,7 @@ public class CategoriesServiceImpl implements ICategoriesService{
         Category category7 = new Category();
         category7.setCategoryId(7);
         category7.setName("Smoothies");
-        category7.setDescription("A thick, smooth cold drink of fresh fruit / vegetables pureed with a plant-based drink/yogurt/water..");*/
+        category7.setDescription("A thick, smooth cold drink of fresh fruit / vegetables blended with a plant-based drink/yogurt/water.");*/
 
         list.add(category1);
         list.add(category2);

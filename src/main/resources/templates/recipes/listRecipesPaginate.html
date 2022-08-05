@@ -64,17 +64,6 @@
           </tbody>
         </table>
 
-<!--        <nav th:if="${recipesPage.totalPages  > 0}" aria-label="Page navigation example" >
-          <ul class="pagination">
-            <li class="page-item">
-              <a th:href="@{/recipes/indexPaginate(page=${recipesPage.number -1})}"
-                 class="page-link">Anterior</a></li>
-            <li class="page-item">
-              <a th:href="@{/recipes/indexPaginate(page=${recipesPage.number + 1})}"
-                 class="page-link">Siguiente</a></li>
-          </ul>
-        </nav>-->
-
 
         <nav th:if="${recipesPage.totalPages > 0}" aria-label="Page navigation example" >
           <ul class="pagination justify-content-center">

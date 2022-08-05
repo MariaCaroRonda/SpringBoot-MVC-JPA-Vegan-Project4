@@ -18,7 +18,8 @@ import java.util.Optional;
 @SpringBootApplication
 public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunner {
 
-    /** Test the Category Repository */
+    /** The following code is used only for Testing the access to
+     * and modification of to the Database */
 
     @Autowired
     private CategoriesRepository categoriesRepository;

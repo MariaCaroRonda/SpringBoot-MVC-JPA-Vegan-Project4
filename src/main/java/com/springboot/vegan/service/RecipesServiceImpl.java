@@ -11,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 
+/** This class is used only for testing the front end
+ * without accessing the Database */
 @Service
 public class RecipesServiceImpl implements IRecipesService{
 
