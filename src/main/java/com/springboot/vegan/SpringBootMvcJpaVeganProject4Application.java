@@ -75,7 +75,20 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
         //saveFavorite();
 
-        //findFavorites();
+        findFavorites();
+
+        isPresentRecipe();
+    }
+
+    private void isPresentRecipe() {
+        int recipeId = 2;
+        int userId = 5;
+        boolean recipeExist = favoritesRepository.existsByRecipeRecipeId(recipeId);
+        boolean recipeUserExist = favoritesRepository
+                .existsByRecipeRecipeIdAndUserVegan_UserId(recipeId, userId);
+
+        System.out.println(recipeExist + ", recipeId: " + recipeId +
+                ", userId: " + userId);
     }
 
     private void findFavorites() {
@@ -85,10 +98,14 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
         userVegan.setPassword(null);
 
         List<Favorite> list = favoritesRepository.findFavoritesByUserVeganEquals(userVegan );
-        System.out.println(userVegan.getFirstName() + " List of favorites ");
+        System.out.println(userVegan.getFirstName() + " (userId) " +
+                           userVegan.getUserId() + " List of favorites ");
         for (Favorite fav : list) {
-            System.out.println("Recipe name: " + fav.getRecipe().getName());
+            System.out.println("Recipe name: " + fav.getRecipe().getName() +
+                    ", Recipe Id: " + fav.getRecipe().getRecipeId());
         }
+
+
     }
 
 

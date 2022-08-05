@@ -20,4 +20,8 @@ public interface IFavoritesService {
     Page<Favorite> findAll(Pageable page);
 
     List<Favorite> findByUser(UserVegan user);
+
+    boolean isRecipePresent(Integer recipeId);
+
+    boolean isRecipePresentUserFavorite(Integer recipeId, Integer userId);
 }

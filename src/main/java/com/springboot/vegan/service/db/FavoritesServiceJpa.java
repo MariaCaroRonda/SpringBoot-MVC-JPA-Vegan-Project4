@@ -3,11 +3,13 @@ package com.springboot.vegan.service.db;
 import com.springboot.vegan.model.Favorite;
 import com.springboot.vegan.model.UserVegan;
 import com.springboot.vegan.repository.FavoritesRepository;
+import com.springboot.vegan.repository.RecipesRepository;
 import com.springboot.vegan.service.IFavoritesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Service;
 
 
@@ -20,6 +22,9 @@ public class FavoritesServiceJpa implements IFavoritesService {
 
     @Autowired
     private FavoritesRepository favoritesRepository;
+
+    @Autowired
+    private RecipesRepository recipesRepository;
 
     @Override
     public void save(Favorite favorite) {
@@ -55,6 +60,22 @@ public class FavoritesServiceJpa implements IFavoritesService {
     @Override
     public List<Favorite> findByUser(UserVegan user) {
         return favoritesRepository.findFavoritesByUserVeganEquals(user);
+    }
+
+    @Override
+    public boolean isRecipePresent(Integer recipeId) {
+        boolean isPresent = favoritesRepository.existsByRecipeRecipeId(recipeId);
+        return isPresent;
+
+
+    }
+
+
+    @Override
+    public boolean isRecipePresentUserFavorite(Integer recipeId, Integer userId) {
+        boolean isPresent = favoritesRepository
+                .existsByRecipeRecipeIdAndUserVegan_UserId(recipeId, userId);
+        return isPresent;
     }
 
 

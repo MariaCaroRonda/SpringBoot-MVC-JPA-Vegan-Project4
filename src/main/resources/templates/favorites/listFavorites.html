@@ -36,6 +36,7 @@
           <tr>
             <th scope="col">Favorite Id</th>
             <th scope="col">Recipe Name</th>
+            <th scope="col">Recipe Id</th>
             <th scope="col">User</th>
             <th scope="col">Details</th>
             <th scope="col">Operations</th>
@@ -47,6 +48,7 @@
             <!--<th scope="row" th:text="${tmpCat.categoryId}"></th>-->
             <td th:text="${tmpFavorite.favoriteId}"></td>
             <td th:text="${tmpFavorite.recipe.name}"></td>
+            <td th:text="${tmpFavorite.recipe.recipeId}"></td>
             <td th:text="${tmpFavorite.userVegan.firstName}"></td>
             <td>
               <p>

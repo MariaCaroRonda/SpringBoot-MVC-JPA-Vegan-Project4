@@ -12,5 +12,9 @@ public interface FavoritesRepository extends JpaRepository<Favorite, Integer> {
 
     List<Favorite> findFavoritesByUserVeganEquals(UserVegan userVegan);
 
+//    Boolean existsFavoriteByRecipeId(Integer recipeId);
 
+    boolean existsByRecipeRecipeId (Integer integer);
+
+    boolean existsByRecipeRecipeIdAndUserVegan_UserId (Integer recipeId, Integer userID);
 }

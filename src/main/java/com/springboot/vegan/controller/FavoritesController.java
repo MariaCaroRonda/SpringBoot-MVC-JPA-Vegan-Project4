@@ -182,24 +182,34 @@ public class FavoritesController {
         }*/
 
 
-        // Buscamos el objeto Usuario en BD
+        // Find the object UserVegan on the DB
         //Usuario usuario = serviceUsuarios.buscarPorUsername(username);
         UserVegan userVegan = usersVgService.findByUsername(username);
         System.out.println(userVegan.getFirstName());
 
-        //solicitud.setUsuario(usuario); // Referenciamos la solicitud con el usuario
+       // Reference the Favorite User field
         favorite.setUserVegan(userVegan);
-        //solicitud.setFecha(new Date());
 
         System.out.println("Favorite: " + favorite);
 
-        // Guadamos el objeto solicitud en la bd
+        // Save object favorite on the DB
         //serviceSolicitudes.guardar(solicitud);
-        favoritesService.save(favorite);
-        attributes.addFlashAttribute("msg", "Gracias por enviar tu CV!");
+//      if (favoritesService.isRecipePresent(favorite.getRecipe().getRecipeId())) {
+        if (favoritesService.isRecipePresentUserFavorite(
+                favorite.getRecipe().getRecipeId(),
+                favorite.getUserVegan().getUserId())  ){
+            System.out.println("Recipe with Id " + favorite.getRecipe().getRecipeId() +
+                    " and user " + favorite.getUserVegan().getUserId() + " already exist");
+            attributes.addFlashAttribute("msg", "Recipe already in Favorites!");
+        }
+        else {
+            System.out.println("Saving ");
+            favoritesService.save(favorite);
+            attributes.addFlashAttribute("msg", "Gracias por enviar tu CV!");
+        }
 
         //return "redirect:/solicitudes/index";
-        return "redirect:/";
+        return "redirect:/favorites/index";
     }
 
 
