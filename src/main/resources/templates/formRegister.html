@@ -23,10 +23,11 @@
 
 <main role="main">
   <hr>
+  <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
   <div class="container">
 
     <div class="card">
-      <h4 class="card-header"><strong>Formulario de registro</strong></h4>
+      <h4 class="card-header"><strong>Register Form</strong></h4>
       <div class="card-body">
         <form th:action="@{/signup}" th:object="${userVegan}" method="post">
 

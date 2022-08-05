@@ -129,6 +129,7 @@ public class HomeController {
 
         try {
             if (result.hasErrors()) {
+                attributes.addFlashAttribute("An error has happened");
                 return "formRegister";
             }
 
@@ -149,10 +150,11 @@ public class HomeController {
         } catch (Exception e) {
             /*throw new RuntimeException(e);*/
             attributes.addFlashAttribute("msg", "Han error has happened " + e.getMessage());
+            attributes.addFlashAttribute("msg", "Han error has happened ");
         }
 
-        /*return "redirect:/usersvegan/index";*/
-        return  "redirect:/login";
+            /**return  "redirect:/login";*/
+            return  "redirect:/signup";
 
     }
 
