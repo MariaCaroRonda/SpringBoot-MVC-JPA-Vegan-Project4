@@ -32,25 +32,6 @@ public class FavoritesController {
     @Autowired
     private IUsersVgService usersVgService;
 
-/*    @GetMapping("/index")
-    public String showIndex(Authentication auth, HttpSession session) {
-        String username = auth.getName();
-        System.out.println("User Name: " + username) ;
-
-        for (GrantedAuthority role : auth.getAuthorities()) {
-            System.out.println("ROLE :" + role.getAuthority());
-        }
-
-        if (session.getAttribute("userVegan") == null) {
-            UserVegan userVegan = usersVgService.findByUsername(username);
-            userVegan.setPassword(null); // to avoid store user's password in the session
-            System.out.println("User: " + userVegan);
-            session.setAttribute("userVegan", userVegan);
-        }
-
-        return "favorites/listFavorites";
-    }*/
-
 
     @GetMapping("/index")
     public String showIndex(Model model,
@@ -80,6 +61,73 @@ public class FavoritesController {
     }
 
 
+    @GetMapping("/indexPaginate")
+    public String showIndexPaginate() {
+        return "favorites/listFavoritesPaginate";
+    }
+
+    @GetMapping("/create/{recipeId}")
+    public String create(Favorite favorite,
+                         @PathVariable Integer recipeId,
+                         Model model
+                         //HttpSession session,
+                         //Authentication authentication
+    ) {
+
+        Recipe recipe = recipesService.findById(recipeId);
+        model.addAttribute("recipe", recipe);
+
+        return "favorites/formFavorite";
+    }
+
+
+    @PostMapping("/save")
+    public String save(Favorite favorite,
+                          BindingResult result,
+                          Model model,
+                          HttpSession session,
+                          RedirectAttributes attributes,
+                          Authentication authentication) {
+
+        // Recover username who started the session
+        String username = authentication.getName();
+
+        if (result.hasErrors()){
+            System.out.println("Errors in formFavorite");
+            return "favorites/formFavorite";
+        }
+
+
+        // Find the object UserVegan on the DB
+        //Usuario usuario = serviceUsuarios.buscarPorUsername(username);
+        UserVegan userVegan = usersVgService.findByUsername(username);
+        System.out.println(userVegan.getFirstName());
+
+        // Reference the Favorite User field
+        favorite.setUserVegan(userVegan);
+
+        System.out.println("Favorite: " + favorite);
+
+        // Save object favorite on the DB
+        if (favoritesService.isRecipePresentUserFavorite(
+                favorite.getRecipe().getRecipeId(),
+                favorite.getUserVegan().getUserId())  ){
+            System.out.println("Recipe with Id " + favorite.getRecipe().getRecipeId() +
+                    " and user " + favorite.getUserVegan().getUserId() + " already exist");
+            attributes.addFlashAttribute("msg", "Recipe was already in Favorites!");
+        }
+        else {
+            System.out.println("Saving ");
+            favoritesService.save(favorite);
+            attributes.addFlashAttribute("msg", "Recipe added to Favorites successfully");
+        }
+
+
+         return "redirect:/favorites/index";
+       /* return "redirect:/";*/
+    }
+
+
     @GetMapping("/userProfile")
     public String showProfile (Model model,
                                HttpSession session,
@@ -106,111 +154,7 @@ public class FavoritesController {
 
     }
 
-    @GetMapping("/indexPaginate")
-    public String showIndexPaginate() {
-        return "favorites/listFavoritesPaginate";
-    }
 
-    @GetMapping("/create/{recipeId}")
-    public String create(Favorite favorite,
-            @PathVariable Integer recipeId,
-                         Model model
-                         //HttpSession session,
-                         //Authentication authentication
-                         ) {
-
-       // String username = authentication.getName();
-        //UserVegan user = usersVgService.findByUsername(username);
-       // model.addAttribute("recipeId", recipeId);
-       // model.addAttribute("userId", user.getUserId());
-       // model.addAttribute("name", "name");
-        //model.addAttribute("user", user);
-
-        Recipe recipe = recipesService.findById(recipeId);
-        model.addAttribute("recipe", recipe);
-
-        return "favorites/formFavorite";
-    }
-
-/*    @GetMapping("/create/{recipeId}")
-    public String create(Favorite favorite,
-                         @PathVariable Integer recipeId,
-                         Model model) {
-
-        Recipe recipe = recipesService.findById(recipeId);
-        model.addAttribute("recipe", recipe);
-
-        return "favorites/formFavorite";
-
-    }*/
-
-/**    @PostMapping("/save")
-    public String save(
-            Favorite favorite, Model model,
-                       HttpSession session,
-                       RedirectAttributes attributes,
-                       Authentication authentication) {
-
-        // User who started a session
-        //String username = authentication.getName();
-
-        // Find the user on the DB
-        //UserVegan userVegan = usersVgService.findByUsername(username);
-        //favorite.setUserVegan(userVegan);
-
-        attributes.addFlashAttribute("msg", "Saved");
-        System.out.println(favorite);
-        favoritesService.save(favorite);
-
-        return "favorites/listFavorites";
-
-    }*/
-
-    @PostMapping("/save")
-    public String guardar(Favorite favorite, Model model,
-                          HttpSession session,
-                          RedirectAttributes attributes,
-                          Authentication authentication) {
-
-        // Recuperamos el username que inicio sesión
-        String username = authentication.getName();
-
-/*        if (result.hasErrors()){
-
-            System.out.println("Existieron errores");
-            return "solicitudes/formSolicitud";
-        }*/
-
-
-        // Find the object UserVegan on the DB
-        //Usuario usuario = serviceUsuarios.buscarPorUsername(username);
-        UserVegan userVegan = usersVgService.findByUsername(username);
-        System.out.println(userVegan.getFirstName());
-
-       // Reference the Favorite User field
-        favorite.setUserVegan(userVegan);
-
-        System.out.println("Favorite: " + favorite);
-
-        // Save object favorite on the DB
-        //serviceSolicitudes.guardar(solicitud);
-//      if (favoritesService.isRecipePresent(favorite.getRecipe().getRecipeId())) {
-        if (favoritesService.isRecipePresentUserFavorite(
-                favorite.getRecipe().getRecipeId(),
-                favorite.getUserVegan().getUserId())  ){
-            System.out.println("Recipe with Id " + favorite.getRecipe().getRecipeId() +
-                    " and user " + favorite.getUserVegan().getUserId() + " already exist");
-            attributes.addFlashAttribute("msg", "Recipe already in Favorites!");
-        }
-        else {
-            System.out.println("Saving ");
-            favoritesService.save(favorite);
-            attributes.addFlashAttribute("msg", "Gracias por enviar tu CV!");
-        }
-
-        //return "redirect:/solicitudes/index";
-        return "redirect:/favorites/index";
-    }
 
 
 
