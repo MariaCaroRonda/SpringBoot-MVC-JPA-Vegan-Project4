@@ -39,5 +39,17 @@ public class UsersVgServiceJpa implements IUsersVgService {
         return usersVeganRepository.findUserVeganByUsername(username);
     }
 
+    @Override
+    public boolean existUsername(String username) {
+        boolean existUsername = usersVeganRepository.existsUserVeganByUsername(username);
+        return existUsername;
+    }
+
+    @Override
+    public boolean existUserEmail(String email) {
+        boolean existUserEmail = usersVeganRepository.existsUserVeganByEmail(email);
+        return existUserEmail;
+    }
+
 
 }

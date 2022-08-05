@@ -75,9 +75,34 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
         //saveFavorite();
 
-        findFavorites();
+/*        findFavorites();
 
-        isPresentRecipe();
+        isPresentRecipe();*/
+
+        existUser();
+
+
+    }
+
+    public void existUser() {
+        String username = "marisol";
+        boolean userByUsername = usersVeganRepository.existsUserVeganByUsername(username);
+
+        String email = "marisol@itinajero.net";
+        boolean userByEmail = usersVeganRepository.existsUserVeganByEmail(email);
+
+        System.out.println(username + " username on DB: " + userByUsername);
+        System.out.println(email + " email on DB " + userByEmail);
+
+        username = "mariola";
+        userByUsername = usersVeganRepository.existsUserVeganByUsername(username);
+
+        email = "marisol@itinajero.net";
+         userByEmail = usersVeganRepository.existsUserVeganByEmail(email);
+
+        System.out.println(username + " username on DB: " + userByUsername);
+        System.out.println(email + " email on DB " + userByEmail);
+
     }
 
     private void isPresentRecipe() {

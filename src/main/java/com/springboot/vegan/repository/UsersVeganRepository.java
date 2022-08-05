@@ -7,5 +7,9 @@ public interface UsersVeganRepository extends JpaRepository<UserVegan, Integer> 
 
     UserVegan findUserVeganByUsername (String username);
 
+    Boolean existsUserVeganByUsername (String username);
+
+    Boolean existsUserVeganByEmail (String email);
+
 
 }

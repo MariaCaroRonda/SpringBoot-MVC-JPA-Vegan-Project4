@@ -99,7 +99,6 @@ public class FavoritesController {
 
 
         // Find the object UserVegan on the DB
-        //Usuario usuario = serviceUsuarios.buscarPorUsername(username);
         UserVegan userVegan = usersVgService.findByUsername(username);
         System.out.println(userVegan.getFirstName());
 

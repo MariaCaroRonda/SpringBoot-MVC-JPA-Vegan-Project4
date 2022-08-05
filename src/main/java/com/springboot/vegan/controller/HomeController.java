@@ -124,6 +124,7 @@ public class HomeController {
     public String saveRegistry(UserVegan userVegan, BindingResult result,
                                RedirectAttributes attributes) {
 
+
         /** Test the below tutorial to check for duplicate usernames when singing up
        /* https://www.javaguides.net/2021/10/login-and-registration-rest-api-using-spring-boot-spring-security-hibernate-mysql-database.html */
 
@@ -145,16 +146,33 @@ public class HomeController {
             profile.setProfileId(3); // Regular user by default
             userVegan.add(profile);
 
+
+            System.out.println(userVegan);
             usersVgService.save(userVegan);
             attributes.addFlashAttribute("msg", "User registered successfully");
+            return  "redirect:/login";
         } catch (Exception e) {
-            /*throw new RuntimeException(e);*/
-            attributes.addFlashAttribute("msg", "Han error has happened " + e.getMessage());
-            attributes.addFlashAttribute("msg", "Han error has happened ");
+           // throw new RuntimeException(e);
+            if (usersVgService.existUsername(userVegan.getUsername())) {
+                attributes.addFlashAttribute("msg", "Username already in used. " +
+                        "Please use a different Email.");
+                return  "redirect:/signup";
+
+            }
+
+            if (usersVgService.existUserEmail(userVegan.getEmail())) {
+                attributes.addFlashAttribute("msg", "Email already in used! " +
+                        "Please use a different user name.");
+                return  "redirect:/signup";
+
+            }
+
+           // attributes.addFlashAttribute("msg", ("Aan error has happened " + e.getMessage() ) );
+           // attributes.addFlashAttribute("msg", "An error has happened ");
         }
 
             /**return  "redirect:/login";*/
-            return  "redirect:/signup";
+            return  "redirect:/login";
 
     }
 

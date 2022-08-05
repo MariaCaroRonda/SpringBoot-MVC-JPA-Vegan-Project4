@@ -14,5 +14,8 @@ public interface IUsersVgService {
 
     UserVegan findByUsername(String username);
 
+    boolean existUsername (String username);
+
+    boolean existUserEmail (String email);
 
 }
