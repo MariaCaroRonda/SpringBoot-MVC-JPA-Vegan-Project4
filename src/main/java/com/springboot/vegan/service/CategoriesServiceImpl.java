@@ -4,6 +4,7 @@ import com.springboot.vegan.model.Category;
 import com.springboot.vegan.model.Recipe;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -88,9 +89,14 @@ public class CategoriesServiceImpl implements ICategoriesService{
     }
 
     @Override
-    public Page<Category> findPagination(int pageNo, int pageSize, String sortField, String sortDirection) {
+    public Page<Category> findAll(Pageable page) {
         return null;
     }
+
+/*    @Override
+    public Page<Category> findPagination(int pageNo, int pageSize, String sortField, String sortDirection) {
+        return null;
+    }*/
 
 
 }

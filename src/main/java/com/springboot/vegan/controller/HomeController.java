@@ -149,14 +149,14 @@ public class HomeController {
            // throw new RuntimeException(e);
             if (usersVgService.existUsername(userVegan.getUsername())) {
                 attributes.addFlashAttribute("msg", "Username already in used. " +
-                        "Please use a different Email.");
+                        "Please use a different Username.");
                 return  "redirect:/signup";
 
             }
 
             if (usersVgService.existUserEmail(userVegan.getEmail())) {
                 attributes.addFlashAttribute("msg", "Email already in used! " +
-                        "Please use a different user name.");
+                        "Please use a different Email.");
                 return  "redirect:/signup";
 
             }

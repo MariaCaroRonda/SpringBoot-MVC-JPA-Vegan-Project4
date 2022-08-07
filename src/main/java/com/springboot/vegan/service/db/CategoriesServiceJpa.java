@@ -46,14 +46,8 @@ public class CategoriesServiceJpa implements ICategoriesService {
     }
 
     @Override
-    public Page<Category> findPagination(int pageNo, int pageSize, String sortField,
-                                         String sortDirection) {
-
-        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name())
-                ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
-
-        Pageable pageable = PageRequest.of(pageNo -1, pageSize, sort);
-        return this.categoriesRepository.findAll(pageable);
+    public Page<Category> findAll(Pageable page) {
+        return categoriesRepository.findAll(page);
     }
 
 
