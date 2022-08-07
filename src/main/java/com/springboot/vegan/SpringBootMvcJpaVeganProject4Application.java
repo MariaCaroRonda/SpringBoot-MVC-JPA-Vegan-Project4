@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
+import javax.swing.text.html.Option;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
     @Autowired
     private FavoritesRepository favoritesRepository;
+
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootMvcJpaVeganProject4Application.class, args);
@@ -77,12 +79,61 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
 /*        findFavorites();
 
-        isPresentRecipe();*/
+        isPresentRecipe();
 
         existUser();
 
+        findProfiles();
+
+        editUser(); */
 
     }
+
+    public void editUser() {
+        int userId = 2;
+        Optional<UserVegan> optional = usersVeganRepository.findById(userId);
+        if (optional.isPresent()) {
+            UserVegan userVegan = optional.get();
+            System.out.println("Updating user: " + optional.get().getUsername());
+            userVegan.setLastName("Rodriguez");
+            System.out.println(userVegan);
+            usersVeganRepository.save(userVegan);
+        }
+        else
+        {
+            System.out.println("User not found.");
+        }
+
+    }
+
+    public void findProfiles() {
+        int userId = 2;
+       /* List<Profile> list = profilesRepository.findProfileByUserVegan_UserId(userId);*/
+        Optional<UserVegan> optional = usersVeganRepository.findById(userId);
+
+/*        Optional<UserVegan> optional = usersVeganRepository.findById(userId);
+
+        System.out.println("User " + optional.get().getUsername() + " profiles: ");*/
+
+      // This line of code is NOT working: usersVeganRepository.findUserVeganByProfiles(2);
+
+        System.out.println(optional.get().getProfiles());
+        List<Profile> list = optional.get().getProfiles();
+        for (Profile p : list) {
+            System.out.println("Profile: " + p);
+        }
+
+/*
+        for (Profile p : list) {
+            System.out.println(p.getProfile());
+        }*/
+
+    }
+
+    public void findProfiles2 () {
+
+    }
+
 
     public void existUser() {
         String username = "marisol";

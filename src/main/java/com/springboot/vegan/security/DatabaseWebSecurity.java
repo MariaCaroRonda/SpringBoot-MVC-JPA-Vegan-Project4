@@ -54,12 +54,16 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                         "/recipes/view/**").permitAll()
 
                 // set up authorizations as per Roles
-                .antMatchers("/favorites/create/**", "/favorites/save/**", "/favorites/index/**").hasAuthority("USERVEGAN")
-               /* .antMatchers("/favorites/**").hasAuthority("USERVEGAN")*/
-                /*.antMatchers("/favorites/**").hasAuthority("SUPERVISOR, ADMINISTRATOR, USERVEGAN")*/
+              //  .antMatchers("/favorites/create/**", "/favorites/save/**", "/favorites/index/**").hasAuthority("USERVEGAN")
+/*                .antMatchers("/favorites/create/**", "/favorites/save/**", "/favorites/index/**"
+                        , "/favorites/update/**").hasAuthority("USERVEGAN")*/
+                .antMatchers("/favorites/**", "/favorites/index/**").hasAnyAuthority("USERVEGAN", "SUPERVISOR", "ADMINISTRATOR")
+             /*   .antMatchers("/favorites/**").hasAuthority("SUPERVISOR, ADMINISTRATOR, USERVEGAN")*/
                 .antMatchers("/recipes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
                 .antMatchers("/categories/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
                 .antMatchers("/usersvegan/**").hasAnyAuthority("ADMINISTRATOR")
+
+               /* .antMatchers("/favorites/**", "/favorites/index/**").hasAuthority("USERVEGAN")*/
 
                 // The rest of URLs require authentication
                 .anyRequest().authenticated()

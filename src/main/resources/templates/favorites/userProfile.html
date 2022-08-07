@@ -41,6 +41,8 @@
             <th scope="col">Email</th>
             <th scope="col">Username</th>
             <th scope="col">Registered On</th>
+            <th scope="col">Operations</th>
+
           </tr>
           </thead>
           <tbody>
@@ -54,6 +56,15 @@
             <th >
               <span th:text="${#dates.format(user.registrationDate, 'dd-MM-yyyy')}"></span>
             </th>
+<!--            <td>
+              <a th:href="@{/favorites/editProfile/{id} (id=${user.userId}) }">Edit</a>
+
+            </td>-->
+            
+            <td>
+              <a href="Edit"></a>
+            </td>
+            
           </tr>
 
           </tbody>

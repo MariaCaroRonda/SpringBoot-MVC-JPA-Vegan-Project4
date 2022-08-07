@@ -24,21 +24,34 @@
 
 <main role="main">
   <hr>
-  <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+<!--  <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>-->
   <div class="container">
 
     <div class="card">
-      <h4 class="card-header"><strong>Register Form</strong></h4>
+      <h4 class="card-header"><strong>Your profile Form</strong></h4>
       <div class="card-body">
-        <form th:action="@{/signup}" th:object="${userVegan}" method="post">
+        <form th:action="@{/update}" method="post"
+              th:object="${userVegan}" >
+
+<!--          <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+            <p>Please correct the following errors: </p>
+            <ul>
+             &lt;!&ndash; <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>&ndash;&gt;
+            </ul>
+          </div>-->
 
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
                 <label for="firstName">First Name</label>
+                <input type="hidden" th:field="*{userId}">
+             <!--   <input type="hidden" th:field="*{password}">-->
+                <input type="hidden" th:field="*{profiles}">
+                <input type="hidden" th:field="*{status}">
+<!--                <input type="hidden" th:field="*{registrationDate}">-->
                 <input type="text" class="form-control" th:field="*{firstName}"
                        id="firstName" name="firstName"
-                       placeholder="Enter your First Name"
+                       placeholder="Update user First Name"
                        required="required">
               </div>
             </div>
@@ -48,7 +61,7 @@
                 <label for="lastName">Last Name</label>
                 <input type="text" class="form-control" th:field="*{lastName}"
                        id="lastName" name="lastName"
-                       placeholder="Enter your Last Name"
+                       placeholder="Update user Last Name"
                        required="required">
               </div>
             </div>
@@ -58,10 +71,22 @@
                 <label for="email">Email</label>
                 <input type="text" class="form-control" th:field="*{email}"
                        id="email" name="email"
-                       placeholder="Enter your email"
+                       placeholder="Update user email"
                        required="required">
               </div>
             </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="pwd">Pwd</label>
+                <input type="text" class="form-control" th:field="*{password}"
+                       id="pwd" name="pwd"
+                       placeholder="Update user email"
+                       required="required">
+              </div>
+            </div>
+            <!--<td th:text="${userTmp.registrationDate}"></td>-->
+
           </div>
 
 
@@ -71,22 +96,36 @@
                 <label for="username">Username</label>
                 <input type="text" class="form-control" th:field="*{username}"
                        id="username" name="username"
-                       placeholder="Enter a username" required="required">
+                       placeholder="Update username" required="required">
               </div>
             </div>
 
-            <div class="col-md-3">
+<!--            <div class="col-md-3">
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control"
+                <input type="password" class="form-control" th:field="*{password}"
+
                        id="password" name="password"
-                       placeholder="Enter your password" required="required">
+                       placeholder="Update user password">
               </div>
-            </div>
+            </div>-->
           </div>
+
+<!--          <div class="col-md-3">
+            <div class="form-group">
+              <label for="registrationDate">Registered Date</label>
+              <input type="text" class="form-control" name="date" th:field="*{registrationDate}"
+                     id="registrationDate"
+                     placeholder="Publication date" required="required">
+            </div>
+          </div>-->
+
+
+
+
           <hr>
           <button type="submit" title="Register to Vegan website"
-                  class="btn btn-primary">Register</button>
+                  class="btn btn-primary">Update</button>
         </form>
       </div>
     </div>
@@ -99,8 +138,26 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/tinymce/tinymce.min.js}"></script>
+<script>
+
+    $(function () {
+            $("#registrationDate").datepicker({dateFormat: 'dd-mm-yy'});
+        }
+    );
+
+    tinymce.init({
+        selector: '#instructions',
+        plugins: "textcolor, table lists code",
+        toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify \n\
+                  | bullist numlist outdent indent | forecolor backcolor table code"
+    });
+
+
+</script>
 
 </body>
 </html>

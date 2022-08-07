@@ -44,7 +44,7 @@ public class FavoritesController {
         // Find user's favorite on DB
         UserVegan user = usersVgService.findByUsername(username);
         int userId = user.getUserId();
-        user.setPassword(null);
+      /**  user.setPassword(null);*/
 
         List<Favorite> list = favoritesService.findAll();
        // model.addAttribute("favorites", list);
@@ -66,6 +66,7 @@ public class FavoritesController {
         return "favorites/listFavoritesPaginate";
     }
 
+    // Form to add a Recipe to User's Favorites
     @GetMapping("/create/{recipeId}")
     public String create(Favorite favorite,
                          @PathVariable Integer recipeId,
@@ -134,7 +135,7 @@ public class FavoritesController {
 
         String username = authentication.getName();
         UserVegan user = usersVgService.findByUsername(username);
-        user.setPassword(null);
+        /**user.setPassword(null);*/
 
         System.out.println(user);
         model.addAttribute("user", user);
@@ -154,38 +155,27 @@ public class FavoritesController {
     }
 
 
+    @GetMapping("/editProfile/{id}")
+    public String editProfile(@PathVariable("id") int userId, Model model) {
+
+        UserVegan userVegan = usersVgService.findById(userId);
+
+        model.addAttribute("userVegan", userVegan);
+
+
+        return  "favorites/formRegisterEdit";
+    }
+
+    @PostMapping("/update")
+    public String save(UserVegan userVegan, BindingResult result,
+                       RedirectAttributes attributes) {
 
 
 
-/*    public String save() {
+        usersVgService.save(userVegan);
+
         return "redirect:/";
     }
 
-    public String delete () {
-        return "redirect/favorites/indexPaginate";
-    }*/
 
-/*    @PostMapping("/save/{id}")
-    public String save(Favorite favorite, Model model,
-                       HttpSession session,
-                       @PathVariable("id") Integer recipeId,
-                       Authentication auth) {
-
-        // User who started the session
-        String username = auth.getName();
-
-        UserVegan user = usersVgService.findByUsername(username);
-        Recipe recipe = recipesService.findById(recipeId);
-
-        favorite.setUserVegan(user);
-        favorite.setRecipe(recipe);
-        favorite.setComments(recipe.getName());
-
-        favoritesService.save(favorite);
-
-        System.out.println(favorite);
-
-        return "favorites/listFavorites";
-
-    }*/
 }

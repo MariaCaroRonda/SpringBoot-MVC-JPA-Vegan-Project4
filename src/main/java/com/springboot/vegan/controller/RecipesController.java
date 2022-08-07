@@ -1,8 +1,10 @@
 package com.springboot.vegan.controller;
 
 import com.springboot.vegan.model.Recipe;
+import com.springboot.vegan.model.UserVegan;
 import com.springboot.vegan.service.ICategoriesService;
 import com.springboot.vegan.service.IRecipesService;
+import com.springboot.vegan.service.IUsersVgService;
 import com.springboot.vegan.util.MyUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +36,9 @@ public class RecipesController {
 
     @Autowired
     private ICategoriesService categoriesService;
+
+    @Autowired
+    private IUsersVgService usersVgService;
 
 
 /*  // Home Page without Pagination
@@ -124,6 +129,7 @@ public class RecipesController {
 
         return "recipes/formRecipe";
     }
+
 
 
     // Generic method to add a Model to the Category List. It is used in create()

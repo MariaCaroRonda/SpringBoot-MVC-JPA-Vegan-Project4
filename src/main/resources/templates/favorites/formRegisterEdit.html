@@ -13,7 +13,6 @@
   <!-- Custom styles for this template -->
   <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
   <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
-  <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" >
   <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
 </head>
 
@@ -30,12 +29,16 @@
     <div class="card">
       <h4 class="card-header"><strong>Register Form</strong></h4>
       <div class="card-body">
-        <form th:action="@{/signup}" th:object="${userVegan}" method="post">
+        <form th:action="@{/favorites/update}" th:object="${userVegan}" method="post">
 
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
                 <label for="firstName">First Name</label>
+                <input type="hidden" th:field="*{userId}">
+                <input type="hidden" th:field="*{email}">
+                <input type="hidden" th:field="*{username}">
+                <input type="hidden" th:field="*{password}">
                 <input type="text" class="form-control" th:field="*{firstName}"
                        id="firstName" name="firstName"
                        placeholder="Enter your First Name"
@@ -65,7 +68,7 @@
           </div>
 
 
-            <div class="row">
+          <div class="row">
             <div class="col-md-3">
               <div class="form-group">
                 <label for="username">Username</label>
@@ -75,18 +78,11 @@
               </div>
             </div>
 
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control"
-                       id="password" name="password"
-                       placeholder="Enter your password" required="required">
-              </div>
-            </div>
+
           </div>
           <hr>
           <button type="submit" title="Register to Vegan website"
-                  class="btn btn-primary">Register</button>
+                  class="btn btn-primary">Update</button>
         </form>
       </div>
     </div>

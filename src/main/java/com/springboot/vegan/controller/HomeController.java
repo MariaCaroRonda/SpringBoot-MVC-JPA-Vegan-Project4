@@ -4,9 +4,12 @@ import com.springboot.vegan.model.Profile;
 import com.springboot.vegan.model.Recipe;
 import com.springboot.vegan.model.UserVegan;
 import com.springboot.vegan.service.ICategoriesService;
+import com.springboot.vegan.service.IFavoritesService;
 import com.springboot.vegan.service.IRecipesService;
 import com.springboot.vegan.service.IUsersVgService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -26,6 +29,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +49,8 @@ public class HomeController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    private IFavoritesService favoritesService;
 
 
     @GetMapping("/")
@@ -78,47 +85,33 @@ public class HomeController {
     public String register(UserVegan userVegan) {
         return "formRegister";
     }
-/**    @PostMapping("/signup")
-    public String saveRegistry(UserVegan userVegan,
-                               RedirectAttributes attributes) {
 
-        String pwdPlain = userVegan.getPassword();
-        String pwdEncrypt = passwordEncoder.encode(pwdPlain);
+/*    @GetMapping("/signupEdit/{id}")
+    public String registerEdit(@PathVariable("id") int userId,*//* UserVegan userVegan,*//* Model model,
+                               HttpSession session,
+                               Authentication authentication) {
 
-        userVegan.setPassword(pwdEncrypt);
 
-        userVegan.setStatus(1); // 'Active' by default
-        userVegan.setRegistrationDate(new Date());
+        UserVegan userVegan1 = usersVgService.findById(userId);
+        System.out.println(userVegan1);
+        System.out.println(userVegan1.getProfiles());
 
-        Profile profile = new Profile();
-        profile.setProfileId(3); // Regular user by default
-        userVegan.add(profile);
 
-        usersVgService.save(userVegan);
-        attributes.addFlashAttribute("msg", "User registered successfully");
+        *//**String username = authentication.getName();*//*
+        *//**userVegan = usersVgService.findByUsername(username);*//*
 
-        *//*return "redirect:/usersvegan/index";*//*
-        return  "redirect:/login";
+        *//**List<Profile> profiles = usersVgService.findProfilesUser(userVegan1.getUserId());*//*
+        List<Profile> profiles = usersVgService.findProfilesUser(userId);
 
+        //userVegan.setProfiles(usersVgService.findProfilesUser(userVegan.getUserId()));
+        *//**userVegan1.setProfiles(profiles);*//*
+
+        System.out.println("User before edit with profiles: " + userVegan1);
+        System.out.println("Profiles@ " + userVegan1.getProfiles());
+        model.addAttribute("userVegan", userVegan1);
+        return "formRegisterEdit";
     }*/
 
-/*    @PostMapping(value="/signup")
-    public String guardarRegistro(Usuario usuario, BindingResult result, RedirectAttributes attributes) {
-        try {
-
-            if (result.hasErrors()) {
-                return "usuarios/formRegistro";
-            }
-            // la logica restante
-            //
-            usuariosService.guardar(usuario);
-
-            attributes.addFlashAttribute("msg", "Los datos del usuario fueron guardados.");
-        }catch(Exception ex) {
-            attributes.addFlashAttribute("msg", "Ocurrio un error durante la operación. " + ex.getMessage());
-        }
-        return "redirect:/usuarios/index";
-    }*/
 
     @PostMapping("/signup")
     public String saveRegistry(UserVegan userVegan, BindingResult result,
@@ -136,6 +129,7 @@ public class HomeController {
 
             String pwdPlain = userVegan.getPassword();
             String pwdEncrypt = passwordEncoder.encode(pwdPlain);
+
 
             userVegan.setPassword(pwdEncrypt);
 
@@ -175,6 +169,108 @@ public class HomeController {
             return  "redirect:/login";
 
     }
+
+    @PostMapping("/update")
+    public String updateRegistry(UserVegan userVegan, BindingResult result,
+                                 RedirectAttributes attributes,
+                                 Authentication auth, HttpSession session
+                                ) {
+        //return "redirect:/categories/index";
+
+        /*Date date= userVegan.getRegistrationDate();*/
+
+        /** Try this to avoid having a ',' at the end of the password*/
+        /** If lenth > 60 && last character = ','  THEN remove last character ','*/
+        /** ELSE encrypt new password */
+
+
+        if (userVegan.getPassword().length() != 60) {
+            String pwdPlain = userVegan.getPassword();
+            String pwdEncrypt = passwordEncoder.encode(pwdPlain);
+            userVegan.setPassword(pwdEncrypt);
+
+        }
+
+
+        String username = auth.getName();
+        System.out.println("Username: " + username);
+
+        System.out.println("pwd length: " + userVegan.getPassword().length());
+
+        userVegan.setRegistrationDate(new Date());
+        System.out.println(userVegan);
+        /*System.out.println("Registration date: " + date);*/
+
+        usersVgService.save(userVegan);
+        return "redirect:/usersvegan/index";
+    }
+
+
+/*    @PostMapping("/signupEdit")
+    public String saveRegistryEdit(UserVegan userVegan, BindingResult result,
+                               RedirectAttributes attributes) {
+
+
+        *//** Test the below tutorial to check for duplicate usernames when singing up
+         /* https://www.javaguides.net/2021/10/login-and-registration-rest-api-using-spring-boot-spring-security-hibernate-mysql-database.html *//*
+
+        try {
+            if (result.hasErrors()) {
+                attributes.addFlashAttribute("An error has happened");
+                System.out.println(userVegan + " error:  " + result.hasErrors());
+                return "formRegisterEdit";
+            }
+
+           *//* String pwdPlain = userVegan.getPassword();
+            String pwdEncrypt = passwordEncoder.encode(pwdPlain);
+
+            userVegan.setPassword(pwdEncrypt);
+
+            userVegan.setStatus(1); // 'Active' by default
+            userVegan.setRegistrationDate(new Date());
+
+            Profile profile = new Profile();
+            profile.setProfileId(3); // Regular user by default
+            userVegan.add(profile);*//*
+
+
+            System.out.println("User vegan before save: " + userVegan);
+
+            usersVgService.save(userVegan);
+            attributes.addFlashAttribute("msg", "User updated successfully");
+
+            return  "favorites/userProfile";
+
+        } catch (Exception e) {
+            // throw new RuntimeException(e);
+            if (usersVgService.existUsername(userVegan.getUsername())) {
+                System.out.println("msg error username: " + userVegan);
+                attributes.addFlashAttribute("msg", "Username already in used. " +
+                        "Please use a different Username.");
+                 return  "redirect:/signupEdit";
+
+
+
+            }
+
+            if (usersVgService.existUserEmail(userVegan.getEmail())) {
+                System.out.println("msg error email: " + userVegan);
+                attributes.addFlashAttribute("msg", "Email already in used! " +
+                        "Please use a different Email.");
+                return  "redirect:/signupEdit";
+
+            }
+
+            // attributes.addFlashAttribute("msg", ("Aan error has happened " + e.getMessage() ) );
+            // attributes.addFlashAttribute("msg", "An error has happened ");
+        }
+
+        *//**return  "redirect:/login";*//*
+        return  "redirect:favorites/userProfile";
+
+    }*/
+
+
 
     @GetMapping("/table")
     public String showTable(Model model) {
@@ -236,11 +332,7 @@ public class HomeController {
     }
 
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        // It set an empty string to null
-        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-    }
+
 
     @ModelAttribute
     // We can add to the model all attributes we want, and these
@@ -252,5 +344,26 @@ public class HomeController {
         model.addAttribute("categories", categoriesService.findAll());
         model.addAttribute("search", recipeSearch);
     }
+
+
+   @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        // It set an empty string to null
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        binder.registerCustomEditor(Date.class,
+                new CustomDateEditor(dateFormat, false));
+
+
+    }
+
+
+    // We customize the Data Binding for all Date type properties
+/*    @InitBinder
+    public void initBinder2(WebDataBinder webDataBinder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        webDataBinder.registerCustomEditor(Date.class,
+                new CustomDateEditor(dateFormat, false));
+    }*/
 
 }

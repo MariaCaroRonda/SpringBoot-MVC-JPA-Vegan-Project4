@@ -8,4 +8,6 @@ import java.util.List;
 public interface ProfilesRepository extends
         JpaRepository<Profile, Integer> {
 
+
+    /*List<Profile> findProfileByUserVegan_UserId(Integer userId);*/
 }

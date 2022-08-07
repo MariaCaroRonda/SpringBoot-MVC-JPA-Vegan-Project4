@@ -34,24 +34,29 @@
         <table class="table table-hover">
           <thead class="thead-light">
             <tr>
+              <th scope="col">User Id</th>
               <th scope="col">First Name</th>
               <th scope="col">Last Name</th>
               <th scope="col">Email</th>
               <th scope="col">Username</th>
               <th scope="col">Status</th>
-              <th scope="col">Registered on</th>
+              <th scope="col">Updated on</th>
               <th scope="col">Operations</th>
             </tr>
           </thead>
 
           <tbody>
             <tr th:each="userTmp : ${usersvegan}">
+              <td th:text="${userTmp.userId}"></td>
               <td th:text="${userTmp.firstName}"></td>
               <td th:text="${userTmp.lastName}"></td>
               <td th:text="${userTmp.email}"></td>
               <td th:text="${userTmp.username}"></td>
               <td th:text="${userTmp.status == 1 ? 'Active' : 'Locked'}"></td>
-              <td th:text="${userTmp.registrationDate}"></td>
+              <!--<td th:text="${userTmp.registrationDate}"></td>-->
+              <td>
+                <span th:text="${#dates.format(userTmp.registrationDate, 'dd-MM-yyyy')}"></span>
+              </td>
               <td>
                 <a th:href="@{/usersvegan/delete/{id} (id=${userTmp.userId}) }"
                    onclick="return confirm('Are you sure?')" class="btn btn-success btn-sm"
@@ -59,10 +64,35 @@
                   <i class="fas fa-trash" aria-hidden="true"></i></a>
 
 
-                <a href="#" onclick="return confirm('¿Do you want to lock this user?')"
+<!--                <a href="#" onclick="return confirm('Do you want to lock this user?')"
                    class="btn btn-success btn-sm" role="button"
                    title="Lock access to this user">
-                  <i class="fas fa-lock" aria-hidden="true"></i></a>
+                  <i class="fas fa-lock" aria-hidden="true"></i></a>-->
+
+<!--                <a th:href="@{/usersvegan/edit/{id} (id=${userTmp.userId}) }"
+                   onclick="return confirm('¿Do you want to edit this user?')"
+                   class="btn btn-success btn-sm" role="button"
+                   title="Edit">
+                  <i class="fas fa-lock" aria-hidden="true"></i></a>-->
+
+
+               <!--#############################################################-->
+
+<!--            <a th:href="@{/this/istheurl(parameter1 = val1, parameter2 = val2) }">
+                <a th:href="@{/usersvegan/edit/{id} (id=${userTmp.userId})}"-->
+                <!--<a th:href="@{/usersvegan/edit/{id}/{pwd} (id=${userTmp.userId}, pwd=${userTmp.password})}"-->
+
+<!--                <a th:href="@{/pathvars/item/{itemId}/detail/{dtlId}(itemId = ${item.id}, dtlId = ${dtl.id})}">-->
+
+
+                <!-- <a th:href="@{/usersvegan/edit/{id}/pwd/{pwd} (id=${userTmp.userId}, pwd=${userTmp.password})}"-->
+
+                <a th:href="@{/usersvegan/edit/{id} (id=${userTmp.userId})}"
+                   onclick="return confirm('Do you want to edit this user?')"
+                   class="btn btn-success btn-sm" role="button"
+                   title="Edit this user">
+                  <i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+
 
               </td>
             </tr>
