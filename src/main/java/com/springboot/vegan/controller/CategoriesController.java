@@ -5,6 +5,7 @@ import com.springboot.vegan.service.ICategoriesService;
 import com.springboot.vegan.service.IRecipesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,16 @@ public class CategoriesController {
         model.addAttribute("categories", list);
         return "categories/listCategories";
     }
+
+/*    @GetMapping("/indexPaginate")
+    public String showIndexPaginate(Model model) {
+
+        return findPaginated(1,  "name", "asc", model);
+
+        *//*List<Category> list = categoriesService.findAll();
+        model.addAttribute("categories", list);
+        return "categories/listCategoriesPaginate";*//*
+    }*/
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable ("id") int categoryId, RedirectAttributes attributes) {
@@ -71,6 +82,29 @@ public class CategoriesController {
 
         return "redirect:/categories/index";
     }
+
+/*    @GetMapping("/page/{pageNo}")
+    public String findPaginated(@PathVariable (value = "pageNo") int pageNo,
+                                @RequestParam("sortField") String sortField,
+                                @RequestParam("sortDir") String sortDir,
+                                Model model) {
+        int pageSize = 5;
+
+        Page<Category> page = categoriesService.findPagination(pageNo, pageSize, sortField, sortDir);
+        List<Category> listCategories = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+        model.addAttribute("listCategories", listCategories);
+
+        return "categories/indexPaginate";
+    }*/
 
 
 

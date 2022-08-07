@@ -27,5 +27,20 @@ public interface RecipesRepository extends JpaRepository<Recipe, Integer> {
 
     List<Recipe> findByFeaturedOrderByName(int featured);
 
+    /*List<Recipe> findRecipeByNameLikeIgnoreCaseOrderByName(String ingredient);*/
+/*
+    List<Recipe> findRecipesByNameLikeIgnoreCaseOrderByName(String name);
+
+    List<Recipe> findRecipesByNameLike(String name);
+
+    List<Recipe> findRecipesByIngredientsLike(String ingredient);
+
+    List<Recipe> findRecipesByNameContains (String name);
+
+    //List<Recipe> findRecipesByNameIn(String string);
+    List<Recipe> findRecipesByIngredientsContaining(String ingredient);
+
+    List<Recipe> findRecipesByNameOrder(String recipe);*/
+
 
 }

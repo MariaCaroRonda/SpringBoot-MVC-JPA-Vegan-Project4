@@ -64,6 +64,21 @@ public class RecipesServiceImpl implements IRecipesService{
         return null;
     }
 
+/*    @Override
+    public List<Recipe> findByName(String name) {
+        return null;
+    }
+
+    @Override
+    public List<Recipe> findByName2(String name) {
+        return null;
+    }
+
+    @Override
+    public List<Recipe> findByIngredient(String ingredient) {
+        return null;
+    }*/
+
 
     public RecipesServiceImpl() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

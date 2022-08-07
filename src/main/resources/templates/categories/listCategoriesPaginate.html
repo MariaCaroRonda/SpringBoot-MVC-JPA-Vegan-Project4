@@ -32,19 +32,30 @@
         <hr>
         <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
 
-        <table class="table table-hover">
+
+        <table class="table table-bordered table-responsive.md">
           <thead class="thead-light">
           <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Operations</th>
+            <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=name&sortDir=' +
+                     ${reverseSortDir}}"> Name</a> </th>
+<!--            <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=name&sortDir=' +
+                     ${reverseSortDir}}">User Last Name</a> </th>-->
+
+            <!--                    <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' +-->
+            <!--                     ${reverseSortDir}}">User Last Name</a> </th>-->
+
+<!--            <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' +
+                     ${reverseSortDir}}">User Email</a> </th>-->
+
+            <!--                    <th> User Email</th>-->
+            <!--                    <th>User Password</th>-->
+            <th> Actions </th>
           </tr>
           </thead>
           <tbody>
 
-          <tr th:each="tmpCat : ${categories}">
-            <!--<th scope="row" th:text="${tmpCat.categoryId}"></th>-->
+          <!--<tr th:each="tmpCat : ${catetories}">
+            &lt;!&ndash;<th scope="row" th:text="${tmpCat.categoryId}"></th>&ndash;&gt;
             <td th:text="${tmpCat.categoryId}"></td>
             <td th:text="${tmpCat.name}"></td>
             <td th:text="${tmpCat.description}"></td>
@@ -59,7 +70,7 @@
                  class="btn btn-success btn-sm" role="button" title="Delete">
                 <i class="fas fa-trash" aria-hidden="true"></i></a>
             </td>
-          </tr>
+          </tr>-->
           </tbody>
         </table>
 

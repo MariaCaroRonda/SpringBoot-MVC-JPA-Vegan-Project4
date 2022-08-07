@@ -85,9 +85,50 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
         findProfiles();
 
-        editUser(); */
+        editUser();
 
+        findRecipeName2();
+
+        findRecipeIngredient();
+
+        findRecipeName3();*/
     }
+
+  /*   public void findRecipeIngredient() {
+        String ingredient = "oil salt";
+        List<Recipe> list = recipesRepository.findRecipesByIngredientsContaining(ingredient);
+        for (Recipe recipe: list) {
+            System.out.println("Recipe name: " + recipe.getName());
+        }
+    }
+
+   public void findRecipeName3() {
+        String name = "brown pan";
+        List<Recipe> list = recipesRepository.findRecipesByNameContains(name);
+        System.out.println(list.size());
+        for (Recipe recipe : list) {
+            System.out.println("Recipe name: " + recipe.getName());
+        }
+    }
+
+
+    public void findRecipeName2() {
+        String name = "brownies";
+        List<Recipe> list = recipesRepository.findRecipesByNameLike(name);
+        System.out.println(list.size());
+        for (Recipe recipe : list) {
+            System.out.println("Recipe name: " + recipe.getName());
+        }
+    }
+
+    public void findRecipeName() {
+        String name = "brown";
+        List<Recipe> list = recipesRepository.findRecipesByNameLikeIgnoreCaseOrderByName(name);
+        System.out.println(list.size());
+        for (Recipe recipe : list) {
+            System.out.println("Recipe name: " + recipe.getName());
+        }
+    }*/
 
     public void editUser() {
         int userId = 2;

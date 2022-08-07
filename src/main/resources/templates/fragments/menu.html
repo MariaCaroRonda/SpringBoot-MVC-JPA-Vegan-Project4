@@ -20,9 +20,15 @@
       <li class="nav-item" sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
         <a class="nav-link" th:href="@{/recipes/indexPaginate}">Recipes</a>
       </li>
+
       <li class="nav-item"  sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
         <a class="nav-link"th:href="@{/categories/index}">Categories</a>
       </li>
+
+<!--      <li class="nav-item"  sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
+        <a class="nav-link"th:href="@{/categories/indexPaginate}">Categories Paginate</a>
+      </li>-->
+
       <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRATOR')">
         <a class="nav-link" th:href="@{/usersvegan/index}">Users</a>
       </li>
