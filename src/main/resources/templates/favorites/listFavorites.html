@@ -61,7 +61,11 @@
             <td>
 
 
-              <a href="#">Delete</a>
+              <a th:href="@{/favorites/delete/{id} (id=${tmpFavorite.favoriteId})}"
+                 onclick="return confirm('Delete favorite?')"
+                 class="btn btn-success btn-sm" role="button" title="Delete">
+                <i class="fas fa-trash" aria-hidden="true"></i></a>
+              </a>
 
 <!--                           <a th:href="@{/categories/edit/{id} (id=${tmpCat.categoryId}) }"
                                class="btn btn-success btn-sm" role="button"

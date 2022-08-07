@@ -24,4 +24,5 @@ public interface IFavoritesService {
     boolean isRecipePresent(Integer recipeId);
 
     boolean isRecipePresentUserFavorite(Integer recipeId, Integer userId);
+
 }

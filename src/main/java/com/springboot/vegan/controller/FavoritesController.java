@@ -154,6 +154,16 @@ public class FavoritesController {
 
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable ("id") int favoriteId, RedirectAttributes attributes) {
+
+        System.out.println("Deleting favorite with id: " + favoriteId);
+        favoritesService.delete(favoriteId);
+
+
+        return "redirect:/favorites/index";
+    }
+
 
     @GetMapping("/editProfile/{id}")
     public String editProfile(@PathVariable("id") int userId, Model model) {
