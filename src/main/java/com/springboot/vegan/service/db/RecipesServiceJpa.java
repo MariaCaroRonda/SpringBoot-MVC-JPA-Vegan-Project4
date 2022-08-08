@@ -67,6 +67,11 @@ public class RecipesServiceJpa implements IRecipesService {
         return recipesRepository.findAll(page);
     }
 
+    @Override
+    public Page<Recipe> findAllExamplePage(Example<Recipe> example, Pageable pageable) {
+        return recipesRepository.findAll(example, pageable);
+    }
+
 /*    @Override
     public List<Recipe> findByName(String name) {
         List<Recipe> recipes = recipesRepository.findRecipesByNameLikeIgnoreCaseOrderByName(name);

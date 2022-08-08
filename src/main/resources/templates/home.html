@@ -32,10 +32,12 @@
       <form class="form-inline"
             th:action="@{/search}" method="get"
             th:object="${search}">
+
         <input type="text" class="form-control mb-3"
                th:field="*{ingredients}"
                id="exampleFormControlInput1"
                placeholder="Enter a Search">&nbsp;
+
         <select th:field="*{category.categoryId}" class="custom-select custom-select mb-3">
           <option th:value="*{null}" selected>Select a Category</option>
           <option th:each="catTmp : ${categories}"

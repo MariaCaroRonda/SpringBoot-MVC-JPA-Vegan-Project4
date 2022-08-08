@@ -64,6 +64,8 @@ public class RecipesController {
     }
 
 
+
+
     /** Method that displays a form to create a new Recipe */
     @GetMapping("/create")
     public String create(Recipe recipe, Model model){
@@ -128,8 +130,27 @@ public class RecipesController {
     public String edit(@PathVariable("id") int recipeId, Model model) {
         Recipe recipe = recipesService.findById(recipeId);
         model.addAttribute("recipe", recipe);
+        model.addAttribute("categories", categoriesService.findAll());
 
         return "recipes/formRecipe";
+    }
+
+
+    @GetMapping("/search")
+    public String search(@ModelAttribute("search") Recipe recipe, Pageable page, Model model) {
+        System.out.println("Searching by: " + recipe.getCategory().getCategoryId() +
+                " " + recipe.getName() + " " + recipe.getImageMeal());
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("name",
+                        ExampleMatcher.GenericPropertyMatchers.contains());
+
+        Example<Recipe> example = Example.of(recipe, matcher);
+
+        Page<Recipe> list = recipesService.findAllExamplePage(example, page);
+        model.addAttribute("recipesPage", list);
+
+        return "recipes/listRecipesPaginate";
     }
 
 
@@ -139,6 +160,9 @@ public class RecipesController {
     @ModelAttribute
     public void setGenerics(Model model) {
         model.addAttribute("categories", categoriesService.findAll());
+        Recipe recipeSearch = new Recipe();
+        recipeSearch.reset();
+        model.addAttribute("search", recipeSearch);
     }
 
 
