@@ -8,6 +8,9 @@ import com.springboot.vegan.service.IUsersVgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,6 +68,12 @@ public class UsersVgServiceJpa implements IUsersVgService {
         List<Profile> profiles = optional.get().getProfiles();
         //List<Profile> profiles2 = usersVeganRepository.findUserVeganByProfiles(userId);
         return profiles;
+    }
+
+    @Override
+    public Page<UserVegan> findAllPaginate() {
+        Pageable pageable = PageRequest.of(0, 5);
+        return usersVeganRepository.findAll(pageable);
     }
 
 

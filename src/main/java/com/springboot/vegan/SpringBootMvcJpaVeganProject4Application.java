@@ -91,9 +91,15 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
         findRecipeIngredient();
 
-        findRecipeName3();*/
+        findRecipeName3();
 
-        findCategoriesId();
+        findCategoriesId(); */
+    }
+
+    public void findPageSort() {
+        Page<Category> page =
+                categoriesRepository.findAll(PageRequest.of(0, 4,
+                        Sort.by("name")));
     }
 
     public void findCategoriesId() {
@@ -429,6 +435,7 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     }
 
     private void findAllPaginatingSorting() {
+
         // Start pagination of page 0 and size 3 (3 registries per page) and sorted by 'name'
         Page<Category> page = categoriesRepository.findAll(PageRequest.of(0, 4, Sort.by("name")));
         System.out.println("Total registries: " + page.getTotalElements());

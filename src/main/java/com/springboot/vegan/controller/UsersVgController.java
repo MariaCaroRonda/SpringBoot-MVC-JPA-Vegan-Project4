@@ -4,6 +4,7 @@ import com.springboot.vegan.model.UserVegan;
 import com.springboot.vegan.service.IUsersVgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,22 @@ public class UsersVgController {
         List<UserVegan> list = usersVgService.findAll();
         model.addAttribute("usersvegan", list);
         return "usersvegan/listUsersVegan";
+    }
+
+    @GetMapping("/indexPaginate")
+    public String showIndexPaginate(Model model) {
+
+        Page<UserVegan> page = usersVgService.findAllPaginate();
+        long totalItems = page.getTotalElements();
+        int totalPages = page.getTotalPages();
+
+        List<UserVegan> list = page.getContent();
+
+/*        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("totalItems", totalItems);*/
+        model.addAttribute("listUsersPaginate", list);
+
+        return "usersvegan/listUsersVeganPaginate";
     }
 
     @GetMapping("/delete/{id}")

@@ -21,30 +21,34 @@
 <header th:insert="fragments/menu :: menu-main"></header>
 
 <main role="main">
-
   <hr>
+
+
   <div class="container">
 
     <div class="card">
       <h4 class="card-header"><strong>List of Categories</strong></h4>
       <div class="card-body">
-        <a class="btn btn-primary" th:href="@{/categories/create}"
-           title="Create a new Category"
-           role="button">
+
+        <a class="btn btn-primary" th:href="@{/categories/create}" role="button">
           <i class="fas fa-file" aria-hidden="true"></i> New</a>
+
+<!--        <a th:href="@{/categories/indexPaginate2}">Sorted</a>-->
+
         <hr>
         <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
 
-        <table class="table table-bordered table-responsive.md">
+        <table class="table table-hover">
           <thead class="thead-light">
           <tr>
             <th scope="col">Id</th>
-            <th scope="col"> Actions </th>
+            <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Operations</th>
           </tr>
           </thead>
           <tbody>
+
 
           <tr th:each="tmpCat : ${categoriesPage}">
             <!--<th scope="row" th:text="${tmpCat.categoryId}"></th>-->
@@ -55,37 +59,33 @@
               <a th:href="@{/categories/edit/{id} (id=${tmpCat.categoryId}) }"
                  class="btn btn-success btn-sm" role="button"
                  title="Edit"><i class="fas fa-pencil-alt"
-                                   aria-hidden="true"></i></a>
+                                 aria-hidden="true"></i></a>
 
               <a th:href="@{/categories/delete/{id} (id=${tmpCat.categoryId}) }"
-                 onclick="return confirm('Are you sure?')"
+                 onclick="return confirm('Delete category?')"
                  class="btn btn-success btn-sm" role="button" title="Delete">
                 <i class="fas fa-trash" aria-hidden="true"></i></a>
             </td>
           </tr>
+
           </tbody>
         </table>
 
         <nav th:if="${categoriesPage.totalPages > 0}" aria-label="Page navigation example" >
           <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${categoriesPage.number == 0 ? 'disabled' : ''}">
-              <a th:href="@{/categories/indexPaginate(page=${categoriesPage.number - 1})}"
-                 class="page-link">Previous</a>
+              <a th:href="@{/categories/indexPaginate(page=${categoriesPage.number - 1})}" class="page-link">Previous</a>
             </li>
 
-            <li class="page-item" th:classappend="${i eq categoriesPage.number + 1} ? 'active'"
-                th:each="i : ${#numbers.sequence( 1, categoriesPage.totalPages, 1)}">
-              <a class="page-link" th:href="@{/categories/indexPaginate?page={tmpPag} (tmpPag=${i-1}) }"
-                 th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+            <li class="page-item" th:classappend="${i eq categoriesPage.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, categoriesPage.totalPages, 1)}">
+              <a class="page-link" th:href="@{/categories/indexPaginate?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
             </li>
-
-            <li class="page-item"
-                th:classappend="${categoriesPage.number == (categoriesPage.totalPages - 1) ? 'disabled' : ''}">
-              <a th:href="@{/categories/indexPaginate(page=${categoriesPage.number + 1})}"
-                 class="page-link">Next</a>
+            <li class="page-item" th:classappend="${categoriesPage.number == (categoriesPage.totalPages - 1) ? 'disabled' : ''}">
+              <a th:href="@{/categories/indexPaginate(page=${categoriesPage.number + 1})}" class="page-link">Next</a>
             </li>
           </ul>
         </nav>
+
 
       </div>
     </div>

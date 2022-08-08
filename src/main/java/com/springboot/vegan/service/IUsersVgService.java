@@ -2,7 +2,7 @@ package com.springboot.vegan.service;
 
 import com.springboot.vegan.model.Profile;
 import com.springboot.vegan.model.UserVegan;
-import org.apache.catalina.User;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -25,4 +25,5 @@ public interface IUsersVgService {
     List<Profile> findProfilesUser(Integer userId);
 
 
+    Page<UserVegan> findAllPaginate();
 }

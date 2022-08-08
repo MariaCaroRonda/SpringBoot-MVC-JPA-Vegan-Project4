@@ -78,4 +78,18 @@ public class CategoriesServiceJpa implements ICategoriesService {
     }
 
 
+    @Override
+    public Page<Category> findAllPageAsc(Pageable page) {
+
+        return (Page) categoriesRepository.findAll(page.getSort().ascending());
+
+    }
+
+    @Override
+    public Page<Category> findSort(Pageable page) {
+        return categoriesRepository.findAll(
+        PageRequest.of(page.getPageNumber(), page.getPageSize(), Sort.by("name")));
+
+    }
+
 }

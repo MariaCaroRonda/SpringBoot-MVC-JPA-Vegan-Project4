@@ -29,6 +29,7 @@
       <h4 class="card-header"><strong>User Details</strong></h4>
       <div class="card-body">
 
+
         <hr>
         <!--<div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>-->
 
@@ -40,15 +41,16 @@
             <th scope="col">LastName</th>
             <th scope="col">Email</th>
             <th scope="col">Username</th>
-            <th scope="col">Registered On</th>
-            <th scope="col">Operations</th>
+            <th scope="col">Updated On</th>
+            <th scope="col">Role(s)</th>
 
           </tr>
           </thead>
+
           <tbody>
 
           <tr th:object="${user}">
-            <td th:text="${user.userId}"></td>
+            <th th:text="${user.userId}"></th>
             <th th:text="${user.firstName}"></th>
             <th th:text="${user.lastName}"></th>
             <th th:text="${user.email}"></th>
@@ -56,19 +58,29 @@
             <th >
               <span th:text="${#dates.format(user.registrationDate, 'dd-MM-yyyy')}"></span>
             </th>
+            <th>
+              <span> <strong> <h6 th:each="p : ${user.profiles}"
+                                 th:text="${p.profile}"></h6> </strong> </span>
+            </th>
+
+
 <!--            <td>
               <a th:href="@{/favorites/editProfile/{id} (id=${user.userId}) }">Edit</a>
 
             </td>-->
-            
-            <td>
-              <a href="Edit"></a>
-            </td>
-            
-          </tr>
 
+
+
+          </tr>
           </tbody>
         </table>
+      <!--  <span> <strong> Role(s): </strong> </span><br>
+        <br>
+          <h6 th:each="p : ${user.profiles}"
+             th:text="${p.profile}"></h6>-->
+
+
+
 
       </div>
     </div>

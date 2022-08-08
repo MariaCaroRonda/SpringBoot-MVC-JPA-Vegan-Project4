@@ -28,6 +28,9 @@ public interface ICategoriesService {
 
     Page<Category> findAll(Pageable page);
 
+    Page<Category> findAllPageAsc(Pageable page);
+
+    Page<Category> findSort(Pageable page);
 
 
 }

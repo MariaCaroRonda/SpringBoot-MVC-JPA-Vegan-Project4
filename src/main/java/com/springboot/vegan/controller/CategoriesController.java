@@ -4,7 +4,9 @@ import com.springboot.vegan.model.Category;
 import com.springboot.vegan.service.ICategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,22 +33,56 @@ public class CategoriesController {
 
     @GetMapping("/indexPaginate")
     public String showIndexPaginate(Model model, Pageable page) {
+
         Page<Category> list = categoriesService.findAll(page);
+        Page<Category> list2 = categoriesService.findSort(page);
+
         model.addAttribute("categoriesPage", list);
 
         return "categories/listCategoriesPaginate";
     }
 
-    @GetMapping("/orderByName")
+    @GetMapping("/indexPaginate2")
+    public String showIndexPaginate2(Model model, Pageable page) {
+
+        /*   Page<Category> list = categoriesService.findAll(page);*/
+        Page<Category> list2 = categoriesService.findSort(page);
+
+        System.out.println(page.getPageNumber() + " " + page.getPageSize());
+
+        model.addAttribute("categoriesPage", list2);
+
+        return "categories/listCategoriesPaginate";
+    }
+
+/*    @GetMapping("/orderIdAscPage")
+    public String orderPage(Model model, Pageable page) {
+
+        Page<Category> list = categoriesService.findAllPageAsc(page);
+        model.addAttribute("categoriesPage", list);
+
+        return "categories/listCategoriesPaginate";
+
+    }*/
+
+/*
+    @GetMapping("/orderIdAscPage")
+    public String findAllByIdPage (Model model, Pageable page){
+        Page<Category> list = categoriesService.findAllPageAsc(page);
+        model.addAttribute("categoriesPage", list);
+
+        return "categories/listCategoriesPaginate";
+    }*/
+
+    @GetMapping("/orderByNameAsc")
     public String orderName(Model model) {
         List<Category> list = categoriesService.findAllByName();
         model.addAttribute("categories", list);
 
         return "categories/listCategories";
-
     }
 
-    @GetMapping("orderNameDesc")
+    @GetMapping("/orderNameDesc")
     public String orderNameDesc(Model model) {
         List<Category> list = categoriesService.findAllByNameDesc();
         model.addAttribute("categories", list);
@@ -54,23 +90,60 @@ public class CategoriesController {
         return "categories/listCategories";
     }
 
-    @GetMapping("orderIdDesc")
+  @GetMapping("/orderIdDesc")
     public String findAllById(Model model) {
         List<Category> list = categoriesService.findAllByIdDesc();
         model.addAttribute("categories", list);
 
         return "categories/listCategories";
-
     }
 
-    @GetMapping("orderIdAsc")
+     @GetMapping("/orderIdAsc")
     public String findAllByIdAsc(Model model) {
         List<Category> list = categoriesService.findAllByIdAsc();
         model.addAttribute("categories", list);
 
         return "categories/listCategories";
-
     }
+
+
+
+
+
+  /* Sorting with Pagination */
+/*
+  @GetMapping("/orderByIdAscPage")
+    public String orderIdAscPage(Model model, Pageable page) {
+        Page<Category> list = categoriesService.findAllPage(page);
+        model.addAttribute("categoriesPage", list);
+
+        return "categories/listCategoriesPaginate";
+    }
+*/
+
+/**  @GetMapping("/orderNameDescPage")
+    public String orderNameDescPage(Model model) {
+        List<Category> list = categoriesService.findAllByNameDesc();
+        model.addAttribute("categoriesPage", list);
+
+        return "categories/listCategoriesPaginate";
+    }*/
+
+/**    @GetMapping("/orderIdDescPage")
+    public String findAllByIdPage(Model model) {
+        List<Category> list = categoriesService.findAllByIdDesc();
+        model.addAttribute("categoriesPage", list);
+
+        return "categories/listCategoriesPaginate";
+    }*/
+
+/**    @GetMapping("/orderIdAscPage")
+    public String findAllByIdAscPage(Model model) {
+        List<Category> list = categoriesService.findAllByIdAsc();
+        model.addAttribute("categoriesPage", list);
+
+        return "categories/listCategoriesPaginate";
+    }*/
 
 /*    @GetMapping("/searchCat")
     public String search(@ModelAttribute("searchCat") Category category, Model model) {
@@ -139,11 +212,13 @@ public class CategoriesController {
     }
 
 
+/*
     @ModelAttribute
     public void setGenerics(Model model) {
         Category categorySearch = new Category();
         model.addAttribute("searchCat", categorySearch);
     }
+*/
 
 
 /*    public String save(@RequestParam("name") String name,

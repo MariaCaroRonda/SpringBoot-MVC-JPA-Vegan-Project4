@@ -32,6 +32,11 @@
       <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRATOR')">
         <a class="nav-link" th:href="@{/usersvegan/index}">Users</a>
       </li>
+
+      <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRATOR')">
+        <a class="nav-link" th:href="@{/usersvegan/indexPaginate}">UsersPaginate</a>
+      </li>
+
       <li class="nav-item" sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
         <a class="nav-link" th:href="@{/favorites/indexAdmin}">Favorites Admin</a>
       </li>

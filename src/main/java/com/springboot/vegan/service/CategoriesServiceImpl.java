@@ -118,6 +118,20 @@ public class CategoriesServiceImpl implements ICategoriesService{
         return null;
     }
 
+    @Override
+    public Page<Category> findAllPageAsc(Pageable page) {
+        return null;
+    }
+
+    @Override
+    public Page<Category> findSort(Pageable page) {
+        return null;
+    }
+
+
+
+
+
 /*    @Override
     public Page<Category> findPagination(int pageNo, int pageSize, String sortField, String sortDirection) {
         return null;

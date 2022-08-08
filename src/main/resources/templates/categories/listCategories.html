@@ -29,37 +29,32 @@
     <div class="card">
       <h4 class="card-header"><strong>List of Categories</strong></h4>
       <div class="card-body">
-        <a class="btn btn-primary" th:href="@{/categories/create}" role="button">
+
+       <a class="btn btn-primary" th:href="@{/categories/create}" role="button">
           <i class="fas fa-file" aria-hidden="true"></i> New</a>
-
         &nbsp;
-        <i class="fas fa-ellipsis-v"></i>  &nbsp;
+        <i class="fas fa-ellipsis-v"></i> &nbsp;
 
-<!--        <a th:href="@{/categories/orderByName}">Order by name</a>
+         <a th:href="@{/categories/orderByNameAsc}"
+                  class="btn btn-success btn-sm" role="button"
+                  title="Ascending Order"><i class="fas fa-angle-double-up"
+                                 ></i> Name</a> &nbsp;
 
-        fas fa-angle-double-up-->
-
-         <a th:href="@{/categories/orderByName}"
-           class="btn btn-success btn-sm" role="button"
-           title="Ascending Order"><i class="fas fa-angle-double-up"
-                          ></i> By Name</a> &nbsp;
-
-        <a th:href="@{/categories/orderNameDesc}"
-           class="btn btn-success btn-sm" role="button"
-           title="Ascending Order"><i class="fas fa-angle-double-down"
-        ></i> By Name</a>  &nbsp;
-        <i class="fas fa-ellipsis-v"></i>  &nbsp;
-
-
-        <a th:href="@{/categories/orderIdDesc}"
-           class="btn btn-success btn-sm" role="button"
-           title="Ascending Order"><i class="fas fa-angle-double-down"
-        ></i> By Id</a>  &nbsp;
+          <a th:href="@{/categories/orderNameDesc}"
+               class="btn btn-success btn-sm" role="button"
+               title="Descending Order"><i class="fas fa-angle-double-down"></i> Name</a> &nbsp;
+            <i class="fas fa-ellipsis-v"></i> &nbsp;
 
         <a th:href="@{/categories/orderIdAsc}"
            class="btn btn-success btn-sm" role="button"
-           title="Ascending Order"><i class="fas fa-angle-double-up"
-        ></i> By Id</a>  &nbsp;
+           title="Ascending Order"><i class="fas fa-angle-double-up"></i> Id</a> &nbsp;
+
+
+          <a th:href="@{/categories/orderIdDesc}"
+            class="btn btn-success btn-sm" role="button"
+            title="Descending Order"><i class="fas fa-angle-double-down"></i> Id</a> &nbsp;
+
+
 
 
         <hr>
