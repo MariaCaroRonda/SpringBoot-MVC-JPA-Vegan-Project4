@@ -2,21 +2,16 @@ package com.springboot.vegan.controller;
 
 import com.springboot.vegan.model.Category;
 import com.springboot.vegan.service.ICategoriesService;
-import com.springboot.vegan.service.IRecipesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -42,13 +37,74 @@ public class CategoriesController {
         return "categories/listCategoriesPaginate";
     }
 
+    @GetMapping("/orderByName")
+    public String orderName(Model model) {
+        List<Category> list = categoriesService.findAllByName();
+        model.addAttribute("categories", list);
+
+        return "categories/listCategories";
+
+    }
+
+    @GetMapping("orderNameDesc")
+    public String orderNameDesc(Model model) {
+        List<Category> list = categoriesService.findAllByNameDesc();
+        model.addAttribute("categories", list);
+
+        return "categories/listCategories";
+    }
+
+    @GetMapping("orderIdDesc")
+    public String findAllById(Model model) {
+        List<Category> list = categoriesService.findAllByIdDesc();
+        model.addAttribute("categories", list);
+
+        return "categories/listCategories";
+
+    }
+
+    @GetMapping("orderIdAsc")
+    public String findAllByIdAsc(Model model) {
+        List<Category> list = categoriesService.findAllByIdAsc();
+        model.addAttribute("categories", list);
+
+        return "categories/listCategories";
+
+    }
+
+/*    @GetMapping("/searchCat")
+    public String search(@ModelAttribute("searchCat") Category category, Model model) {
+
+        int catId = category.getCategoryId();
+        System.out.println("CategoryId: " + category.getCategoryId());
+        Category categorySearch = new Category();
+        categorySearch = categoriesService.findById(category.getCategoryId());
+
+        List<Category> list = categoriesService.findAllById(category.getCategoryId());
+        List<Category> listAll = categoriesService.findAll();
+
+
+        System.out.println(category.getCategoryId() + " " + category.getName());
+        model.addAttribute("categories", list);
+
+        model.addAttribute("categoriesAll", listAll);
+
+        model.addAttribute("categorySearch", categorySearch);
+
+        model.addAttribute("catId", catId);
+
+      //  System.out.println("Searching all: " + categorySearch.getCategoryId());
+
+        return "categories/listCategories";
+    }*/
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable ("id") int categoryId, RedirectAttributes attributes) {
         System.out.println("Deleting category with id: " + categoryId);
         categoriesService.delete(categoryId);
         attributes.addFlashAttribute("msg", "Category deleted successfully");
 
-        return "redirect:/categories/index";
+        return "redirect:/categories/indexPaginate";
     }
 
     @GetMapping("/edit/{id}")
@@ -82,6 +138,12 @@ public class CategoriesController {
         return "redirect:/categories/index";
     }
 
+
+    @ModelAttribute
+    public void setGenerics(Model model) {
+        Category categorySearch = new Category();
+        model.addAttribute("searchCat", categorySearch);
+    }
 
 
 /*    public String save(@RequestParam("name") String name,

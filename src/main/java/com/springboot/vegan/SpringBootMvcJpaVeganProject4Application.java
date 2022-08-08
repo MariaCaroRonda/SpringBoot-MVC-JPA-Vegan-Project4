@@ -92,6 +92,16 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
         findRecipeIngredient();
 
         findRecipeName3();*/
+
+        findCategoriesId();
+    }
+
+    public void findCategoriesId() {
+        int categoryId = 1;
+        List<Category> list = categoriesRepository.findCategoriesByCategoryIdOrderByName(categoryId);
+        for (Category cat : list) {
+            System.out.println(cat.getCategoryId() + " " + cat.getName());
+        }
     }
 
   /*   public void findRecipeIngredient() {

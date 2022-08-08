@@ -57,10 +57,12 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
               //  .antMatchers("/favorites/create/**", "/favorites/save/**", "/favorites/index/**").hasAuthority("USERVEGAN")
 /*                .antMatchers("/favorites/create/**", "/favorites/save/**", "/favorites/index/**"
                         , "/favorites/update/**").hasAuthority("USERVEGAN")*/
+                .antMatchers("/favorites/indexAdmin/**").hasAnyAuthority("ADMINISTRATOR")
                 .antMatchers("/favorites/**", "/favorites/index/**").hasAnyAuthority("USERVEGAN", "SUPERVISOR", "ADMINISTRATOR")
              /*   .antMatchers("/favorites/**").hasAuthority("SUPERVISOR, ADMINISTRATOR, USERVEGAN")*/
                 .antMatchers("/recipes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
-                .antMatchers("/categories/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
+
+                .antMatchers("/categories/**",  "/categories/searchCat/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
                 .antMatchers("/usersvegan/**").hasAnyAuthority("ADMINISTRATOR")
 
                /* .antMatchers("/favorites/**", "/favorites/index/**").hasAuthority("USERVEGAN")*/

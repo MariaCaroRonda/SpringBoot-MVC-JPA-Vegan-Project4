@@ -35,10 +35,9 @@
         <table class="table table-hover">
           <thead class="thead-light">
           <tr>
-<!--            <th scope="col">Favorite Id</th>-->
+            <th scope="col">Favorite Id</th>
             <th scope="col">Recipe Name</th>
-            <!--<th scope="col">Recipe Id</th>-->
-            <th scope="col">Category</th>
+            <th scope="col">Recipe Id</th>
             <th scope="col">User</th>
             <th scope="col">Details</th>
             <th scope="col">Operations</th>
@@ -48,10 +47,9 @@
 
           <tr th:each="tmpFavorite : ${favorites}">
             <!--<th scope="row" th:text="${tmpCat.categoryId}"></th>-->
-            <!--<td th:text="${tmpFavorite.favoriteId}"></td>-->
+            <td th:text="${tmpFavorite.favoriteId}"></td>
             <td th:text="${tmpFavorite.recipe.name}"></td>
-            <td th:text="${tmpFavorite.recipe.category.name}"></td>
-            <!--<td th:text="${tmpFavorite.recipe.recipeId}"></td>-->
+            <td th:text="${tmpFavorite.recipe.recipeId}"></td>
             <td th:text="${tmpFavorite.userVegan.firstName}"></td>
             <td>
               <p>
@@ -63,7 +61,7 @@
             <td>
 
 
-              <a th:href="@{/favorites/delete/{id} (id=${tmpFavorite.favoriteId})}"
+              <a th:href="@{/favorites/deleteAdmin/{id} (id=${tmpFavorite.favoriteId})}"
                  onclick="return confirm('Delete favorite?')"
                  class="btn btn-success btn-sm" role="button" title="Delete">
                 <i class="fas fa-trash" aria-hidden="true"></i></a>

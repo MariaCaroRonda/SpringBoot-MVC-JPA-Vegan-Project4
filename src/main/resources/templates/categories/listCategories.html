@@ -22,6 +22,8 @@
 
 <main role="main">
   <hr>
+
+
   <div class="container">
 
     <div class="card">
@@ -29,6 +31,37 @@
       <div class="card-body">
         <a class="btn btn-primary" th:href="@{/categories/create}" role="button">
           <i class="fas fa-file" aria-hidden="true"></i> New</a>
+
+        &nbsp;
+        <i class="fas fa-ellipsis-v"></i>  &nbsp;
+
+<!--        <a th:href="@{/categories/orderByName}">Order by name</a>
+
+        fas fa-angle-double-up-->
+
+         <a th:href="@{/categories/orderByName}"
+           class="btn btn-success btn-sm" role="button"
+           title="Ascending Order"><i class="fas fa-angle-double-up"
+                          ></i> By Name</a> &nbsp;
+
+        <a th:href="@{/categories/orderNameDesc}"
+           class="btn btn-success btn-sm" role="button"
+           title="Ascending Order"><i class="fas fa-angle-double-down"
+        ></i> By Name</a>  &nbsp;
+        <i class="fas fa-ellipsis-v"></i>  &nbsp;
+
+
+        <a th:href="@{/categories/orderIdDesc}"
+           class="btn btn-success btn-sm" role="button"
+           title="Ascending Order"><i class="fas fa-angle-double-down"
+        ></i> By Id</a>  &nbsp;
+
+        <a th:href="@{/categories/orderIdAsc}"
+           class="btn btn-success btn-sm" role="button"
+           title="Ascending Order"><i class="fas fa-angle-double-up"
+        ></i> By Id</a>  &nbsp;
+
+
         <hr>
         <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
 
@@ -43,6 +76,7 @@
           </thead>
           <tbody>
 
+
           <tr th:each="tmpCat : ${categories}">
             <!--<th scope="row" th:text="${tmpCat.categoryId}"></th>-->
             <td th:text="${tmpCat.categoryId}"></td>
@@ -52,7 +86,7 @@
               <a th:href="@{/categories/edit/{id} (id=${tmpCat.categoryId}) }"
                  class="btn btn-success btn-sm" role="button"
                  title="Edit"><i class="fas fa-pencil-alt"
-                                   aria-hidden="true"></i></a>
+                                 aria-hidden="true"></i></a>
 
               <a th:href="@{/categories/delete/{id} (id=${tmpCat.categoryId}) }"
                  onclick="return confirm('Delete category?')"
@@ -60,6 +94,7 @@
                 <i class="fas fa-trash" aria-hidden="true"></i></a>
             </td>
           </tr>
+
           </tbody>
         </table>
 

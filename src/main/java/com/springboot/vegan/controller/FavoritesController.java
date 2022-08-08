@@ -66,6 +66,13 @@ public class FavoritesController {
         return "favorites/listFavoritesPaginate";
     }
 
+    @GetMapping("/indexAdmin")
+    public String showIndexAdmin(Model model) {
+        List<Favorite> list = favoritesService.findAll();
+        model.addAttribute("favorites", list);
+        return "favorites/listFavoritesAdmin";
+    }
+
     // Form to add a Recipe to User's Favorites
     @GetMapping("/create/{recipeId}")
     public String create(Favorite favorite,
@@ -162,6 +169,16 @@ public class FavoritesController {
 
 
         return "redirect:/favorites/index";
+    }
+
+    @GetMapping("/deleteAdmin/{id}")
+    public String deleteAdmin(@PathVariable ("id") int favoriteId, RedirectAttributes attributes) {
+
+        System.out.println("Deleting favorite with id: " + favoriteId);
+        favoritesService.delete(favoriteId);
+
+
+        return "redirect:/favorites/indexAdmin";
     }
 
 

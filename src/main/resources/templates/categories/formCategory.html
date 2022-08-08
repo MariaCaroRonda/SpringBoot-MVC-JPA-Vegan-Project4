@@ -22,6 +22,32 @@
 
 <main role="main">
   <hr>
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h3>Find a vegan recipe.</h3>
+      <p>You can search by ingredient and category</p>
+
+      <form class="form-inline"
+            th:action="@{/search}" method="get"
+            th:object="${search}">
+        <input type="text" class="form-control mb-3"
+               th:field="*{ingredients}"
+               id="exampleFormControlInput1"
+               placeholder="Enter a Search">&nbsp;
+        <select th:field="*{category.categoryId}" class="custom-select custom-select mb-3">
+          <option th:value="*{null}" selected>Select a Category</option>
+          <option th:each="catTmp : ${categories}"
+                  th:value="${catTmp.categoryId}"
+                  th:text="${catTmp.name}">
+          </option>
+
+        </select>&nbsp;
+        <button type="submit" class="btn btn-primary mb-3">Search</button>
+      </form>
+    </div>
+  </div>
+  <hr>
   <div class="container">
 
     <div class="card">

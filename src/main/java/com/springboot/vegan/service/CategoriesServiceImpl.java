@@ -79,6 +79,31 @@ public class CategoriesServiceImpl implements ICategoriesService{
     }
 
     @Override
+    public List<Category> findAllByName() {
+        return null;
+    }
+
+    @Override
+    public List<Category> findAllByNameDesc() {
+        return null;
+    }
+
+    @Override
+    public List<Category> findAllByIdDesc() {
+        return null;
+    }
+
+    @Override
+    public List<Category> findAllByIdAsc() {
+        return null;
+    }
+
+    @Override
+    public List<Category> findAllByIdDesc(Integer categoryId) {
+        return null;
+    }
+
+    @Override
     public Category findById(Integer categoryId) {
         return null;
     }

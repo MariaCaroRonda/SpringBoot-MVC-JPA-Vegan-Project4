@@ -32,6 +32,33 @@ public class CategoriesServiceJpa implements ICategoriesService {
     }
 
     @Override
+    public List<Category> findAllByName() {
+        return categoriesRepository.findAll(Sort.by("name").ascending());
+    }
+
+    @Override
+    public List<Category> findAllByNameDesc() {
+        return categoriesRepository.findAll(Sort.by("name").descending());
+    }
+
+    @Override
+    public List<Category> findAllByIdDesc() {
+        return categoriesRepository.findAll(Sort.by("categoryId").descending());
+    }
+
+    @Override
+    public List<Category> findAllByIdAsc() {
+        return categoriesRepository.findAll(Sort.by("categoryId").ascending());
+    }
+
+
+    @Override
+    public List<Category> findAllByIdDesc(Integer categoryId) {
+        return categoriesRepository.findCategoriesByCategoryIdOrderByName(categoryId);
+
+    }
+
+    @Override
     public Category findById(Integer categoryId) {
         Optional<Category> optional = categoriesRepository.findById(categoryId);
         if (optional.isPresent()) {

@@ -12,10 +12,22 @@ public interface ICategoriesService {
 
     List<Category> findAll();
 
+    List<Category> findAllByName();
+
+    List<Category> findAllByNameDesc();
+
+    List<Category> findAllByIdDesc();
+
+    List<Category> findAllByIdAsc();
+
+    List<Category> findAllByIdDesc(Integer categoryId);
+
     Category findById(Integer categoryId);
 
     void delete(Integer categoryId);
 
     Page<Category> findAll(Pageable page);
+
+
 
 }

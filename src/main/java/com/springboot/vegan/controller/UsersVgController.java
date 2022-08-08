@@ -54,23 +54,6 @@ public class UsersVgController {
         return "formRegisterEdit";
     }
 
-/**    @GetMapping("/edit/{id}/pwd/{pwd}")
-    public String edit(@PathVariable("id") int userId,
-                       @PathVariable("pwd") String pwd,
-
-                       Model model) {
-        UserVegan userVegan = usersVgService.findById(userId);
-        model.addAttribute("userVegan", userVegan);
-
-        System.out.println(userVegan.getFirstName());
-        System.out.println(userVegan.getPassword());
-        System.out.println("pwd length: " + userVegan.getPassword().length());
-
-        //    System.out.println(password);
-
-        return "formRegisterEdit";
-    }*/
-
 
 
 /*    @InitBinder

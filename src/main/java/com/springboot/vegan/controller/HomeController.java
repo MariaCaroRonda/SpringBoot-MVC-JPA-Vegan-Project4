@@ -340,7 +340,8 @@ public class HomeController {
     public void setGenerics(Model model) {
         Recipe recipeSearch = new Recipe();
         recipeSearch.reset(); // Remove the default values to avoid run time errors
-        model.addAttribute("recipes", recipesService.findFeatured());
+      /*  model.addAttribute("recipes", recipesService.findFeatured());*/
+        model.addAttribute("recipes", recipesService.findAll());
         model.addAttribute("categories", categoriesService.findAll());
         model.addAttribute("search", recipeSearch);
     }
