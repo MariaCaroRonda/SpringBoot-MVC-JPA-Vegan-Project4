@@ -11,9 +11,11 @@
   <!-- Bootstrap core CSS -->
   <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link th:href="@{bootstrap/css/jumbotron.css}" rel="stylesheet">
-  <link th:href="@{bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+  <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+  <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+
+  <link th:href="@{/css/myStyle.css}" rel="stylesheet">
 
 </head>
 
@@ -25,9 +27,10 @@
 <main role="main">
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
+  <div class="jumbotron" >
+
     <div class="container">
-      <div class="card-header text-center">
+      <div class="card-header text-center my-card">
       <h3 class="text-success">
         Go Green
         <small class="text-success">with</small>
@@ -35,9 +38,10 @@
       </h3>
       </div>&nbsp;
 
-      <h4>Find a vegan recipe.</h4>
-      <p>You can search by ingredient and category</p>
 
+      <h4 class="my-title">Find a vegan recipe.</h4>
+      <h5>You can search by <strong>Ingredient</strong> and <strong>Category</strong> </h5>
+      &nbsp;
       <form class="form-inline"
             th:action="@{/search}" method="get"
             th:object="${search}">
@@ -45,7 +49,7 @@
         <input type="text" class="form-control mb-3"
                th:field="*{ingredients}"
                id="exampleFormControlInput1"
-               placeholder="Enter a Search">&nbsp;
+               placeholder="Ingredient">&nbsp;
 
         <select th:field="*{category.categoryId}" class="custom-select custom-select mb-3">
           <option th:value="*{null}" selected>Select a Category</option>
@@ -137,6 +141,6 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>

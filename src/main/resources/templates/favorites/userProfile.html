@@ -43,6 +43,7 @@
             <th scope="col">Username</th>
             <th scope="col">Updated On</th>
             <th scope="col">Role(s)</th>
+            <th scope="col">Contact Us</th>
 
           </tr>
           </thead>
@@ -61,6 +62,9 @@
             <th>
               <span> <strong> <h6 th:each="p : ${user.profiles}"
                                  th:text="${p.profile}"></h6> </strong> </span>
+            </th>
+            <th>
+              <a href="mailto: IT_Support@vegan.com">Send Email</a>
             </th>
 
 

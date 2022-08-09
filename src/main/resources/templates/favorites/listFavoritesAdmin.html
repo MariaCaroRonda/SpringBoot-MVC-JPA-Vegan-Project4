@@ -36,9 +36,11 @@
           <thead class="thead-light">
           <tr>
             <th scope="col">Favorite Id</th>
-            <th scope="col">Recipe Name</th>
             <th scope="col">Recipe Id</th>
-            <th scope="col">User</th>
+            <th scope="col">Recipe Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">User Id</th>
+            <th scope="col">Username</th>
             <th scope="col">Details</th>
             <th scope="col">Operations</th>
           </tr>
@@ -48,9 +50,11 @@
           <tr th:each="tmpFavorite : ${favorites}">
             <!--<th scope="row" th:text="${tmpCat.categoryId}"></th>-->
             <td th:text="${tmpFavorite.favoriteId}"></td>
-            <td th:text="${tmpFavorite.recipe.name}"></td>
             <td th:text="${tmpFavorite.recipe.recipeId}"></td>
-            <td th:text="${tmpFavorite.userVegan.firstName}"></td>
+            <td th:text="${tmpFavorite.recipe.name}"></td>
+            <td th:text="${tmpFavorite.recipe.category.name}"></td>
+            <td th:text="${tmpFavorite.userVegan.userId}"></td>
+            <td th:text="${tmpFavorite.userVegan.username}"></td>
             <td>
               <p>
                 <a class="btn btn-secondary"

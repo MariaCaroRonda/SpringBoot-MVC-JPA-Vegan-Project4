@@ -11,13 +11,13 @@
   <!-- Bootstrap core CSS -->
   <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link th:href="@{bootstrap/css/jumbotron.css}" rel="stylesheet">
-  <link th:href="@{bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+  <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+  <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
 
 </head>
 
-<body>
+<body class="body-vegan">
 
 <header th:insert="fragments/menu :: menu-main">
 </header>
@@ -26,15 +26,17 @@
   <hr>
   <div class="container">
 
-    <div class="card card-header text-left">
-      <h4 class="card-header"> <small> <strong> About the Webapp</strong>  </small> &nbsp;
+    <div class="card card-header text-left my-div-about">
+      <h4 class="card-header my-card-about"> <small> <strong> About the Webapp</strong>  </small> &nbsp;
         <strong class="text-success">Go Green <smal>with</smal> Plant-based Recipes</strong> </h4>
       <div class="card-body">
         <h5>Cook Book Application for Vegan Recipes developed with Spring Boot.</h5>
       </div>
     </div>
+
     <hr>
-    <div class="card card-header text-left">
+
+    <div class="card card-header text-left my-div-about">
       <h4 class="card-header"> <small> <strong> About Veganism</strong>  </small> &nbsp;
         <strong class="text-success">Veganism <smal>in a nutshell</smal></strong> </h4>
       <div class="card-body">
@@ -42,11 +44,17 @@
       </div>
     </div>
 
+    <hr>
 
+    <div class="card card-header text-left my-div-about">
+      <h4 class="card-header"> <small> <strong> Vegan in Dublin</strong>  </small> &nbsp;
+      </smal></strong> </h4>
+      <div class="card-body">
+        <h5>Shops and Restaurants.</h5>
+      </div>
+    </div>
 
   </div> <!--container-->
-
-
 
 
 </main>
@@ -54,10 +62,18 @@
 <footer th:insert="fragments/footer :: page-footer" class="footer">
 </footer>
 
+<style>
+  .infoVegan {
+      background-color: #b3dcb3;
+      margin: 5px;
+      padding: 0px;
+  }
+</style>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
