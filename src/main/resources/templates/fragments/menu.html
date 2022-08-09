@@ -21,31 +21,34 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/about}">About</a>
+        <a class="nav-link" th:href="@{/about}">About &nbsp; &middot;</a>
       </li>
 
       <li class="nav-item" sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
-        <a class="nav-link" th:href="@{/recipes/indexPaginate}">Recipes</a>
+        <a class="nav-link" th:href="@{/recipes/indexPaginate}">Recipes &nbsp; &middot; </a>
       </li>
 
-      <li class="nav-item"  sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
+<!--      <li class="nav-item"  sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
         <a class="nav-link"th:href="@{/categories/index}">Categories</a>
-      </li>
+      </li>-->
 
       <li class="nav-item"  sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
-        <a class="nav-link"th:href="@{/categories/indexPaginate}">Categories Paginate</a>
+        <a class="nav-link"th:href="@{/categories/indexPaginate}">Categories
+          &nbsp; &middot; </a>
       </li>
 
-      <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRATOR')">
+<!--      <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRATOR')">
         <a class="nav-link" th:href="@{/usersvegan/index}">Users</a>
-      </li>
+      </li>-->
 
       <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRATOR')">
-        <a class="nav-link" th:href="@{/usersvegan/indexPaginate}">UsersPaginate</a>
+        <a class="nav-link" th:href="@{/usersvegan/indexPaginate}">Users
+          &nbsp; &middot;</a>
       </li>
 
       <li class="nav-item" sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
-        <a class="nav-link" th:href="@{/favorites/indexAdmin}">Favorites Admin</a>
+        <a class="nav-link" th:href="@{/favorites/indexAdmin}">Favorites Admin
+          &nbsp; &middot; </a>
       </li>
 
 
@@ -67,7 +70,7 @@
 
     <div sec:authorize="isAuthenticated()">
       <span class="text-light">Welcome</span>&nbsp;
-      <span class="text-light" sec:authentication="name"></span>&nbsp;
+      <strong> <span class=" text-light"  sec:authentication="name"></span>&nbsp;</strong>
       <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
     </div>
 
@@ -75,7 +78,8 @@
     <div sec:authorize="isAuthenticated() and hasAnyAuthority('USERVEGAN')">
       <span class="text-light"></span>&nbsp;
       <!--<span class="text-light" sec:authentication="name"></span>&nbsp;-->
-      <a class="btn btn-primary" th:href="@{/favorites/index}">My Favorites</a>
+      <a class="btn btn-primary" th:href="@{/favorites/index}">My Favorites </a>
+
     </div>
 
     <div sec:authorize="isAuthenticated()">

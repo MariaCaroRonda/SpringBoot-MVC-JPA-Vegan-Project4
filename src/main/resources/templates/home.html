@@ -38,10 +38,9 @@
       </h3>
       </div>&nbsp;
 
+      <h5 class="my-title">Find a vegan recipe.</h5>
+      <h6>You can search by <strong>Ingredient</strong> and <strong>Category</strong> </h6>
 
-      <h4 class="my-title">Find a vegan recipe.</h4>
-      <h5>You can search by <strong>Ingredient</strong> and <strong>Category</strong> </h5>
-      &nbsp;
       <form class="form-inline"
             th:action="@{/search}" method="get"
             th:object="${search}">
@@ -98,7 +97,7 @@
 
       <div class="col-md-3">
         <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${tmpRecipe.imageMeal}) }"
-             alt="Generic placeholder image" width="220" height="200">
+             alt="Generic placeholder image" width="220" height="220">
       </div>
 
 
@@ -109,10 +108,10 @@
           <strong>Ingredients: </strong> <span th:text="${tmpRecipe.ingredients}"></span>
         </h6>
 
-        <h5 class="card-title"><strong>Publication date: </strong>
+        <h6 class="card-title"><strong>Publication date: </strong>
             <!--<span th:text="${tmpRecipe.date}"></span>-->
           <span th:text="${#dates.format(tmpRecipe.date, 'dd-MM-yyyy')}"></span>
-        </h5>
+        </h6>
 
        <!-- <h6 class="card-title"><strong>Ingredients: </strong>
           <span th:text="${tmpRecipe.ingredients}"></span></h6>-->

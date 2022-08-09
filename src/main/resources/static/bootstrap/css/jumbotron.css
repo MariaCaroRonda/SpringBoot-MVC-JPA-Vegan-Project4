@@ -1,23 +1,4 @@
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
 body {
-  padding-top: 2rem;
-}
-/*
-.jumbotron {
-  padding-top: 1rem;
-}*/
-
-.my-card {
-  margin-bottom: 1rem;
-  border-bottom: #6ae06a solid 1px;
-}
-
-.my-card-about {
-
-  border-bottom: #6ae06a solid 1px;
-}
-
-.my-div-about {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  padding-top: 3.5rem;
 }

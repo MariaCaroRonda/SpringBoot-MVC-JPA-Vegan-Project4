@@ -246,7 +246,7 @@ public class HomeController {
         /*System.out.println("Registration date: " + date);*/
 
         usersVgService.save(userVegan);
-        return "redirect:/usersvegan/index";
+        return "redirect:/usersvegan/indexPaginate";
     }
 
 
