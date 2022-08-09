@@ -52,6 +52,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                         "/orderRecByNameDesc",
                         "/bcrypt/**",
                         "/favorites/**",
+                        "/about",
                         "/profile/**",
                         "/recipes/view/**").permitAll()
 

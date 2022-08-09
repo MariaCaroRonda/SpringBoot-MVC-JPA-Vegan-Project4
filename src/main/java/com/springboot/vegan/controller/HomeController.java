@@ -75,6 +75,11 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @GetMapping("/about")
+    public String showAbout() {
+        return "about";
+    }
+
 
    @GetMapping("/orderRecByNameAsc")
     public String orderName(Model model) {

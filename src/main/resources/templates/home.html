@@ -27,7 +27,15 @@
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
-      <h3>Find a vegan recipe.</h3>
+      <div class="card-header text-center">
+      <h3 class="text-success">
+        Go Green
+        <small class="text-success">with</small>
+        Plant-Based Recipes
+      </h3>
+      </div>&nbsp;
+
+      <h4>Find a vegan recipe.</h4>
       <p>You can search by ingredient and category</p>
 
       <form class="form-inline"
@@ -46,11 +54,12 @@
                   th:text="${catTmp.name}">
           </option>
 
-        </select>&nbsp;
-        <button type="submit" class="btn btn-primary mb-3">Search</button>&nbsp;
+        </select>&nbsp;&nbsp;
+
+        <button type="submit" class="btn btn-primary mb-3 font-weight-bold">Search</button>&nbsp;
       <!--  <button type="reset" class="btn btn-danger mb-3">Clear Search</button> &nbsp;-->
         <a th:href="@{/}"
-           class="btn btn-danger mb-3" role="button"
+           class="btn btn-danger mb-3 font-weight-bold" role="button"
            title="Clear Search"></i> Clear Search </a> &nbsp;
 
       </form>
