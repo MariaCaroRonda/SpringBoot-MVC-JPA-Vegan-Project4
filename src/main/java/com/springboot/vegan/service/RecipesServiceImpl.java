@@ -60,12 +60,27 @@ public class RecipesServiceImpl implements IRecipesService{
     }
 
     @Override
+    public List<Recipe> findByExampleSort(Example<Recipe> example) {
+        return null;
+    }
+
+    @Override
     public Page<Recipe> findAll(Pageable page) {
         return null;
     }
 
     @Override
     public Page<Recipe> findAllExamplePage(Example<Recipe> example, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public List<Recipe> findAllByNameAsc() {
+        return null;
+    }
+
+    @Override
+    public List<Recipe> findAllByNameDesc() {
         return null;
     }
 

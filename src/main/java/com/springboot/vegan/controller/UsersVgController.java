@@ -1,10 +1,15 @@
 package com.springboot.vegan.controller;
 
+import com.springboot.vegan.model.Recipe;
 import com.springboot.vegan.model.UserVegan;
 import com.springboot.vegan.service.IUsersVgService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,17 +35,38 @@ public class UsersVgController {
     }
 
     @GetMapping("/indexPaginate")
-    public String showIndexPaginate(Model model) {
+    public String showIndexPaginate(Model model, Pageable page) {
 
-        Page<UserVegan> page = usersVgService.findAllPaginate();
+/*        Page<UserVegan> page = usersVgService.findAllPaginate();
         long totalItems = page.getTotalElements();
         int totalPages = page.getTotalPages();
 
         List<UserVegan> list = page.getContent();
 
-/*        model.addAttribute("totalItems", totalItems);
-        model.addAttribute("totalItems", totalItems);*/
-        model.addAttribute("listUsersPaginate", list);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("listUsersPaginate", list);*/
+        Page<UserVegan> list = usersVgService.findAll(page);
+        model.addAttribute("usersPage", list);
+
+        return "usersvegan/listUsersVeganPaginate";
+    }
+
+    @GetMapping("/search")
+    public String search(@ModelAttribute("search") UserVegan userVegan, Pageable page, Model model) {
+
+        System.out.println("Searching by: " + userVegan.getFirstName() + " " + userVegan.getEmail());
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("firstName",
+                        ExampleMatcher.GenericPropertyMatchers.contains());
+
+        Example<UserVegan> example = Example.of(userVegan, matcher);
+
+        Page<UserVegan> list = usersVgService.findAllExamplePage(example, page);
+        model.addAttribute("usersPage", list);
+
+        /******************/
 
         return "usersvegan/listUsersVeganPaginate";
     }
@@ -72,6 +98,11 @@ public class UsersVgController {
     }
 
 
+    @ModelAttribute
+    public void setGenerics(Model model) {
+        UserVegan userSearch = new UserVegan();
+        model.addAttribute("search", userSearch);
+    }
 
 /*    @InitBinder
     public void initBinder(WebDataBinder binder) {

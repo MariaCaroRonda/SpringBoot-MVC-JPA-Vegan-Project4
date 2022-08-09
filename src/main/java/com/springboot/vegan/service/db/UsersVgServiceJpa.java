@@ -71,9 +71,18 @@ public class UsersVgServiceJpa implements IUsersVgService {
     }
 
     @Override
-    public Page<UserVegan> findAllPaginate() {
-        Pageable pageable = PageRequest.of(0, 5);
-        return usersVeganRepository.findAll(pageable);
+    public Page<UserVegan> findAll(Pageable page) {
+        return usersVeganRepository.findAll(page);
+    }
+
+    @Override
+    public List<UserVegan> findByExample(Example<UserVegan> example) {
+        return usersVeganRepository.findAll(example);
+    }
+
+    @Override
+    public Page<UserVegan> findAllExamplePage(Example<UserVegan> example, Pageable pageable) {
+        return usersVeganRepository.findAll(example, pageable);
     }
 
 

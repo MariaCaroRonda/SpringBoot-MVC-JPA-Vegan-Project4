@@ -23,9 +23,15 @@ public interface IRecipesService {
 
     List<Recipe> findByExample(Example<Recipe> example);
 
+    List<Recipe> findByExampleSort(Example<Recipe> example);
+
     Page<Recipe> findAll(Pageable page);
 
     Page<Recipe> findAllExamplePage(Example<Recipe> example, Pageable pageable);
+
+    List<Recipe> findAllByNameAsc();
+
+    List<Recipe> findAllByNameDesc();
 
 /*    List<Recipe> findByName(String name);
 

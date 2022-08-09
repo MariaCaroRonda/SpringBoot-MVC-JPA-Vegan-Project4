@@ -107,7 +107,9 @@ public class UserVegan {
         this.profiles = profiles;
     }
 
-
+    public void reset() {
+        this.status = null;
+    }
 
     @Override
     public String toString() {

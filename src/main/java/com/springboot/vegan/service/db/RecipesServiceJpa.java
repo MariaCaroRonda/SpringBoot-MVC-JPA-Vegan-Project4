@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,6 +64,12 @@ public class RecipesServiceJpa implements IRecipesService {
     }
 
     @Override
+    public List<Recipe> findByExampleSort(Example<Recipe> example) {
+        recipesRepository.findAll(example, Sort.by("name"));
+        return null;
+    }
+
+    @Override
     public Page<Recipe> findAll(Pageable page) {
         return recipesRepository.findAll(page);
     }
@@ -70,6 +77,16 @@ public class RecipesServiceJpa implements IRecipesService {
     @Override
     public Page<Recipe> findAllExamplePage(Example<Recipe> example, Pageable pageable) {
         return recipesRepository.findAll(example, pageable);
+    }
+
+    @Override
+    public List<Recipe> findAllByNameAsc() {
+        return recipesRepository.findAll(Sort.by("name").ascending());
+    }
+
+    @Override
+    public List<Recipe> findAllByNameDesc() {
+        return recipesRepository.findAll(Sort.by("name").descending());
     }
 
 /*    @Override

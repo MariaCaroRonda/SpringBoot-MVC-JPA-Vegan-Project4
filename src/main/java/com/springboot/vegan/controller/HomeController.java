@@ -7,7 +7,6 @@ import com.springboot.vegan.service.ICategoriesService;
 import com.springboot.vegan.service.IFavoritesService;
 import com.springboot.vegan.service.IRecipesService;
 import com.springboot.vegan.service.IUsersVgService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -15,25 +14,20 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.context.support.SecurityWebApplicationContextUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -80,6 +74,51 @@ public class HomeController {
 
         return "redirect:/";
     }
+
+
+   @GetMapping("/orderRecByNameAsc")
+    public String orderName(Model model) {
+        List<Recipe> list = recipesService.findAllByNameAsc();
+
+        model.addAttribute("recipes", list);
+
+
+        return "home";
+    }
+
+
+    @GetMapping("/orderRecByNameDesc")
+    public String orderNameDesc(Model model) {
+        List<Recipe> list = recipesService.findAllByNameDesc();
+        model.addAttribute("recipes", list);
+
+        return "home";
+    }
+
+/**     @GetMapping("/orderbyNameDesc")
+    public String orderNameAsc(Model model) {
+        List<Recipe> list = recipesService.findAllByNameAsc();
+        model.addAttribute("recipes", list);
+
+        return "home";
+    }*/
+
+/**    @GetMapping("/orderbyNameAsc")
+    public String orderNameAsc(Model model) {
+        List<Recipe> list = recipesService.findAllByNameAsc();
+        model.addAttribute("recipes", list);
+
+        return "categories/listCategories";
+    }*/
+
+/**    @GetMapping("/orderbyNameDesc")
+    public String orderNameDesc(Model model) {
+        List<Recipe> list = recipesService.findAllByNameDesc();
+        model.addAttribute("recipes", list);
+
+        return "home";
+    }*/
+
 
     @GetMapping("/signup")
     public String register(UserVegan userVegan) {
@@ -272,14 +311,14 @@ public class HomeController {
 
 
 
-    @GetMapping("/table")
+/*    @GetMapping("/table")
     public String showTable(Model model) {
         List<Recipe> list = recipesService.findAll();
         model.addAttribute("recipes", list);
 
         return "table";
 
-    }
+    }*/
 
     @GetMapping("/detail")
     public String showDetail(Model model) {

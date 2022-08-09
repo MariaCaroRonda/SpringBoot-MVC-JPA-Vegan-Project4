@@ -47,7 +47,9 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                 // Public views don't require authentication
                 .antMatchers("/",
                         "/signup",
-                        "/search",
+                        "/search/**",
+                        "/orderRecByNameAsc",
+                        "/orderRecByNameDesc",
                         "/bcrypt/**",
                         "/favorites/**",
                         "/profile/**",
@@ -63,6 +65,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/recipes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
 
                 .antMatchers("/categories/**",  "/categories/searchCat/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
+
                 .antMatchers("/usersvegan/**").hasAnyAuthority("ADMINISTRATOR")
 
                /* .antMatchers("/favorites/**", "/favorites/index/**").hasAuthority("USERVEGAN")*/
