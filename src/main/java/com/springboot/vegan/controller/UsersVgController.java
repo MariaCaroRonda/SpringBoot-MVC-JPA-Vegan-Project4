@@ -75,7 +75,7 @@ public class UsersVgController {
     public String delete(@PathVariable("id") int userId, RedirectAttributes attributes) {
         usersVgService.delete(userId);
         attributes.addFlashAttribute("msg", "User deleted successfully");
-        return "redirect:/usersvegan/index";
+        return "redirect:/usersvegan/indexPaginate";
     }
 
 

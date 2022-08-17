@@ -7,6 +7,8 @@ import com.springboot.vegan.service.IFavoritesService;
 import com.springboot.vegan.service.IRecipesService;
 import com.springboot.vegan.service.IUsersVgService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,10 +68,20 @@ public class FavoritesController {
         return "favorites/listFavoritesPaginate";
     }
 
-    @GetMapping("/indexAdmin")
+/*    @GetMapping("/indexAdmin")
     public String showIndexAdmin(Model model) {
         List<Favorite> list = favoritesService.findAll();
         model.addAttribute("favorites", list);
+        return "favorites/listFavoritesAdmin";
+    }*/
+
+    @GetMapping("/indexAdmin")
+    public String showIndexAdmin(Model model, Pageable page) {
+
+        Page<Favorite> list2 = favoritesService.findAll(page);
+        List<Favorite> list = favoritesService.findAll();
+      //  model.addAttribute("favorites", list);
+        model.addAttribute("favoritesPaginate", list2);
         return "favorites/listFavoritesAdmin";
     }
 
