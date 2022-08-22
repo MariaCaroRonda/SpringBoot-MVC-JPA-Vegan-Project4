@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Primary // To allow the use of another Service Class use for testing
+@Primary
 public class RecipesServiceJpa implements IRecipesService {
 
     @Autowired
@@ -25,6 +25,35 @@ public class RecipesServiceJpa implements IRecipesService {
     public List<Recipe> findAll() {
         return recipesRepository.findAll();
     }
+
+    @Override
+    public List<Recipe> findByExample(Example<Recipe> example) {
+        return recipesRepository.findAll(example);
+    }
+
+    @Override
+    public List<Recipe> findAllByNameAsc() {
+        return recipesRepository.findAll(Sort.by("name").ascending());
+    }
+
+    @Override
+    public List<Recipe> findAllByNameDesc() {
+        return recipesRepository.findAll(Sort.by("name").descending());
+    }
+
+
+    @Override
+    public Page<Recipe> findAllExamplePage(Example<Recipe> example, Pageable pageable) {
+        return recipesRepository.findAll(example, pageable);
+    }
+
+    @Override
+    public List<Recipe> findByExampleSort(Example<Recipe> example) {
+        recipesRepository.findAll(example, Sort.by("name"));
+        return null;
+    }
+
+
 
     @Override
     public Recipe findById(Integer recipeId) {
@@ -59,35 +88,11 @@ public class RecipesServiceJpa implements IRecipesService {
     }
 
     @Override
-    public List<Recipe> findByExample(Example<Recipe> example) {
-        return recipesRepository.findAll(example);
-    }
-
-    @Override
-    public List<Recipe> findByExampleSort(Example<Recipe> example) {
-        recipesRepository.findAll(example, Sort.by("name"));
-        return null;
-    }
-
-    @Override
     public Page<Recipe> findAll(Pageable page) {
         return recipesRepository.findAll(page);
     }
 
-    @Override
-    public Page<Recipe> findAllExamplePage(Example<Recipe> example, Pageable pageable) {
-        return recipesRepository.findAll(example, pageable);
-    }
 
-    @Override
-    public List<Recipe> findAllByNameAsc() {
-        return recipesRepository.findAll(Sort.by("name").ascending());
-    }
-
-    @Override
-    public List<Recipe> findAllByNameDesc() {
-        return recipesRepository.findAll(Sort.by("name").descending());
-    }
 
 /*    @Override
     public List<Recipe> findByName(String name) {

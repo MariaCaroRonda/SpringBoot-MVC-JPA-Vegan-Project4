@@ -11,6 +11,17 @@ public interface IRecipesService {
 
     List<Recipe> findAll();
 
+    List<Recipe> findByExample(Example<Recipe> example);
+
+    List<Recipe> findAllByNameAsc();
+
+    List<Recipe> findAllByNameDesc();
+
+    Page<Recipe> findAllExamplePage(Example<Recipe> example,
+                                    Pageable pageable);
+
+
+
     Recipe findById(Integer recipeId);
 
     void save(Recipe recipe);
@@ -21,23 +32,12 @@ public interface IRecipesService {
 
     void delete (Integer recipeId);
 
-    List<Recipe> findByExample(Example<Recipe> example);
 
     List<Recipe> findByExampleSort(Example<Recipe> example);
 
     Page<Recipe> findAll(Pageable page);
 
-    Page<Recipe> findAllExamplePage(Example<Recipe> example, Pageable pageable);
 
-    List<Recipe> findAllByNameAsc();
-
-    List<Recipe> findAllByNameDesc();
-
-/*    List<Recipe> findByName(String name);
-
-    List<Recipe> findByName2(String name);
-
-    List<Recipe> findByIngredient(String ingredient);*/
 
 
 }

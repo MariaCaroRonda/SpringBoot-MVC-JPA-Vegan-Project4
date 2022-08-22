@@ -64,8 +64,6 @@ public class RecipesController {
     }
 
 
-
-
     /** Method that displays a form to create a new Recipe */
     @GetMapping("/create")
     public String create(Recipe recipe, Model model){
@@ -75,21 +73,22 @@ public class RecipesController {
 
     /** Method to save a Recipe in the Database */
     @PostMapping("/save")
-    public String save(Recipe recipe, BindingResult result, RedirectAttributes attributes,
+    public String save(Recipe recipe, BindingResult result,
+                       RedirectAttributes attributes,
                        @RequestParam("fileImage") MultipartFile multiPart) {
 
         if (result.hasErrors()) {
             // Print in the console error messages if they have occurred
             for (ObjectError error: result.getAllErrors()){
-                System.out.println("An error has happened: "+ error.getDefaultMessage());
+                // Testing on the output console
+                System.out.println("An error has happened: " +
+                        error.getDefaultMessage());
             }
             return "recipes/formRecipe";
         }
 
         if (!multiPart.isEmpty()) {
-            /*String path = "c:/vegan/img-vegan04/"; // Windows*/
-
-            String nameImage = MyUtilities.saveFile(multiPart, path);
+             String nameImage = MyUtilities.saveFile(multiPart, path);
             if (nameImage != null){ // The image was uploaded
                 // Process file nameImage
                 recipe.setImageMeal(nameImage);
@@ -98,7 +97,8 @@ public class RecipesController {
 
         // Save object Recipe on the Database and display a confirmation message
         recipesService.save(recipe);
-        attributes.addFlashAttribute("msg", "Recipe Saved Successfully");
+        attributes.addFlashAttribute("msg",
+                        "Recipe Saved Successfully");
 
         return "redirect:/recipes/indexPaginate";
     }
@@ -125,11 +125,14 @@ public class RecipesController {
         return "detail";
     }
 
-    // Method that renders an HTML form to edit an existing Recipe on the DB
+    /** Method that renders an HTML form to edit an existing Recipe on the DB */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") int recipeId, Model model) {
+        // Retrieve the Recipe from the DB to edit it
         Recipe recipe = recipesService.findById(recipeId);
+        // Pass the retrieved recipe to the HTML View
         model.addAttribute("recipe", recipe);
+        // Pass all categories to the HTML View
         model.addAttribute("categories", categoriesService.findAll());
 
         return "recipes/formRecipe";

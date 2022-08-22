@@ -15,20 +15,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Primary // To allow the use of another Service Class use for testing
+@Primary // To allow the use of a second Service Class for testing
 public class CategoriesServiceJpa implements ICategoriesService {
+
+// Category methods implementation
 
     @Autowired
     private CategoriesRepository categoriesRepository;
 
-    @Override
-    public void save(Category category) {
-        categoriesRepository.save(category);
-    }
-
+    // Find all categories on the DB
     @Override
     public List<Category> findAll() {
         return categoriesRepository.findAll();
+    }
+
+    // Find all categories on the DB and apply Pagination
+    @Override
+    public Page<Category> findAll(Pageable page) {
+        return categoriesRepository.findAll(page);
+    }
+
+    @Override
+    public void save(Category category) {
+        categoriesRepository.save(category);
     }
 
     @Override
@@ -72,10 +81,7 @@ public class CategoriesServiceJpa implements ICategoriesService {
         categoriesRepository.deleteById(categoryId);
     }
 
-    @Override
-    public Page<Category> findAll(Pageable page) {
-        return categoriesRepository.findAll(page);
-    }
+
 
 
     @Override

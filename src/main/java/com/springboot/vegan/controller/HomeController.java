@@ -84,13 +84,10 @@ public class HomeController {
    @GetMapping("/orderRecByNameAsc")
     public String orderName(Model model) {
         List<Recipe> list = recipesService.findAllByNameAsc();
-
         model.addAttribute("recipes", list);
-
 
         return "home";
     }
-
 
     @GetMapping("/orderRecByNameDesc")
     public String orderNameDesc(Model model) {
@@ -99,6 +96,7 @@ public class HomeController {
 
         return "home";
     }
+
 
 /**     @GetMapping("/orderbyNameDesc")
     public String orderNameAsc(Model model) {
@@ -250,72 +248,6 @@ public class HomeController {
     }
 
 
-/*    @PostMapping("/signupEdit")
-    public String saveRegistryEdit(UserVegan userVegan, BindingResult result,
-                               RedirectAttributes attributes) {
-
-
-        *//** Test the below tutorial to check for duplicate usernames when singing up
-         /* https://www.javaguides.net/2021/10/login-and-registration-rest-api-using-spring-boot-spring-security-hibernate-mysql-database.html *//*
-
-        try {
-            if (result.hasErrors()) {
-                attributes.addFlashAttribute("An error has happened");
-                System.out.println(userVegan + " error:  " + result.hasErrors());
-                return "formRegisterEdit";
-            }
-
-           *//* String pwdPlain = userVegan.getPassword();
-            String pwdEncrypt = passwordEncoder.encode(pwdPlain);
-
-            userVegan.setPassword(pwdEncrypt);
-
-            userVegan.setStatus(1); // 'Active' by default
-            userVegan.setRegistrationDate(new Date());
-
-            Profile profile = new Profile();
-            profile.setProfileId(3); // Regular user by default
-            userVegan.add(profile);*//*
-
-
-            System.out.println("User vegan before save: " + userVegan);
-
-            usersVgService.save(userVegan);
-            attributes.addFlashAttribute("msg", "User updated successfully");
-
-            return  "favorites/userProfile";
-
-        } catch (Exception e) {
-            // throw new RuntimeException(e);
-            if (usersVgService.existUsername(userVegan.getUsername())) {
-                System.out.println("msg error username: " + userVegan);
-                attributes.addFlashAttribute("msg", "Username already in used. " +
-                        "Please use a different Username.");
-                 return  "redirect:/signupEdit";
-
-
-
-            }
-
-            if (usersVgService.existUserEmail(userVegan.getEmail())) {
-                System.out.println("msg error email: " + userVegan);
-                attributes.addFlashAttribute("msg", "Email already in used! " +
-                        "Please use a different Email.");
-                return  "redirect:/signupEdit";
-
-            }
-
-            // attributes.addFlashAttribute("msg", ("Aan error has happened " + e.getMessage() ) );
-            // attributes.addFlashAttribute("msg", "An error has happened ");
-        }
-
-        *//**return  "redirect:/login";*//*
-        return  "redirect:favorites/userProfile";
-
-    }*/
-
-
-
 /*    @GetMapping("/table")
     public String showTable(Model model) {
         List<Recipe> list = recipesService.findAll();
@@ -340,7 +272,6 @@ public class HomeController {
 
     @GetMapping("/search")
     public String search(@ModelAttribute("search") Recipe recipe, Model model) {
-        System.out.println("Searching by: " + recipe);
 
         // It uses a search type 'like'
         //where ingredients like '%?%'
@@ -376,15 +307,12 @@ public class HomeController {
     }
 
 
-
-
     @ModelAttribute
     // We can add to the model all attributes we want, and these
     //attributes will be available for all methods within Home Controller
     public void setGenerics(Model model) {
         Recipe recipeSearch = new Recipe();
         recipeSearch.reset(); // Remove the default values to avoid run time errors
-      /*  model.addAttribute("recipes", recipesService.findFeatured());*/
         model.addAttribute("recipes", recipesService.findAll());
         model.addAttribute("categories", categoriesService.findAll());
         model.addAttribute("search", recipeSearch);

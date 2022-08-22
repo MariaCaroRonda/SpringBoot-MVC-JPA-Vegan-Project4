@@ -4,10 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Recipes")
+@Table(name = "Recipes") // mapping 'Recipe' model with 'Recipes' table
 public class Recipe {
 
-    @Id
+    @Id   // Primary Key (PK) on 'Recipes' table
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment mySQL
     private Integer recipeId;
     private String name;            // Recipe name
@@ -21,6 +21,7 @@ public class Recipe {
     private String status; // status: {Premium (for registered users only), Normal}
     private String instructions;    // Instructions to prepare and cook a recipe
 
+    // OneToOne relationship between 'Recipes' table and 'Categories' table
     @OneToOne // between 'Recipes' and 'Categories' using the column 'categoryId'
     @JoinColumn(name = "categoryId")
     private Category category;

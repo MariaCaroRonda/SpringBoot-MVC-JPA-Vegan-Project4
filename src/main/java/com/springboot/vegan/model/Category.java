@@ -5,14 +5,16 @@ import org.springframework.data.repository.cdi.Eager;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Categories")
+@Table(name = "Categories")  // mapping 'Category' model with 'Categories' table
 public class Category {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id  // Primary Key (PK) on 'Categories' table
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // PK Autoincrement
     private Integer categoryId;
     private String name;
     private String description;
+
+    // Getters and Setters
 
     public Integer getCategoryId() {
         return categoryId;

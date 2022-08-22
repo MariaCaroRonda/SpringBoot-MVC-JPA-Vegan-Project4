@@ -6,11 +6,16 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
+// Category methods interface
 public interface ICategoriesService {
 
-    void save(Category category);
-
     List<Category> findAll();
+
+    Page<Category> findAll(Pageable page);
+
+
+
+    void save(Category category);
 
     List<Category> findAllByName();
 
@@ -25,8 +30,6 @@ public interface ICategoriesService {
     Category findById(Integer categoryId);
 
     void delete(Integer categoryId);
-
-    Page<Category> findAll(Pageable page);
 
     Page<Category> findAllPageAsc(Pageable page);
 

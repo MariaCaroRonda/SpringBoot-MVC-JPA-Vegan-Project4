@@ -3,23 +3,27 @@ package com.springboot.vegan.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Favorites")
+@Table(name = "Favorites")  // mapping 'Favorite' model with 'Favorites' table
 public class Favorite {
 
-    @Id
+    @Id  // Primary key on 'Favorites' table
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer favoriteId;
     private String comments = "comments";
 
+    // Configure the OneToOne Relationship between 'Favorites' and 'Recipes' tables
     @OneToOne
     @JoinColumn(name = "recipeId") // foreign key in Recipes table
     private Recipe recipe;
 
+    // Configure the OneToOne Relationship between 'Favorites' and 'UsersVegan' tables
     @OneToOne
     @JoinColumn(name = "userId")  // foreign key in UsersVegan table
     private UserVegan userVegan;
 
     public Favorite() {}
+
+    // Getters and Setters
 
     public Integer getFavoriteId() {
         return favoriteId;

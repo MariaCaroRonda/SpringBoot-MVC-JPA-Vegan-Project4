@@ -24,6 +24,16 @@ public class UsersVgServiceJpa implements IUsersVgService {
     private UsersVeganRepository usersVeganRepository;
 
     @Override
+    public List<UserVegan> findAll() {
+        return usersVeganRepository.findAll();
+    }
+
+    @Override
+    public Page<UserVegan> findAll(Pageable page) {
+        return usersVeganRepository.findAll(page);
+    }
+
+    @Override
     public void save(UserVegan userVegan) {
         usersVeganRepository.save(userVegan);
     }
@@ -33,10 +43,6 @@ public class UsersVgServiceJpa implements IUsersVgService {
         usersVeganRepository.deleteById(userId);
     }
 
-    @Override
-    public List<UserVegan> findAll() {
-        return usersVeganRepository.findAll();
-    }
 
     @Override
     public UserVegan findByUsername(String username) {
@@ -70,10 +76,7 @@ public class UsersVgServiceJpa implements IUsersVgService {
         return profiles;
     }
 
-    @Override
-    public Page<UserVegan> findAll(Pageable page) {
-        return usersVeganRepository.findAll(page);
-    }
+
 
     @Override
     public List<UserVegan> findByExample(Example<UserVegan> example) {

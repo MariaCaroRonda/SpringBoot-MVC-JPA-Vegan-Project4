@@ -6,17 +6,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
-@Table(name="UsersVegan")
+@Table(name="UsersVegan")  // mapping 'UserVegan' model with 'UsersVegan' table
 public class UserVegan {
 
-    @Id
+    @Id  // Primary Key (PK) on 'UsersVegan' table
     @GeneratedValue(strategy = GenerationType.IDENTITY) //auto-increment MySQL
-    private Integer userId;
+    private Integer userId;   // Unique identifier
     private String firstName; // user's first name
-    private String lastName;
-    private String email;
-    private String username; // used to log in to the website, it doesn't have to match the user's firstName
-    private String password;
+    private String lastName;  // user's last name
+    private String email;     // email
+    private String username; // used to log in to the website,
+    // it doesn't have to match the user's firstName
+
+    private String password;  // user's password
     private Integer status = 1; // {status: {not-locked = 1, locked = 0} (default value = 1)
     private Date registrationDate;
 
@@ -34,6 +36,8 @@ public class UserVegan {
         }
         profiles.add(tmpProfile);
     }
+
+    // Getters and Setters
 
     public Integer getUserId() {
         return userId;

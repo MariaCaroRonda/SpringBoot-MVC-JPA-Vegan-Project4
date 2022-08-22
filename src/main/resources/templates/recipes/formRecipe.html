@@ -33,6 +33,7 @@
         <form th:action="@{/recipes/save}" method="post"
           th:object="${recipe}" enctype="multipart/form-data">
 
+          <!--handles errors at running time-->
           <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
             <p>Please correct the following errors: </p>
             <ul>
@@ -40,20 +41,33 @@
             </ul>
           </div>
 
+          <!-- When Edit Recipe using this Form Template: th:field = *{fieldName} is used with
+             Edit form to automatically filled in the fieldNames with the data of the edited Recipe
+             without having to re-type it -->
+
+          <!-- When Edit Recipe using this Form Template: {recipeId} and {imageMeal} must be hidden fields
+              to avoid INSERT a duplicate or empty default values on the DB -->
+
+         <!-- When Create New Recipe using this Form Template: the input fields name = "fieldName" must much
+              same the fieldNames from the Recipe Model (name, ingredients, instructions, prepTime,
+               cookingTime or imageMeal) -->
+
+
+
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Name</label>
                 <input type="hidden" th:field="*{recipeId}">
                 <input type="hidden" th:field="*{imageMeal}">
-                <input type="text" class="form-control" th:field="*{name}"
+                <input type="text" class="form-control " th:field="*{name}"
                        id="name" name="name"
                        placeholder="Recipe name" required="required">
               </div>
             </div>
 
-            <div class="col-md-9">
-              <div class="form-group">
+            <div class="col-md-9 " >
+              <div class="form-group ">
                 <label for="ingredients">Ingredients</label>
                 <input type="text" class="form-control" th:field="*{ingredients}"
                        id="ingredients" name="ingredients"
@@ -63,6 +77,10 @@
           </div>
 
           <div class="row">
+
+            <!-- In the drop-down menu to select Category for a Recipe, the drop-down menu introduces
+               the Categories dynamically using the Thymeleaf expression th:each,
+               and it, Categories are displayed by name, but are selected using the categoryId -->
 
             <div class="col-md-3">
               <div class="form-group">
@@ -140,6 +158,16 @@
             </div>
           </div>
           <hr>
+
+          <!-- The Instructions text box uses the 'tinymce' plugins and 'tinymce' jQueries
+               to use the Instructions text box as a text editor to format the instructions
+               with bold, italics, numbering, colors, etc. 'tinymce' also has the option
+               to show the HTML code used during the text formatting -->
+
+
+          <!-- Images Uploading uses MultipartFile configuration in the application.properties file,
+           in the RecipesController and in the WebConfig class-->
+
           <div class="row">
             <div class="col-md-9">
               <div class="form-group">

@@ -40,14 +40,6 @@
             <option th:each="tmpCat : ${categories}"
               th:value="${tmpCat.categoryId}"
               th:text="${tmpCat.name}"></option>
-<!--            <option value="2">Lunch</option>
-            <option value="3">Dinner</option>
-            <option value="4">Snacks</option>
-            <option value="5">Dessert</option>
-            <option value="6">Christmas Dinner</option>
-            <option value="7">Smoothies</option>
-            <option value="8">Soups</option>-->
-
           </select> &nbsp;
           <button type="submit" class="btn btn-primary mb-3">Search</button>
         </form>
@@ -64,7 +56,7 @@
             <i class="fas fa-file" aria-hidden="true"></i> New</a>
         &nbsp;
         <hr>
-
+        <!-- Error handling at running time  -->
         <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
         <table class="table table-hover">
           <thead class="thead-light">
@@ -91,6 +83,7 @@
 
             <td th:text="${tmpRecipe.status}"></td>
             <td th:text="${tmpRecipe.featured==1 ? 'YES' : 'NO' }"></td>
+
             <td>
               <a th:href="@{/recipes/edit/{id} (id=${tmpRecipe.recipeId})}"
                  class="btn btn-success btn-sm" role="button"

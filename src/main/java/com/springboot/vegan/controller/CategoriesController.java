@@ -35,12 +35,34 @@ public class CategoriesController {
     public String showIndexPaginate(Model model, Pageable page) {
 
         Page<Category> list = categoriesService.findAll(page);
-        Page<Category> list2 = categoriesService.findSort(page);
-
         model.addAttribute("categoriesPage", list);
 
         return "categories/listCategoriesPaginate";
     }
+
+
+    // @GetMapping
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String create(Category category) {
+        return "categories/formCategory";
+    }
+
+    // @PostMapping
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(Category category, BindingResult result, RedirectAttributes attributes) {
+        if (result.hasErrors()) {
+            for (ObjectError error: result.getAllErrors()) {
+                System.out.println("An error has happened: " + error.getDefaultMessage());
+            }
+            return "categories/formCategory";
+        }
+
+        categoriesService.save(category);
+        attributes.addFlashAttribute("msg", "Category Saved Successfully");
+
+        return "redirect:/categories/indexPaginate";
+    }
+
 
     @GetMapping("/indexPaginate2")
     public String showIndexPaginate2(Model model, Pageable page) {
@@ -189,27 +211,7 @@ public class CategoriesController {
     }
 
 
-    // @GetMapping
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String create(Category category) {
-        return "categories/formCategory";
-    }
 
-    // @PostMapping
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(Category category, BindingResult result, RedirectAttributes attributes) {
-        if (result.hasErrors()) {
-            for (ObjectError error: result.getAllErrors()) {
-                System.out.println("An error has happened: " + error.getDefaultMessage());
-            }
-            return "categories/formCategory";
-        }
-
-        categoriesService.save(category);
-        attributes.addFlashAttribute("msg", "Category Saved Successfully");
-
-        return "redirect:/categories/index";
-    }
 
 
 /*

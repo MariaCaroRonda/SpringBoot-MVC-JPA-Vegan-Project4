@@ -14,40 +14,11 @@
   <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
   <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
 </head>
-
 <body>
-
-<header th:insert="fragments/menu :: menu-main">
-</header>
+<header th:insert="fragments/menu :: menu-main"></header>
 
 <main role="main">
   <hr>
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-<!--  <div class="jumbotron">
-    <div class="container">
-      <h3>Find a vegan recipe.</h3>
-      <p>You can search by ingredient and category</p>
-
-      <form class="form-inline"
-            th:action="@{/search}" method="get"
-            th:object="${search}">
-        <input type="text" class="form-control mb-3"
-               th:field="*{ingredients}"
-               id="exampleFormControlInput1"
-               placeholder="Enter a Search">&nbsp;
-        <select th:field="*{category.categoryId}" class="custom-select custom-select mb-3">
-          <option th:value="*{null}" selected>Select a Category</option>
-          <option th:each="catTmp : ${categories}"
-                  th:value="${catTmp.categoryId}"
-                  th:text="${catTmp.name}">
-          </option>
-
-        </select>&nbsp;
-        <button type="submit" class="btn btn-primary mb-3">Search</button>
-      </form>
-    </div>
-  </div>
-  <hr>-->
   <div class="container">
 
     <div class="card">
@@ -56,13 +27,11 @@
 
         <form th:action="@{/categories/save}" method="post"
           th:object="${category}">
-
           <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
             <p>Please correct the following errors: </p>
             <ul>
               <li th:each="err : ${#fields.errors('*')}" th:text="${err}" ></li>
             </ul>
-
           </div>
 
           <div class="row">
@@ -76,6 +45,7 @@
               </div>
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
