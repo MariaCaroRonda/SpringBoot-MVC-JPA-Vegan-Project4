@@ -44,40 +44,44 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
     @Override
     public void run(String... args) throws Exception {
-        /*  save();
-            findById();
-            update();
-            delete();
-            save();
-            countCategories();
-            deleteAll();
-            findByIds();
-            findAll();
-            existById();
-            saveAll();
-            findAllJpa();
-            findAllSorting();
-            findAllPaginating();
-            findAllPaginatingSorting()
-            findRecipes();
-            saveRecipe();
-            createProfileApplication();
-            createUserWithTwoProfiles();
-            findUser();
-            findRecipesByStatus();
-            findRecipesByFeaturedStatus();
-            findByCookingTime();
-            findByCookingTimeBetweenOrdered();
-            findRecipeSeveralStatus();
-            findFeatured();
+
+        delete();
+
+
+
+/* findById();
+        update();
+        delete();
+        save();
+        countCategories();
+        deleteAll();
+        findByIds();
+        findAll();
+        existById();
+        saveAll();
+        findAllJpa();
+        findAllSorting();
+        findAllPaginating();
+        findAllPaginatingSorting()
+        findRecipes();
+        saveRecipe();
+        createProfileApplication();
+        createUserWithTwoProfiles();
+        findUser();
+        findRecipesByStatus();
+        findRecipesByFeaturedStatus();
+        findByCookingTime();
+        findByCookingTimeBetweenOrdered();
+        findRecipeSeveralStatus();
+        findFeatured();
 
         findUserUsername();  */
 
-        //findUserUsername();
+/*        findUserUsername();
 
-        //saveFavorite();
+        saveFavorite();
 
-/*        findFavorites();
+        findFavorites();
 
         isPresentRecipe();
 
@@ -87,14 +91,10 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
 
         editUser();
 
-        findRecipeName2();
-
-        findRecipeIngredient();
-
-        findRecipeName3();
-
         findCategoriesId(); */
+
     }
+
 
     public void findPageSort() {
         Page<Category> page =
@@ -521,7 +521,7 @@ public class SpringBootMvcJpaVeganProject4Application implements CommandLineRunn
     }
 
     public void delete() {
-        int categoryId = 2;
+        int categoryId = 1;
         if (!categoriesRepository.findById(categoryId).isPresent()) {
             System.out.println("Category with id " + categoryId + " not found");
         }
