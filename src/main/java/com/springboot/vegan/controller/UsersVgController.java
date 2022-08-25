@@ -36,16 +36,6 @@ public class UsersVgController {
 
     @GetMapping("/indexPaginate")
     public String showIndexPaginate(Model model, Pageable page) {
-
-/*        Page<UserVegan> page = usersVgService.findAllPaginate();
-        long totalItems = page.getTotalElements();
-        int totalPages = page.getTotalPages();
-
-        List<UserVegan> list = page.getContent();
-
-        model.addAttribute("totalItems", totalItems);
-        model.addAttribute("totalItems", totalItems);
-        model.addAttribute("listUsersPaginate", list);*/
         Page<UserVegan> list = usersVgService.findAll(page);
         model.addAttribute("usersPage", list);
 

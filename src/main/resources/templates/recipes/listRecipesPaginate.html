@@ -51,6 +51,7 @@
     <div class="card">
       <h4 class="card-header"><strong>List of Recipes</strong></h4>
       <div class="card-body">
+
         <a class="btn btn-primary" th:href="@{/recipes/create}"
            title="Create a new Recipe" role="button">
             <i class="fas fa-file" aria-hidden="true"></i> New</a>
@@ -76,7 +77,6 @@
             <td th:text="${tmpRecipe.recipeId}"></td>
             <td th:text="${tmpRecipe.category.name}"></td>
             <td th:text="${tmpRecipe.name}"></td>
-          <!--  <td th:text="${tmpRecipe.date}"></td>-->
             <td>
               <span th:text="${#dates.format(tmpRecipe.date, 'dd-MM-yyyy')}"></span>
             </td>

@@ -9,6 +9,11 @@ import java.util.List;
 
 public interface IRecipesService {
 
+    void save(Recipe recipe);
+
+    Recipe findById(Integer recipeId);
+
+
     List<Recipe> findAll();
 
     List<Recipe> findByExample(Example<Recipe> example);
@@ -22,15 +27,12 @@ public interface IRecipesService {
 
 
 
-    Recipe findById(Integer recipeId);
 
-    void save(Recipe recipe);
+    void delete (Integer recipeId);
 
     List<Recipe> findFeaturedPremium();
 
     List<Recipe> findFeatured();
-
-    void delete (Integer recipeId);
 
 
     List<Recipe> findByExampleSort(Example<Recipe> example);

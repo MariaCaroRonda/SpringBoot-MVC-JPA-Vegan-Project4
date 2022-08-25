@@ -17,6 +17,14 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 
+
+    /* Password encryption. It will encrypt the password when
+     a new User register to the website*/
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Autowired
     private DataSource dataSource;
 
@@ -33,19 +41,19 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
     }
 
 
-    // Configure the authorization to HTML templates per User role (Supervisor, Administrator
-    //and regular User)
+    // Configure the authorization to HTML templates per User role
+    // (Supervisor, Administrator and VeganUser)
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                // Static resources don't require authentication
-                .antMatchers(
-                        "/bootstrap/**",
-                        "/images/**",
-                        "/tinymce/**",
-                        "/logos/**").permitAll()
-                // Public views don't require authentication
-                .antMatchers("/",
+            // Static resources don't require authentication
+            .antMatchers(
+             "/bootstrap/**",
+                         "/images/**",
+                         "/tinymce/**",
+                         "/logos/**").permitAll()
+            // Public views don't require authentication
+            .antMatchers("/",
                         "/signup",
                         "/search/**",
                         "/orderRecByNameAsc",
@@ -56,35 +64,25 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                         "/profile/**",
                         "/recipes/view/**").permitAll()
 
-                // set up authorizations as per Roles
-              //  .antMatchers("/favorites/create/**", "/favorites/save/**", "/favorites/index/**").hasAuthority("USERVEGAN")
-/*                .antMatchers("/favorites/create/**", "/favorites/save/**", "/favorites/index/**"
-                        , "/favorites/update/**").hasAuthority("USERVEGAN")*/
-                .antMatchers("/favorites/indexAdmin/**").hasAnyAuthority("ADMINISTRATOR")
-                .antMatchers("/favorites/**", "/favorites/index/**").hasAnyAuthority("USERVEGAN", "SUPERVISOR", "ADMINISTRATOR")
-             /*   .antMatchers("/favorites/**").hasAuthority("SUPERVISOR, ADMINISTRATOR, USERVEGAN")*/
-                .antMatchers("/recipes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
-
-                .antMatchers("/categories/**",  "/categories/searchCat/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
-
-                .antMatchers("/usersvegan/**").hasAnyAuthority("ADMINISTRATOR")
-
-               /* .antMatchers("/favorites/**", "/favorites/index/**").hasAuthority("USERVEGAN")*/
-
-                // The rest of URLs require authentication
-                .anyRequest().authenticated()
-                // Form login don't require authentication
-                // Configure a personalize 'login' page
-                .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll();
+             // set up authorizations as per Roles
+           .antMatchers("/favorites/indexAdmin/**").hasAnyAuthority("ADMINISTRATOR")
+           .antMatchers("/favorites/**", "/favorites/index/**")
+                    .hasAnyAuthority("USERVEGAN",
+                        "SUPERVISOR", "ADMINISTRATOR")
+           .antMatchers("/recipes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRATOR")
+           .antMatchers("/categories/**",  "/categories/searchCat/**").hasAnyAuthority(
+                        "SUPERVISOR","ADMINISTRATOR")
+           .antMatchers("/usersvegan/**").hasAnyAuthority("ADMINISTRATOR")
+             // The rest of URLs require authentication
+           .anyRequest().authenticated()
+             // Form login don't require authentication
+             // Configure a personalize 'login' page
+           .and().formLogin().loginPage("/login").permitAll()
+           .and().logout().permitAll();
     }
 
-    // Password encryption. It will encrypt the password when a new User register to
-    //the website
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+
+
 
 
 }

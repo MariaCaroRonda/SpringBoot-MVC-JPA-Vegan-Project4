@@ -22,6 +22,26 @@ public class RecipesServiceJpa implements IRecipesService {
     private RecipesRepository recipesRepository;
 
     @Override
+    public void save(Recipe recipe) {
+        // recipe is the object the Recipes Controller will
+        //access through the Service Class
+        recipesRepository.save(recipe);
+    }
+
+    @Override
+    public Recipe findById(Integer recipeId) {
+        Optional<Recipe> optional = recipesRepository.findById(recipeId);
+        if (optional.isPresent()) { // looks ofr recipeId on the DB
+            return optional.get(); // returns the found Recipe
+        }
+        // if the recipeId does not exist on the DB
+        return null;
+    }
+
+
+
+
+    @Override
     public List<Recipe> findAll() {
         return recipesRepository.findAll();
     }
@@ -55,19 +75,6 @@ public class RecipesServiceJpa implements IRecipesService {
 
 
 
-    @Override
-    public Recipe findById(Integer recipeId) {
-        Optional<Recipe> optional = recipesRepository.findById(recipeId);
-        if (optional.isPresent()) {
-            return optional.get();
-        }
-        return null;
-    }
-
-    @Override
-    public void save(Recipe recipe) {
-        recipesRepository.save(recipe);
-    }
 
 
     @Override

@@ -33,6 +33,9 @@ import java.util.*;
 public class HomeController {
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private ICategoriesService categoriesService;
 
     @Autowired
@@ -41,8 +44,7 @@ public class HomeController {
     @Autowired
     private IUsersVgService usersVgService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
 
     private IFavoritesService favoritesService;
 
@@ -128,51 +130,18 @@ public class HomeController {
         return "formRegister";
     }
 
-/*    @GetMapping("/signupEdit/{id}")
-    public String registerEdit(@PathVariable("id") int userId,*//* UserVegan userVegan,*//* Model model,
-                               HttpSession session,
-                               Authentication authentication) {
-
-
-        UserVegan userVegan1 = usersVgService.findById(userId);
-        System.out.println(userVegan1);
-        System.out.println(userVegan1.getProfiles());
-
-
-        *//**String username = authentication.getName();*//*
-        *//**userVegan = usersVgService.findByUsername(username);*//*
-
-        *//**List<Profile> profiles = usersVgService.findProfilesUser(userVegan1.getUserId());*//*
-        List<Profile> profiles = usersVgService.findProfilesUser(userId);
-
-        //userVegan.setProfiles(usersVgService.findProfilesUser(userVegan.getUserId()));
-        *//**userVegan1.setProfiles(profiles);*//*
-
-        System.out.println("User before edit with profiles: " + userVegan1);
-        System.out.println("Profiles@ " + userVegan1.getProfiles());
-        model.addAttribute("userVegan", userVegan1);
-        return "formRegisterEdit";
-    }*/
 
 
     @PostMapping("/signup")
     public String saveRegistry(UserVegan userVegan, BindingResult result,
                                RedirectAttributes attributes) {
-
-
-        /** Test the below tutorial to check for duplicate usernames when singing up
-       /* https://www.javaguides.net/2021/10/login-and-registration-rest-api-using-spring-boot-spring-security-hibernate-mysql-database.html */
-
         try {
             if (result.hasErrors()) {
                 attributes.addFlashAttribute("An error has happened");
                 return "formRegister";
             }
-
             String pwdPlain = userVegan.getPassword();
             String pwdEncrypt = passwordEncoder.encode(pwdPlain);
-
-
             userVegan.setPassword(pwdEncrypt);
 
             userVegan.setStatus(1); // 'Active' by default
@@ -203,11 +172,8 @@ public class HomeController {
 
             }
 
-           // attributes.addFlashAttribute("msg", ("Aan error has happened " + e.getMessage() ) );
-           // attributes.addFlashAttribute("msg", "An error has happened ");
         }
 
-            /**return  "redirect:/login";*/
             return  "redirect:/login";
 
     }
@@ -215,22 +181,15 @@ public class HomeController {
     @PostMapping("/update")
     public String updateRegistry(UserVegan userVegan, BindingResult result,
                                  RedirectAttributes attributes,
-                                 Authentication auth, HttpSession session
-                                ) {
-        //return "redirect:/categories/index";
-
-        /*Date date= userVegan.getRegistrationDate();*/
-
-        /** Try this to avoid having a ',' at the end of the password*/
-        /** If lenth > 60 && last character = ','  THEN remove last character ','*/
-        /** ELSE encrypt new password */
-
+                                 Authentication auth, HttpSession session) {
+        /* Avoid having a ',' at the end of the password when Admin edit user
+         If length > 60 && last character = ','  THEN remove last character ','
+         ELSE encrypt new password */
 
         if (userVegan.getPassword().length() != 60) {
             String pwdPlain = userVegan.getPassword();
             String pwdEncrypt = passwordEncoder.encode(pwdPlain);
             userVegan.setPassword(pwdEncrypt);
-
         }
 
 
@@ -247,15 +206,6 @@ public class HomeController {
         return "redirect:/usersvegan/indexPaginate";
     }
 
-
-/*    @GetMapping("/table")
-    public String showTable(Model model) {
-        List<Recipe> list = recipesService.findAll();
-        model.addAttribute("recipes", list);
-
-        return "table";
-
-    }*/
 
     @GetMapping("/detail")
     public String showDetail(Model model) {

@@ -12,7 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
     private String pathImages;
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        /*registry.addResourceHandler("/logos/**").addResourceLocations("file:c:/vegan/img-vegan04/");*/
+
 
         registry.addResourceHandler("/logos/**").addResourceLocations("file:" + pathImages);
     }

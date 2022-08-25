@@ -30,6 +30,18 @@
       <h4 class="card-header"><strong>Recipe Details</strong></h4>
       <div class="card-body">
 
+
+      <!--  In the <form> tag here and using Thymeleaf expressions, we dynamically configure
+       the URL where the Form will be redirected and the "action" the Form will perform.
+       Dynamic URL and action ::   th:action="@{/recipes/save}" method "post"
+
+        Using Thymeleaf expressions, we specify the URL to which the Form is to be redirected.
+        In this case the URL will be "/recipes/save".
+        The full Thymeleaf expression is th:action="@{/recipes/save}"
+        The Form is going to be sent in an HTTP that answers to a request of type "post". In this case
+        the method save() in the Controller will receive this request by mapping the dynamic URL to
+        Controller method save() -->
+
         <form th:action="@{/recipes/save}" method="post"
           th:object="${recipe}" enctype="multipart/form-data">
 
@@ -41,18 +53,18 @@
             </ul>
           </div>
 
-          <!-- When Edit Recipe using this Form Template: th:field = *{fieldName} is used with
-             Edit form to automatically filled in the fieldNames with the data of the edited Recipe
+          <!-- When using this Form Template to 'Edit a Recipe',
+            the Thymeleaf expression :: th:field = *{fieldName} is used to automatically filled-in
+            the Inputs with the data that was already in the edited Recipe
              without having to re-type it -->
 
-          <!-- When Edit Recipe using this Form Template: {recipeId} and {imageMeal} must be hidden fields
-              to avoid INSERT a duplicate or empty default values on the DB -->
+          <!-- When using this Form template to 'Edit a Recipe', the fields
+           {recipeId} and {imageMeal} must be hidden fields. This is to avoid
+            to INSERT a duplicate or empty default values on the Database -->
 
-         <!-- When Create New Recipe using this Form Template: the input fields name = "fieldName" must much
-              same the fieldNames from the Recipe Model (name, ingredients, instructions, prepTime,
-               cookingTime or imageMeal) -->
-
-
+         <!-- When using this Form Template to 'Create New Recipe', the Input fields
+            name = "fieldName" must match the fieldNames from the Recipe Model (name, ingredients
+            ,instructions, prepTime, cookingTime or imageMeal) -->
 
           <div class="row">
             <div class="col-md-3">
@@ -60,6 +72,8 @@
                 <label for="name">Name</label>
                 <input type="hidden" th:field="*{recipeId}">
                 <input type="hidden" th:field="*{imageMeal}">
+
+        <!-- Here, the field name = "name", matches the Model Recipe field "name" -->
                 <input type="text" class="form-control " th:field="*{name}"
                        id="name" name="name"
                        placeholder="Recipe name" required="required">
@@ -69,6 +83,8 @@
             <div class="col-md-9 " >
               <div class="form-group ">
                 <label for="ingredients">Ingredients</label>
+
+        <!-- Here, the field name = "ingredients", matches the Model Recipe field "ingredients" -->
                 <input type="text" class="form-control" th:field="*{ingredients}"
                        id="ingredients" name="ingredients"
                        placeholder="Recipe ingredients" required="required">
@@ -85,6 +101,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="category">Category</label>
+                <!-- Here, the field name = "category", matches the Model Recipe field "category" -->
                 <select class="form-control" name="category" th:field="*{category.categoryId}"
                         id="category">
                   <option th:each="catTmp: ${categories}" th:value="${catTmp.categoryId}"
@@ -93,10 +110,11 @@
 
               </div>
             </div>
-
+            <!-- Here, the field name = "status", matches the Model Recipe field "status" -->
             <div class="col-md-3">
               <div class="form-group">
                 <label for="status">Status</label>
+
                 <select class="form-control" name="status" th:field="*{status}"
                         id="status">
                   <option value='Premium'>Premium</option>
@@ -104,10 +122,11 @@
                  </select>
               </div>
             </div>
-
+            <!-- Here, the field name = "date", matches the Model Recipe field "date" -->
             <div class="col-md-3">
               <div class="form-group">
                 <label for="date">Publication Date</label>
+                status
                 <input type="text" class="form-control" name="date" th:field="*{date}"
                        id="date"
                        placeholder="Publication date" required="required">
@@ -115,7 +134,7 @@
             </div>
 
 
-
+            <!-- Here, the field name = "featured", matches the Model Recipe field "featured" -->
             <div class="col-md-3">
               <div class="form-check">
                 <label class="form-check-label" for="featured0"></label><br>
@@ -135,6 +154,7 @@
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
+                <!-- Here, the field name = "prepTime", matches the Model Recipe field "prepTime" -->
                 <label for="prepTime">Preparation time (Approx)</label>
                 <input type="text" class="form-control" name="prepTime" th:field="*{prepTime}"
                        id="prepTime"
@@ -143,6 +163,7 @@
             </div>
             <div class="col-md-3">
               <div class="form-group">
+                <!-- Here, the field name = "cookingTime", matches the Model Recipe field "cookingTime" -->
                 <label for="cookingTime">Cooking time (Approx)</label>
                 <input type="text" class="form-control" name="cookingTime" th:field="*{cookingTime}"
                        id="cookingTime"
@@ -159,13 +180,13 @@
           </div>
           <hr>
 
-          <!-- The Instructions text box uses the 'tinymce' plugins and 'tinymce' jQueries
-               to use the Instructions text box as a text editor to format the instructions
-               with bold, italics, numbering, colors, etc. 'tinymce' also has the option
-               to show the HTML code used during the text formatting -->
+          <!-- The Instructions text box uses the 'tinymce' plugins and 'tinymce' jQueries.
+               This allows to use the Instructions text box as a text editor format the
+                Recipe Instructions with bold, italics, underline, numbering, colors, etc.
+                'tinymce' also has the option to show the HTML code used during the text formatting -->
 
 
-          <!-- Images Uploading uses MultipartFile configuration in the application.properties file,
+          <!-- The uploading of images use MultipartFile configuration in the application.properties file,
            in the RecipesController and in the WebConfig class-->
 
           <div class="row">

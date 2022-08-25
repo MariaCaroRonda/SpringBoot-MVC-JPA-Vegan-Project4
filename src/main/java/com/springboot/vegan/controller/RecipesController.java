@@ -33,6 +33,7 @@ public class RecipesController {
     @Value("${veganapp.path.images}")  // path where the uploaded images are saved
     private String path;
 
+    // Instance of the Recipes Service Class
     @Autowired
     private IRecipesService recipesService;
 
@@ -67,11 +68,12 @@ public class RecipesController {
     /** Method that displays a form to create a new Recipe */
     @GetMapping("/create")
     public String create(Recipe recipe, Model model){
-
         return "recipes/formRecipe";
     }
 
-    /** Method to save a Recipe in the Database */
+    /** Method to save a Recipe on the Database */
+    /* This method is mapped to this Thymeleaf expression:
+     <form th:action="@{/recipes/save}" method="post" > */
     @PostMapping("/save")
     public String save(Recipe recipe, BindingResult result,
                        RedirectAttributes attributes,
@@ -80,13 +82,13 @@ public class RecipesController {
         if (result.hasErrors()) {
             // Print in the console error messages if they have occurred
             for (ObjectError error: result.getAllErrors()){
-                // Testing on the output console
+                // Testing error messages on the output console
                 System.out.println("An error has happened: " +
                         error.getDefaultMessage());
             }
             return "recipes/formRecipe";
         }
-
+        // 'MultipartFile multiPart' is used to upload images of Recipes
         if (!multiPart.isEmpty()) {
              String nameImage = MyUtilities.saveFile(multiPart, path);
             if (nameImage != null){ // The image was uploaded
@@ -126,6 +128,8 @@ public class RecipesController {
     }
 
     /** Method that renders an HTML form to edit an existing Recipe on the DB */
+    /* This method receives the recipeId and searches it on the DB.
+     {id} is the recipedId we are going to Edit */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") int recipeId, Model model) {
         // Retrieve the Recipe from the DB to edit it

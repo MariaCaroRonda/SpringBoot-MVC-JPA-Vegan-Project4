@@ -28,18 +28,10 @@
         <a class="nav-link" th:href="@{/recipes/indexPaginate}">Recipes &nbsp; &middot; </a>
       </li>
 
-<!--      <li class="nav-item"  sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
-        <a class="nav-link"th:href="@{/categories/index}">Categories</a>
-      </li>-->
-
       <li class="nav-item"  sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRATOR')">
         <a class="nav-link"th:href="@{/categories/indexPaginate}">Categories
           &nbsp; &middot; </a>
       </li>
-
-<!--      <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRATOR')">
-        <a class="nav-link" th:href="@{/usersvegan/index}">Users</a>
-      </li>-->
 
       <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRATOR')">
         <a class="nav-link" th:href="@{/usersvegan/indexPaginate}">Users
@@ -51,22 +43,12 @@
           &nbsp; &middot; </a>
       </li>
 
-
     </ul>
 
-<!--    <a class="btn btn-primary" th:href="@{/index}">Login</a>&nbsp;
-    <a class="btn btn-primary" th:href="@{/signup}">Register</a>&nbsp;-->
     <div sec:authorize="isAnonymous()">
       <a class="btn btn-primary" th:href="@{/index}">Login</a>&nbsp;
       <a class="btn btn-primary" th:href="@{/signup}">Register</a>&nbsp;
     </div>
-
-<!--    <span th:if="${session.userVegan != null}" class="text-light"
-          th:text="'Welcome ' + ${session.userVegan.email}"></span>&nbsp;-->
-    &nbsp;
-<!--    <span class="text-light">Welcome</span>&nbsp;
-      <span class="text-light" sec:authentication="name"></span>&nbsp;
-    <a class="btn btn-primary" th:href="@{/logout}">Logout</a>&nbsp;-->
 
     <div sec:authorize="isAuthenticated()">
       <span class="text-light">Welcome</span>&nbsp;
@@ -77,16 +59,16 @@
     <!--Add Favorites to menu-->
     <div sec:authorize="isAuthenticated() and hasAnyAuthority('USERVEGAN')">
       <span class="text-light"></span>&nbsp;
-      <!--<span class="text-light" sec:authentication="name"></span>&nbsp;-->
       <a class="btn btn-primary" th:href="@{/favorites/index}">My Favorites </a>
 
     </div>
 
     <div sec:authorize="isAuthenticated()">
       <span class="text-light"></span>&nbsp;
-      <!--<span class="text-light" sec:authentication="name"></span>&nbsp;-->
       <a class="btn btn-primary" th:href="@{/favorites/userProfile}">My Profile</a>
     </div>
 
   </div>
 </nav>
+
+  WebSecurityConfigurerAdapter
